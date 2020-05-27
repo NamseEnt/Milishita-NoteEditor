@@ -1,0 +1,6 @@
+play()
+setCursor(cursor: Cursor)
+stop()
+mouseDownOnCursor()
+mouseUpOnCursor()
+togglePlay()

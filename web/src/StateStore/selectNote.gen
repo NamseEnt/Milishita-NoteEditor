@@ -1,0 +1,2 @@
+selectNote(noteId: string)
+deselectNote()

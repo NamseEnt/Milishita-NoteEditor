@@ -1,0 +1,685 @@
+[
+  {
+    "id": "101a548a-68bb-4046-a678-c6e659c9ac9d",
+    "notes": [],
+    "beat": 4
+  },
+  {
+    "id": "b7c72041-b111-410b-82d0-4806f88328b8",
+    "notes": [
+      {
+        "id": "5e683352-7acd-42af-9747-752b0967f47d",
+        "type": "tap",
+        "position": {
+          "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
+          "beat": 0,
+          "key": 0
+        }
+      },
+      {
+        "id": "5f66ee66-db90-4867-9e7e-31a8d6a673c9",
+        "type": "tap",
+        "position": {
+          "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
+          "beat": 0.75,
+          "key": 0
+        }
+      },
+      {
+        "id": "b8a54783-0eff-429d-833a-94c9af5565df",
+        "type": "tap",
+        "position": {
+          "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
+          "beat": 0,
+          "key": 3
+        }
+      },
+      {
+        "id": "d9b74fcd-b803-42b3-a07b-0c88a4c9b84c",
+        "type": "tap",
+        "position": {
+          "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
+          "beat": 0.75,
+          "key": 3
+        }
+      },
+      {
+        "id": "0bb7b057-4242-4487-bd8e-17695a29c0bd",
+        "type": "tap",
+        "position": {
+          "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
+          "beat": 1.5,
+          "key": 1
+        }
+      },
+      {
+        "id": "e38e83eb-d193-41bd-88f1-50bca12fa908",
+        "type": "tap",
+        "position": {
+          "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
+          "beat": 2.5,
+          "key": 1
+        }
+      },
+      {
+        "id": "853c7307-9a96-40d0-baff-333d6f8357f1",
+        "type": "tap",
+        "position": {
+          "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
+          "beat": 2.5,
+          "key": 4
+        }
+      },
+      {
+        "id": "41f7a74f-c33c-4c64-aaca-93ac5fc05b0f",
+        "type": "tap",
+        "position": {
+          "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
+          "beat": 3.5,
+          "key": 4
+        }
+      }
+    ],
+    "beat": 4
+  },
+  {
+    "id": "655b3d42-753d-4234-a2dc-34189844a2f5",
+    "notes": [
+      {
+        "id": "8e221e10-79e7-46b6-912d-b56044cb70a5",
+        "type": "tap",
+        "position": {
+          "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
+          "beat": 0,
+          "key": 2
+        }
+      },
+      {
+        "id": "823dfa42-77cc-4048-b4b5-2682c5a0b53a",
+        "type": "tap",
+        "position": {
+          "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
+          "beat": 0,
+          "key": 5
+        }
+      },
+      {
+        "id": "ceb8406c-ad32-43f6-b01c-1b0feb752ab3",
+        "type": "tap",
+        "position": {
+          "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
+          "beat": 0.75,
+          "key": 5
+        }
+      },
+      {
+        "id": "6f1940c1-1d09-455e-acc4-736bb9b83fe8",
+        "type": "tap",
+        "position": {
+          "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
+          "beat": 0.75,
+          "key": 2
+        }
+      },
+      {
+        "id": "1b1bd1b9-85f6-45b2-b816-a6cd9334ee46",
+        "type": "tap",
+        "position": {
+          "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
+          "beat": 1.5,
+          "key": 4
+        }
+      },
+      {
+        "id": "849f6187-2b5a-4d31-857b-78ada69191fa",
+        "type": "tap",
+        "position": {
+          "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
+          "beat": 2.5,
+          "key": 4
+        }
+      },
+      {
+        "id": "92909d62-6b1f-45e3-bd32-46e925ae3fd8",
+        "type": "tap",
+        "position": {
+          "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
+          "beat": 2.5,
+          "key": 1
+        }
+      },
+      {
+        "id": "c00a485c-126b-49a4-822c-8279955c8677",
+        "type": "tap",
+        "position": {
+          "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
+          "beat": 3.5,
+          "key": 1
+        }
+      }
+    ],
+    "beat": 4
+  },
+  {
+    "id": "3f873798-4530-4daa-890c-fbca97abd4fb",
+    "notes": [
+      {
+        "id": "8b25d820-4bda-4413-8016-563819fbc8c3",
+        "type": "tap",
+        "position": {
+          "barId": "3f873798-4530-4daa-890c-fbca97abd4fb",
+          "beat": 0,
+          "key": 0
+        }
+      },
+      {
+        "id": "29ee8d8d-1316-4bf5-9d9e-609ac632ef49",
+        "type": "tap",
+        "position": {
+          "barId": "3f873798-4530-4daa-890c-fbca97abd4fb",
+          "beat": 0,
+          "key": 4
+        }
+      },
+      {
+        "id": "4d1f0e30-d460-4aed-b669-c43675541fdb",
+        "type": "right",
+        "position": {
+          "barId": "3f873798-4530-4daa-890c-fbca97abd4fb",
+          "beat": 0.75,
+          "key": 0
+        }
+      },
+      {
+        "id": "da9a051a-b1bc-45d7-921c-184ffd8ec2a2",
+        "type": "tap",
+        "position": {
+          "barId": "3f873798-4530-4daa-890c-fbca97abd4fb",
+          "beat": 1.5,
+          "key": 1
+        }
+      }
+    ],
+    "beat": 4
+  },
+  {
+    "id": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+    "notes": [
+      {
+        "id": "ce2a2e65-9f4e-40f2-a4c8-96124cc2061a",
+        "type": "up",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 0,
+          "key": 1
+        }
+      },
+      {
+        "id": "12f9eac9-37c9-4ef0-b0c7-0f79bef67787",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 0,
+          "key": 5
+        }
+      },
+      {
+        "id": "b38a6221-d809-4449-ac50-11da89eefc45",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 0.5,
+          "key": 2
+        }
+      },
+      {
+        "id": "b14bc700-1cc2-4df6-a507-766dac88e2ef",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 0.5,
+          "key": 4
+        }
+      },
+      {
+        "id": "cb68e317-4561-467c-b7e7-f1b7c30e01a0",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 1,
+          "key": 4
+        }
+      },
+      {
+        "id": "375f1e1d-f199-47c3-a0b9-43e71003d79e",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 1.25,
+          "key": 3
+        }
+      },
+      {
+        "id": "25f636c7-2a8d-4d5c-bfa8-480cc4f0c404",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 1.5,
+          "key": 2
+        }
+      },
+      {
+        "id": "332ca476-291d-4a1c-b1f4-78abd0c13c53",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 2,
+          "key": 1
+        }
+      },
+      {
+        "id": "b7b8921e-3af1-4129-9e33-6f7a46d283bf",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 2,
+          "key": 5
+        }
+      },
+      {
+        "id": "2193a154-b617-462f-a4c7-082632c449e1",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 2.5,
+          "key": 3
+        }
+      },
+      {
+        "id": "d5fbaccc-7762-4519-bcc5-07fa39766220",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 3,
+          "key": 3
+        }
+      },
+      {
+        "id": "2e2afe64-179c-4e40-a094-4502f0176883",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 3,
+          "key": 1
+        }
+      },
+      {
+        "id": "2be95993-b0fc-4c91-b45a-f8852d11b8a8",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 3.5,
+          "key": 1
+        }
+      },
+      {
+        "id": "39def6e9-8884-43cd-87d2-8b52a4624900",
+        "type": "tap",
+        "position": {
+          "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
+          "beat": 3.5,
+          "key": 5
+        }
+      }
+    ],
+    "beat": 4
+  },
+  {
+    "id": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
+    "notes": [
+      {
+        "id": "400195bc-f214-418b-b75c-ce59eb1e6e79",
+        "type": "tap",
+        "position": {
+          "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
+          "beat": 0,
+          "key": 5
+        }
+      },
+      {
+        "id": "811e0481-3fdb-4254-9170-f8f6c05bcd42",
+        "type": "tap",
+        "position": {
+          "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
+          "beat": 1,
+          "key": 5
+        }
+      },
+      {
+        "id": "b04ff37f-8100-417f-b7cb-e0a5869bd0b7",
+        "type": "right",
+        "position": {
+          "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
+          "beat": 1,
+          "key": 0
+        }
+      },
+      {
+        "id": "d0d5888f-2cb2-4da4-9033-7a571f0cc0b6",
+        "type": "tap",
+        "position": {
+          "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
+          "beat": 1.5,
+          "key": 1
+        }
+      },
+      {
+        "id": "72441d35-a1d9-4ce6-a572-3753f2a4db4f",
+        "type": "tap",
+        "position": {
+          "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
+          "beat": 2,
+          "key": 4
+        }
+      },
+      {
+        "id": "35058266-c6f4-491e-9fb0-3a5fce7b492c",
+        "type": "tap",
+        "position": {
+          "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
+          "beat": 2.5,
+          "key": 4
+        }
+      },
+      {
+        "id": "d9825cb6-340a-426b-913d-e38e9836075e",
+        "type": "left",
+        "position": {
+          "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
+          "beat": 3,
+          "key": 4
+        }
+      },
+      {
+        "id": "625b3791-47ee-45d0-a17c-6209bc8ad662",
+        "type": "tap",
+        "position": {
+          "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
+          "beat": 3,
+          "key": 1
+        }
+      }
+    ],
+    "beat": 4
+  },
+  {
+    "id": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+    "notes": [
+      {
+        "id": "872160e8-96df-477f-a6b7-dd19871fcf75",
+        "type": "tap",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 0,
+          "key": 4
+        }
+      },
+      {
+        "id": "8c96f42c-a8d9-4c58-9f26-7c2ce5b86ff2",
+        "type": "tap",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 1,
+          "key": 4
+        }
+      },
+      {
+        "id": "b6750d61-1eb0-4dbd-bc0b-9648d102dc29",
+        "type": "right",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 1,
+          "key": 1
+        }
+      },
+      {
+        "id": "f686db0b-9add-458b-9f33-2e8a5f6a98c5",
+        "type": "tap",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 1.5,
+          "key": 0
+        }
+      },
+      {
+        "id": "37633b5b-3bf3-4bf4-904c-3cb8800ac641",
+        "type": "tap",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 2,
+          "key": 5
+        }
+      },
+      {
+        "id": "e93f56ac-49c1-4648-b98c-e55c9a053280",
+        "type": "tap",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 2.5,
+          "key": 0
+        }
+      },
+      {
+        "id": "be9ac471-c06d-49c0-ad28-785ee1477675",
+        "type": "tap",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 2.5,
+          "key": 4
+        }
+      },
+      {
+        "id": "e51bc8e6-7442-4ce8-8965-ac54c91c3e67",
+        "type": "left",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 3,
+          "key": 4
+        }
+      },
+      {
+        "id": "a5c00d3d-79dd-4cfc-9d98-0646fe716341",
+        "type": "tap",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 3,
+          "key": 1
+        }
+      },
+      {
+        "id": "d74635d8-2338-4dd5-98d4-f4e62fda8686",
+        "type": "tap",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 3.5,
+          "key": 1
+        }
+      },
+      {
+        "id": "9e0b8bc5-bf43-48ac-ae49-788f535fb9dc",
+        "type": "tap",
+        "position": {
+          "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
+          "beat": 3.5,
+          "key": 4
+        }
+      }
+    ],
+    "beat": 4
+  },
+  {
+    "id": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
+    "notes": [
+      {
+        "id": "fa21d432-682d-4cd2-8672-d09891b864ca",
+        "type": "tap",
+        "position": {
+          "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
+          "beat": 0,
+          "key": 5
+        }
+      },
+      {
+        "id": "fd20b276-a296-4106-abd1-19f0957a4d71",
+        "type": "tap",
+        "position": {
+          "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
+          "beat": 1,
+          "key": 5
+        }
+      },
+      {
+        "id": "a5078b66-7b2b-4f01-b359-69e94e85b10f",
+        "type": "right",
+        "position": {
+          "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
+          "beat": 1,
+          "key": 0
+        }
+      },
+      {
+        "id": "8cd7e999-ee91-4e37-9f30-9a596881fb5b",
+        "type": "tap",
+        "position": {
+          "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
+          "beat": 1.5,
+          "key": 1
+        }
+      },
+      {
+        "id": "aa294f04-f43a-4c95-b988-91b36e97b416",
+        "type": "tap",
+        "position": {
+          "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
+          "beat": 2,
+          "key": 4
+        }
+      },
+      {
+        "id": "aff1fea7-e4f6-4d1c-9068-c07fb610f88f",
+        "type": "tap",
+        "position": {
+          "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
+          "beat": 2.5,
+          "key": 4
+        }
+      },
+      {
+        "id": "70746323-dcdd-4eaf-848b-69b007f3645d",
+        "type": "left",
+        "position": {
+          "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
+          "beat": 3,
+          "key": 4
+        }
+      },
+      {
+        "id": "b252a98f-5b71-4677-9c67-5a25c1bcfe36",
+        "type": "left",
+        "position": {
+          "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
+          "beat": 3,
+          "key": 1
+        }
+      }
+    ],
+    "beat": 4
+  },
+  {
+    "id": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
+    "notes": [
+      {
+        "id": "a2e4c40c-ad34-4844-beee-1a78bb4df8e2",
+        "type": "tap",
+        "position": {
+          "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
+          "beat": 0,
+          "key": 1
+        }
+      },
+      {
+        "id": "f1595760-702c-4988-98f4-40116b83f39a",
+        "type": "tap",
+        "position": {
+          "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
+          "beat": 0.5,
+          "key": 1
+        }
+      },
+      {
+        "id": "605d68de-2b05-445c-b3b3-21e1449b3d7c",
+        "type": "tap",
+        "position": {
+          "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
+          "beat": 0.5,
+          "key": 4
+        }
+      },
+      {
+        "id": "ed4970ae-de0c-4198-9c2b-9c9e0b14b201",
+        "type": "left",
+        "position": {
+          "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
+          "beat": 1,
+          "key": 4
+        }
+      },
+      {
+        "id": "dc45fba2-3afb-484d-bd0b-3e21b31348ac",
+        "type": "tap",
+        "position": {
+          "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
+          "beat": 1,
+          "key": 0
+        }
+      },
+      {
+        "id": "cee54730-fa54-4a20-969d-20ea232d033e",
+        "type": "tap",
+        "position": {
+          "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
+          "beat": 1.5,
+          "key": 0
+        }
+      },
+      {
+        "id": "5320c43b-8eed-4282-a598-9fe4b5525c72",
+        "type": "tap",
+        "position": {
+          "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
+          "beat": 1.5,
+          "key": 5
+        }
+      },
+      {
+        "id": "bd0f56c6-bc68-44f6-8254-149991c25c87",
+        "type": "right",
+        "position": {
+          "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
+          "beat": 2.5,
+          "key": 4
+        }
+      },
+      {
+        "id": "ca32abe3-b1f6-4e06-8107-2c87dc182eef",
+        "type": "left",
+        "position": {
+          "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
+          "beat": 3,
+          "key": 1
+        }
+      }
+    ],
+    "beat": 4
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "name": "luda-note-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node watch.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/npm": "^2.0.31",
+    "electron": "^9.0.0",
+    "ts-node": "^8.10.1"
+  },
+  "dependencies": {
+    "fs-extra": "^9.0.0",
+    "typescript": "^3.9.3",
+    "ws": "^7.3.0"
+  }
+}

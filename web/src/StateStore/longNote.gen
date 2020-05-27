@@ -1,0 +1,4 @@
+addLongNote(longNote: LongNote)
+updateLongNote(longNote: LongNote)
+updateEditingLongNote(longNote: Partial<LongNote>)
+finishEditingLongNote()

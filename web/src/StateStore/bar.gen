@@ -1,0 +1,8 @@
+pushNewBar()
+addBar(bar: Bar)
+removeBar(barIndex: number)
+addNote(barIndex: number, note: Note)
+removeNote(barIndex: number, note: Note)
+changeNoteType(noteId: string, noteType: NoteType)
+waitBarClick(trigger: Action<Position>)
+clickBar(position: Position)
