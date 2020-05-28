@@ -1,4 +1,4 @@
-import { ILongNoteReducers, LongNoteActions, AddLongNoteAction, UpdateLongNoteAction, UpdateEditingLongNoteAction, FinishEditingLongNoteAction } from "./longNote_action.ts";
+import { ILongNoteReducers, LongNoteActions, AddLongNoteAction, UpdateLongNoteAction, UpdateEditingLongNoteAction, FinishEditingLongNoteAction, RemoveLongNoteAction } from "./longNote_action.ts";
 import { LongNoteState } from "./longNote_state";
 
 export class LongNoteReducers implements ILongNoteReducers {
@@ -13,6 +13,9 @@ export class LongNoteReducers implements ILongNoteReducers {
   }
   UPDATE_LONG_NOTE(state: LongNoteState, action: UpdateLongNoteAction): LongNoteState {
     throw new Error("Method not implemented.");
+  }
+  REMOVE_LONG_NOTE(state: LongNoteState, action: RemoveLongNoteAction): LongNoteState {
+    return state.update('longNotes', longNotes => longNotes.filter(longNote => longNote.id != action.longNote.id));
   }
 };
 
