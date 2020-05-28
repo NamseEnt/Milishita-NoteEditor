@@ -1,1 +1,2 @@
 changeMode(mode: Mode)
+changeNoteTypeMode(mode: NoteType)
