@@ -1,6 +1,7 @@
-import { store } from "~StateStore/store";
+import { store, dispatch } from "~StateStore/store";
 import { Mode } from "~NoteView/types";
 import { CancellationToken, runAddLongNoteProcess } from "~runAddLongNoteProcess";
+import { LongNoteAction } from "~StateStore/_gen/longNote_action.ts";
 
 export class ModeSelectHandler {
   private prevMode?: Mode;
@@ -35,6 +36,11 @@ export class ModeSelectHandler {
         if (store.getState().modeState.mode === 'longNoteEdit') {
           this.initRunAddLongNoteProcess();
         }
+      }).catch((reason) => {
+        if (reason !== 'token canceled') {
+          throw reason;
+        }
+        dispatch(LongNoteAction.finishEditingLongNote());
       });
   }
 }
