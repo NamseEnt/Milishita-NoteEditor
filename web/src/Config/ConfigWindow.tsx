@@ -11,8 +11,8 @@ const audioElement = document.createElement('audio');
 audioElement.src = dearUrl;
 
 export const ConfigWindow = () => {
-  const { mode, guideBeat, isPlaying, cursor } = useSelector((state: RootState) => {
-    const { mode } = state.modeState;
+  const { mode, guideBeat, isPlaying, cursor, noteTypeMode } = useSelector((state: RootState) => {
+    const { mode, noteTypeMode } = state.modeState;
     const { guideBeat } = state.configState;
     const { isPlaying, cursor } = state.playerState;
     return {
@@ -20,6 +20,7 @@ export const ConfigWindow = () => {
       guideBeat,
       isPlaying,
       cursor,
+      noteTypeMode,
     };
   });
 
@@ -49,7 +50,7 @@ export const ConfigWindow = () => {
           {isPlaying ? '⏸ Stop' : '▶️ Play'} {cursor.beats.toFixed(1)}
         </Button>
       </div>
-      <ModeWindow mode={mode} />
+      <ModeWindow mode={mode} noteTypeMode={noteTypeMode} />
     </div>
   );
 }

@@ -138,7 +138,7 @@ export class BarRenderer extends Drawable<BarRendererProps> {
         ...beatKey,
         barId: this.props.bar.id,
       }),
-      type: 'tap',
+      type: store.getState().modeState.noteTypeMode,
     });
 
     dispatch(BarAction.addNote(this.props.barIndex, newNote));

@@ -6,6 +6,7 @@ export type Action<T> = (arg: T) => any;
 export const modes = ['singleNoteEdit', 'longNoteEdit',] as const;
 export type Mode = typeof modes[number];
 
+
 export class Bar extends Record<{
   id: string;
   notes: List<Note>,

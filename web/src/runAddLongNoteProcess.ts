@@ -3,7 +3,7 @@ import uuid from "~utils/uuid";
 import { LongNoteAction } from "~StateStore/_gen/longNote_action.ts";
 import { getNoteOnPosition } from "~utils/note";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
-import { dispatch } from "~StateStore/store";
+import { dispatch, store } from "~StateStore/store";
 import { getBarIndex } from "~utils/bar";
 
 async function waitClick(token: CancellationToken): Promise<Position> {
@@ -42,7 +42,7 @@ async function getStartNote(token: CancellationToken): Promise<Note> {
     return noteOnPosition;
   }
 
-  const newNote = new Note({ position, id: uuid(), type: 'tap' });
+  const newNote = new Note({ position, id: uuid(), type: store.getState().modeState.noteTypeMode });
   dispatch(BarAction.addNote(getBarIndex(newNote.position.barId), newNote));
   return newNote;
 }
@@ -67,7 +67,7 @@ async function getEndNoteAndMiddlePoints(
 
     if (middlePoints[middlePoints.length - 1]?.equals(position)) {
       middlePoints.pop();
-      const endNote = new Note({ position, id: uuid(), type: 'tap' });
+      const endNote = new Note({ position, id: uuid(), type: store.getState().modeState.noteTypeMode });
       dispatch(BarAction.addNote(getBarIndex(endNote.position.barId), endNote));
       return {
         middlePoints,
