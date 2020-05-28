@@ -4,6 +4,8 @@ import { dispatch } from "~StateStore/store";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { SelectNoteAction } from "~StateStore/_gen/selectNote_action.ts";
 import uuid from "~utils/uuid";
+import { LongNoteAction } from "~StateStore/_gen/longNote_action.ts";
+import { ModeSelectHandler } from "~Config/ModeSelectHandler";
 
 interface BarRendererProps {
   bar: Bar;
@@ -84,6 +86,10 @@ export class BarRenderer extends Drawable<BarRendererProps> {
             this.removeNote(noteOnBeatKey);
           }
         } break;
+      }
+    } else {
+      if (event.button === 2) { // right on long note edit mode
+        ModeSelectHandler.cancelAddLongNoteProcess();
       }
     }
   }

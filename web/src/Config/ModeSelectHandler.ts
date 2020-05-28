@@ -20,8 +20,7 @@ export class ModeSelectHandler {
     if (previousMode !== nextMode) {
       console.log(`mode changed. ${previousMode}-> ${nextMode}`);
       if (previousMode === 'longNoteEdit') {
-        this.longNoteProcessCancellationToken?.cancel();
-        this.runAddLongNoteProcessPromise = undefined;
+        this.cancelAddLongNoteProcess();
       }
       if (nextMode === 'longNoteEdit' && !this.runAddLongNoteProcessPromise) {
         this.initRunAddLongNoteProcess();
@@ -32,15 +31,22 @@ export class ModeSelectHandler {
   private static initRunAddLongNoteProcess() {
     this.longNoteProcessCancellationToken = new CancellationToken();
     this.runAddLongNoteProcessPromise = runAddLongNoteProcess(this.longNoteProcessCancellationToken)
-      .then(() => {
+      .catch((reason) => {
+        if (reason !== 'token canceled' && reason.message !== 'canceled') {
+          throw reason;
+        }
+        this.cancelAddLongNoteProcess();
+      })
+      .finally(() => {
         if (store.getState().modeState.mode === 'longNoteEdit') {
           this.initRunAddLongNoteProcess();
         }
-      }).catch((reason) => {
-        if (reason !== 'token canceled') {
-          throw reason;
-        }
-        dispatch(LongNoteAction.finishEditingLongNote());
       });
+  }
+
+  public static cancelAddLongNoteProcess() {
+    this.longNoteProcessCancellationToken?.cancel();
+    this.runAddLongNoteProcessPromise = undefined;
+    dispatch(LongNoteAction.finishEditingLongNote());
   }
 }
