@@ -1,6 +1,6 @@
-import { Bar, Note, NoteType, Position, Mode } from "./types";
+import { Bar, Note, NoteType, Position, Mode, LongNote } from "./types";
 import Drawable from "./Drawable";
-import { dispatch } from "~StateStore/store";
+import { dispatch, store } from "~StateStore/store";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { SelectNoteAction } from "~StateStore/_gen/selectNote_action.ts";
 import uuid from "~utils/uuid";
@@ -59,38 +59,47 @@ export class BarRenderer extends Drawable<BarRendererProps> {
     const { beat, key } = guideDotOnMouse;
     const beatKey = { beat, key };
 
-    dispatch(BarAction.clickBar(new Position({
-      barId: this.props.bar.id,
-      beat,
-      key,
-    })));
+    switch (event.button) {
+      case 0: { // left click
+        dispatch(BarAction.clickBar(new Position({
+          barId: this.props.bar.id,
+          beat,
+          key,
+        })));
 
-    if (mode === 'singleNoteEdit') {
-      switch (event.button) {
-        case 0: { // left click
-          const noteOnBeatKey = this.getNoteOnBeatKey(beatKey)
-          if (noteOnBeatKey) {
-            if (noteOnBeatKey === this.props.selectedNote) {
-              this.deselectNote()
-            } else {
-              this.selectNote(noteOnBeatKey);
-            }
+        if (mode === 'longNoteEdit') {
+          break;
+        }
+
+        const noteOnBeatKey = this.getNoteOnBeatKey(beatKey);
+        if (noteOnBeatKey) {
+          if (noteOnBeatKey === this.props.selectedNote) {
+            this.deselectNote()
           } else {
-            this.addNote(beatKey);
+            this.selectNote(noteOnBeatKey);
           }
-        } break;
+        } else {
+          this.addNote(beatKey);
+        }
+      } break;
 
-        case 2: { // right click
-          const noteOnBeatKey = this.getNoteOnBeatKey(beatKey)
-          if (noteOnBeatKey) {
-            this.removeNote(noteOnBeatKey);
-          }
-        } break;
-      }
-    } else {
-      if (event.button === 2) { // right on long note edit mode
-        ModeSelectHandler.cancelAddLongNoteProcess();
-      }
+      case 2: { // right click
+        if (mode === 'longNoteEdit') {
+          ModeSelectHandler.cancelAddLongNoteProcess();
+        }
+
+        const noteOnBeatKey = this.getNoteOnBeatKey(beatKey)
+        if (!noteOnBeatKey) {
+          break;
+        }
+
+        const longNote = this.getLongNoteBySingleNote(noteOnBeatKey);
+        if (longNote) {
+          this.removeLongNote(longNote);
+        }
+
+        this.removeNote(noteOnBeatKey);
+      } break;
     }
   }
 
@@ -98,10 +107,20 @@ export class BarRenderer extends Drawable<BarRendererProps> {
     dispatch(BarAction.removeNote(this.props.barIndex, note));
   }
 
+  removeLongNote(longNote: LongNote) {
+    dispatch(LongNoteAction.removeLongNote(longNote));
+  }
+
   getNoteOnBeatKey(beatKey: { beat: number; key: number; }): Note | undefined {
     return this.props.bar.notes.find(note =>
       note.position.beat === beatKey.beat
       && note.position.key === beatKey.key);
+  }
+
+  getLongNoteBySingleNote(note: Note): LongNote | undefined {
+    return store.getState().longNoteState.longNotes.find(longNote =>
+      note.id === longNote.startNote.id
+      || note.id === longNote.endNote.id);
   }
 
   deselectNote() {
