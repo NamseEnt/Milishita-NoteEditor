@@ -1,4 +1,4 @@
-import { IBarReducers, PushNewBarAction, AddBarAction, RemoveBarAction, AddNoteAction, RemoveNoteAction, BarActions, ChangeNoteTypeAction, WaitBarClickAction, ClickBarAction, InsertNewBarAction, RemoveNotesOnBarAction } from "./bar_action.ts";
+import { IBarReducers, PushNewBarAction, AddBarAction, RemoveBarAction, AddNoteAction, RemoveNoteAction, BarActions, ChangeNoteTypeAction, WaitBarClickAction, ClickBarAction, InsertNewBarAction, RemoveNotesOnBarAction, ChangeBarBeatAction, RemoveOverflowedNotesAction } from "./bar_action.ts";
 import { BarState } from "./bar_state";
 import { Bar, Note } from "~NoteView/types";
 import uuid from "~utils/uuid";
@@ -22,7 +22,7 @@ export class BarReducers implements IBarReducers {
       (note: Note) => note.set('type', action.noteType));
   }
   PUSH_NEW_BAR(state: BarState, action: PushNewBarAction): BarState {
-    return state.update('bars', bars => bars.push(new Bar({ id: uuid(), beat: 4 })));
+    return state.update('bars', bars => bars.push(new Bar({ id: uuid(), beat: action.beat })));
   }
   ADD_BAR(state: BarState, action: AddBarAction): BarState {
     return state.update('bars', bars => bars.push(action.bar));
@@ -39,10 +39,18 @@ export class BarReducers implements IBarReducers {
       (notes: Note[]) => notes.filter(note => note.id !== action.note.id));
   }
   INSERT_NEW_BAR(state: BarState, action: InsertNewBarAction): BarState {
-    return state.update('bars', bars => bars.splice(action.barIndex, 0, new Bar({ id: uuid(), beat: 4 })))
+    return state.update('bars', bars => bars.splice(action.barIndex, 0, new Bar({ id: uuid(), beat: action.beat })))
   }
   REMOVE_NOTES_ON_BAR(state: BarState, action: RemoveNotesOnBarAction): BarState {
     return state.updateIn(['bars', action.barIndex, 'notes'], (_) => []);
+  }
+  CHANGE_BAR_BEAT(state: BarState, action: ChangeBarBeatAction): BarState {
+    return state.updateIn(['bars', action.barIndex],
+      (bar: Bar) => bar.set('beat', action.beat));
+  }
+  REMOVE_OVERFLOWED_NOTES(state: BarState, action: RemoveOverflowedNotesAction): BarState {
+    return state.updateIn(['bars', action.barIndex, 'notes'],
+      notes => (notes as Note[]).filter(note =>note.position.beat < action.beat));
   }
 }
 

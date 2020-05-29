@@ -2,7 +2,7 @@ import { world } from "./world";
 import { Button } from "./Button";
 import { BarListRenderer } from "./BarListRenderer";
 import { ScrollView } from "./ScrollView";
-import { dispatch } from "~StateStore/store";
+import { dispatch, store } from "~StateStore/store";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { runTestCode } from "./runTestCode";
 
@@ -68,7 +68,7 @@ export default class NoteViewCanvas {
   }
 
   private addBar() {
-    dispatch(BarAction.pushNewBar());
+    dispatch(BarAction.pushNewBar(store.getState().configState.defaultBarBeat));
   }
 
   tick() {

@@ -1,6 +1,6 @@
 import { ModeSelectHandler } from "./ModeSelectHandler";
 import { modes, Mode, NoteType, noteTypes } from "~NoteView/types";
-import { Button } from "semantic-ui-react";
+import { Button, Segment, Divider } from "semantic-ui-react";
 import React from "react";
 import { dispatch } from "~StateStore/store";
 import { ModeAction } from "~StateStore/_gen/mode_action.ts";
@@ -42,15 +42,14 @@ export const ModeWindow = (props: {
 
 
   return (
-    <div>
-      <h2>Mode</h2>
-      <Button.Group>
+    <Segment>
+      <Button.Group fluid>
         {buttons}
       </Button.Group>
-      <h2>Note Type</h2>
-      <Button.Group>
+      <Divider />
+      <Button.Group fluid>
         {noteTypeButtons}
       </Button.Group>
-    </div>
+    </Segment>
   );
 }

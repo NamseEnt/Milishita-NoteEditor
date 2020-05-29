@@ -7,6 +7,7 @@ export class ConfigState extends Record<{
   keys: number;
   guideBeat: number;
   bpm: number;
+  defaultBarBeat: number;
 }>({
   beatHeight: 100,
   barWidth: 350,
@@ -14,4 +15,5 @@ export class ConfigState extends Record<{
   keys: 6,
   guideBeat: 0.5,
   bpm: 123,
+  defaultBarBeat: 4,
 }) {};

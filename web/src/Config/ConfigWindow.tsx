@@ -5,6 +5,7 @@ import { ModeWindow } from './ModeWindow';
 import { Slider, Typography, Button } from '@material-ui/core';
 import { ConfigAction } from '~StateStore/_gen/config_action.ts';
 import { PlayerAction } from '~StateStore/_gen/player_action.ts';
+import { Segment, Header } from 'semantic-ui-react';
 const dearUrl = require('../dear.mp3');
 console.log(dearUrl);
 const audioElement = document.createElement('audio');
@@ -31,9 +32,14 @@ export const ConfigWindow = () => {
   }
 
   return (
-    <div>
-      <h1>Config</h1>
-      <div>
+    <Segment.Group>
+      <Segment><Header >Config</Header></Segment>
+      <Segment>
+        <Button onClick={() => { dispatch(isPlaying ? PlayerAction.stop() : PlayerAction.play()) }}>
+          {isPlaying ? '⏸ Stop' : '▶️ Play'} {cursor.beats.toFixed(1)}
+        </Button>
+      </Segment>
+      <Segment>
         <Typography gutterBottom>
           Guide Beat
         </Typography>
@@ -46,11 +52,8 @@ export const ConfigWindow = () => {
           valueLabelFormat={(value) => value < 0 ? `1 / ${2 ** -value}` : value}
           onChange={(_, value) => dispatch(ConfigAction.setGuideBeat(2 ** (value as number)))}
         />
-        <Button onClick={() => {dispatch(isPlaying ? PlayerAction.stop() : PlayerAction.play()) }}>
-          {isPlaying ? '⏸ Stop' : '▶️ Play'} {cursor.beats.toFixed(1)}
-        </Button>
-      </div>
+      </Segment>
       <ModeWindow mode={mode} noteTypeMode={noteTypeMode} />
-    </div>
+    </Segment.Group>
   );
 }

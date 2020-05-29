@@ -1,4 +1,4 @@
-import { ILongNoteReducers, LongNoteActions, AddLongNoteAction, UpdateLongNoteAction, UpdateEditingLongNoteAction, FinishEditingLongNoteAction, RemoveLongNoteAction, RemoveLongNotesOnBarAction } from "./longNote_action.ts";
+import { ILongNoteReducers, LongNoteActions, AddLongNoteAction, UpdateLongNoteAction, UpdateEditingLongNoteAction, FinishEditingLongNoteAction, RemoveLongNoteAction, RemoveLongNotesOnBarAction, RemoveOverflowedLongNotesAction } from "./longNote_action.ts";
 import { LongNoteState } from "./longNote_state";
 
 export class LongNoteReducers implements ILongNoteReducers {
@@ -18,9 +18,17 @@ export class LongNoteReducers implements ILongNoteReducers {
     return state.update('longNotes', longNotes => longNotes.filter(longNote => longNote.id != action.longNote.id));
   }
   REMOVE_LONG_NOTES_ON_BAR(state: LongNoteState, action: RemoveLongNotesOnBarAction): LongNoteState {
-    return state.update('longNotes', longNotes => longNotes.filter(longNote => longNote.startNote.position.barId !== action.barId
+    return state.update('longNotes', longNotes => longNotes.filter(longNote =>
+      longNote.startNote.position.barId !== action.barId
       && longNote.endNote.position.barId !== action.barId
       && longNote.middlePoints.every(middlePoint => middlePoint.barId !== action.barId)
+    ));
+  }
+  REMOVE_OVERFLOWED_LONG_NOTES(state: LongNoteState, action: RemoveOverflowedLongNotesAction): LongNoteState {
+    return state.update('longNotes', longNotes => longNotes.filter(longNote =>
+      (longNote.startNote.position.barId !== action.barId || longNote.startNote.position.beat < action.beat)
+      && (longNote.endNote.position.barId !== action.barId || longNote.endNote.position.beat < action.beat)
+      && longNote.middlePoints.every(middlePoint => (middlePoint.barId !== action.barId) || (middlePoint.beat < action.beat))
     ));
   }
 };
