@@ -24,6 +24,19 @@ export function getBarIndex(barId: string): number {
   return store.getState().barState.bars.findIndex(bar => bar.id === barId);
 }
 
+export function getBarIndexByBeats(beats: number): number {
+  const bars = store.getState().barState.bars;
+
+  let beatSum = 0;
+  let barIndex = -1;
+  const found = bars.some(bar => {
+    barIndex += 1;
+    beatSum += bar.beat;
+    return beatSum > beats;
+  })
+  return found ? barIndex : -1
+}
+
 export function getBar(barId: string): Bar | undefined {
   return store.getState().barState.bars.find(bar => bar.id === barId);
 }

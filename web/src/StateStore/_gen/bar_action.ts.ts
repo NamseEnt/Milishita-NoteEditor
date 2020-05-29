@@ -4,10 +4,12 @@ import { BarState } from './bar_state'
 ///BEGIN
 
 export const PUSH_NEW_BAR = "PUSH_NEW_BAR" as const;
+export const INSERT_NEW_BAR = "INSERT_NEW_BAR" as const;
 export const ADD_BAR = "ADD_BAR" as const;
 export const REMOVE_BAR = "REMOVE_BAR" as const;
 export const ADD_NOTE = "ADD_NOTE" as const;
 export const REMOVE_NOTE = "REMOVE_NOTE" as const;
+export const REMOVE_NOTES_ON_BAR = "REMOVE_NOTES_ON_BAR" as const;
 export const CHANGE_NOTE_TYPE = "CHANGE_NOTE_TYPE" as const;
 export const WAIT_BAR_CLICK = "WAIT_BAR_CLICK" as const;
 export const CLICK_BAR = "CLICK_BAR" as const;
@@ -16,6 +18,14 @@ export const CLICK_BAR = "CLICK_BAR" as const;
   export function pushNewBar() {
     return {
       type: PUSH_NEW_BAR,
+    };
+  }
+
+
+  export function insertNewBar(barIndex: number) {
+    return {
+      type: INSERT_NEW_BAR,
+      barIndex,
     };
   }
 
@@ -54,6 +64,14 @@ export const CLICK_BAR = "CLICK_BAR" as const;
   }
 
 
+  export function removeNotesOnBar(barIndex: number) {
+    return {
+      type: REMOVE_NOTES_ON_BAR,
+      barIndex,
+    };
+  }
+
+
   export function changeNoteType(noteId: string, noteType: NoteType) {
     return {
       type: CHANGE_NOTE_TYPE,
@@ -86,6 +104,12 @@ export type PushNewBarAction = {
 };
 
 
+export type InsertNewBarAction = {
+  type: typeof INSERT_NEW_BAR;
+  barIndex: number;
+};
+
+
 export type AddBarAction = {
   type: typeof ADD_BAR;
   bar: Bar;
@@ -112,6 +136,12 @@ export type RemoveNoteAction = {
 };
 
 
+export type RemoveNotesOnBarAction = {
+  type: typeof REMOVE_NOTES_ON_BAR;
+  barIndex: number;
+};
+
+
 export type ChangeNoteTypeAction = {
   type: typeof CHANGE_NOTE_TYPE;
   noteId: string;
@@ -131,14 +161,16 @@ export type ClickBarAction = {
 };
 
 
-export type BarActions = PushNewBarAction | AddBarAction | RemoveBarAction | AddNoteAction | RemoveNoteAction | ChangeNoteTypeAction | WaitBarClickAction | ClickBarAction
+export type BarActions = PushNewBarAction | InsertNewBarAction | AddBarAction | RemoveBarAction | AddNoteAction | RemoveNoteAction | RemoveNotesOnBarAction | ChangeNoteTypeAction | WaitBarClickAction | ClickBarAction
 
 export interface IBarReducers {
   PUSH_NEW_BAR(state: BarState, action: PushNewBarAction): BarState;
+  INSERT_NEW_BAR(state: BarState, action: InsertNewBarAction): BarState;
   ADD_BAR(state: BarState, action: AddBarAction): BarState;
   REMOVE_BAR(state: BarState, action: RemoveBarAction): BarState;
   ADD_NOTE(state: BarState, action: AddNoteAction): BarState;
   REMOVE_NOTE(state: BarState, action: RemoveNoteAction): BarState;
+  REMOVE_NOTES_ON_BAR(state: BarState, action: RemoveNotesOnBarAction): BarState;
   CHANGE_NOTE_TYPE(state: BarState, action: ChangeNoteTypeAction): BarState;
   WAIT_BAR_CLICK(state: BarState, action: WaitBarClickAction): BarState;
   CLICK_BAR(state: BarState, action: ClickBarAction): BarState;
