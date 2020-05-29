@@ -1,4 +1,4 @@
-import { IBarReducers, PushNewBarAction, AddBarAction, RemoveBarAction, AddNoteAction, RemoveNoteAction, BarActions, ChangeNoteTypeAction, WaitBarClickAction, ClickBarAction } from "./bar_action.ts";
+import { IBarReducers, PushNewBarAction, AddBarAction, RemoveBarAction, AddNoteAction, RemoveNoteAction, BarActions, ChangeNoteTypeAction, WaitBarClickAction, ClickBarAction, InsertNewBarAction, RemoveNotesOnBarAction } from "./bar_action.ts";
 import { BarState } from "./bar_state";
 import { Bar, Note } from "~NoteView/types";
 import uuid from "~utils/uuid";
@@ -37,6 +37,12 @@ export class BarReducers implements IBarReducers {
   REMOVE_NOTE(state: BarState, action: RemoveNoteAction): BarState {
     return state.updateIn(['bars', action.barIndex, 'notes'],
       (notes: Note[]) => notes.filter(note => note.id !== action.note.id));
+  }
+  INSERT_NEW_BAR(state: BarState, action: InsertNewBarAction): BarState {
+    return state.update('bars', bars => bars.splice(action.barIndex, 0, new Bar({ id: uuid(), beat: 4 })))
+  }
+  REMOVE_NOTES_ON_BAR(state: BarState, action: RemoveNotesOnBarAction): BarState {
+    return state.updateIn(['bars', action.barIndex, 'notes'], (_) => []);
   }
 }
 

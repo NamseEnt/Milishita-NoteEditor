@@ -8,16 +8,21 @@ import { store } from '~StateStore/store'
 import { ConfigWindow } from '~Config/ConfigWindow'
 import '~/test.ts';
 import '~/keyboardHandler';
+import { Grid, Container } from 'semantic-ui-react'
 
 ReactDOM.render(
   (<Provider store={store}>
-    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr' }}>
-      <div><NoteView /></div>
-      <div>
-        <ConfigWindow />
-        <InspectorWindow />
-      </div>
-    </div>
+    <Container>
+      <Grid columns={2} doubling stackable>
+        <Grid.Column>
+          <NoteView />
+        </Grid.Column>
+        <Grid.Column>
+          <ConfigWindow />
+          <InspectorWindow />
+        </Grid.Column>
+      </Grid>
+    </Container>
   </Provider>),
   document.getElementById('root'),
 )
