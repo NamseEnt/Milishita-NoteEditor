@@ -38,7 +38,7 @@ export const CursorLocatedBarInspectorComponent = () => {
       >아래에 한 마디 추가</Button>
       <Button
         disabled={isPlaying}
-        onClick={() => { removeBar() }}
+        onClick={removeBar}
       >삭제</Button>
     </Button>
   </Button.Group>
