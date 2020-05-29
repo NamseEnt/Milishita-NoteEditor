@@ -4,8 +4,8 @@ import { dispatch, store } from "~StateStore/store";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { SelectNoteAction } from "~StateStore/_gen/selectNote_action.ts";
 import uuid from "~utils/uuid";
-import { LongNoteAction } from "~StateStore/_gen/longNote_action.ts";
 import { ModeSelectHandler } from "~Config/ModeSelectHandler";
+import { removeNote } from "~utils/note";
 
 interface BarRendererProps {
   bar: Bar;
@@ -93,34 +93,19 @@ export class BarRenderer extends Drawable<BarRendererProps> {
           break;
         }
 
-        const longNote = this.getLongNoteBySingleNote(noteOnBeatKey);
-        if (longNote) {
-          this.removeLongNote(longNote);
-        }
-
         this.removeNote(noteOnBeatKey);
       } break;
     }
   }
 
   removeNote(note: Note) {
-    dispatch(BarAction.removeNote(this.props.barIndex, note));
-  }
-
-  removeLongNote(longNote: LongNote) {
-    dispatch(LongNoteAction.removeLongNote(longNote));
+    removeNote(note, this.props.barIndex);
   }
 
   getNoteOnBeatKey(beatKey: { beat: number; key: number; }): Note | undefined {
     return this.props.bar.notes.find(note =>
       note.position.beat === beatKey.beat
       && note.position.key === beatKey.key);
-  }
-
-  getLongNoteBySingleNote(note: Note): LongNote | undefined {
-    return store.getState().longNoteState.longNotes.find(longNote =>
-      note.id === longNote.startNote.id
-      || note.id === longNote.endNote.id);
   }
 
   deselectNote() {

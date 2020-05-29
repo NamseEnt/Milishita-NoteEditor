@@ -1,6 +1,6 @@
 import { IModeReducers, ModeActions, ChangeModeAction, ChangeNoteTypeModeAction } from "./mode_action.ts";
 import { ModeState } from "./mode_state";
-import { CancellationToken, runAddLongNoteProcess } from "~runAddLongNoteProcess";
+import { CancellationToken } from "~runAddLongNoteProcess";
 
 let longNoteProcessCancellationToken: CancellationToken | undefined;
 

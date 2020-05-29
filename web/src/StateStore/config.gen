@@ -1,1 +1,2 @@
 setGuideBeat(guideBeat: number)
+setDefaultBarBeat(beat: number)
