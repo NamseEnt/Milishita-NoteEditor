@@ -1,6 +1,6 @@
 import React from 'react';
-import { Segment, Header } from "semantic-ui-react";
 import NoteViewCanvas from './NoteViewCanvas';
+import { Card, Typography, List, ListItem } from '@material-ui/core';
 
 type NoteViewProps = {
 
@@ -29,12 +29,16 @@ export default class NoteView extends React.Component<NoteViewProps, NoteViewSta
 
   render() {
     return (
-      <Segment.Group>
-        <Segment><Header>NoteView</Header></Segment>
-        <Segment textAlign={'center'}>
-          <canvas width={440} height={500} ref={this.setCanvasRef} />
-        </Segment>
-      </Segment.Group>
+      <Card>
+        <List>
+          <ListItem>
+            <Typography variant="h3">NoteView</Typography>
+          </ListItem>
+          <ListItem>
+            <canvas width={440} height={500} ref={this.setCanvasRef} />
+          </ListItem>
+        </List>
+      </Card>
     );
   }
 }

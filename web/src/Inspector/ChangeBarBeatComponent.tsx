@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, ChangeEvent } from 'react';
 import { Bar } from '~NoteView/types';
-import { Input, InputOnChangeData } from 'semantic-ui-react';
 import { isNumber } from 'util';
 import { dispatch } from '~StateStore/store';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
 import { removeOverFlowedNotes } from '~utils/note';
+import { Button, InputAdornment, TextField} from '@material-ui/core';
 
 type ChangeBarBeatInputProps = {
   isPlaying: boolean;
@@ -60,16 +60,17 @@ export default class ChangeBarBeatComponent extends Component<ChangeBarBeatInput
       isPlaying,
     } = this.props;
 
-    return <Input
-      fluid
+    return <TextField
+      fullWidth
+      label={`${barIndex}번 마디의 박자`}
       disabled={isPlaying}
       type={'number'}
       value={inputText}
-      label={`${barIndex}번 마디의 박자`}
-      onChange={(_: React.ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => this.setInputText(data.value)}
-      action={{
-        content: '변경',
-        onClick: () => {this.changeBarBeat()},
+      onChange={(event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => this.setInputText(event.target.value)}
+      InputProps={{
+        endAdornment: <InputAdornment position="start">
+          <Button onClick={() => { this.changeBarBeat() }}>변경</Button>
+        </InputAdornment>,
       }}
     />
   }

@@ -1,4 +1,3 @@
-import 'semantic-ui-css/semantic.min.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { InspectorWindow } from '~Inspector/InspectorWindow'
@@ -8,19 +7,19 @@ import { store } from '~StateStore/store'
 import { ConfigWindow } from '~Config/ConfigWindow'
 import '~/test.ts';
 import '~/keyboardHandler';
-import { Grid, Container } from 'semantic-ui-react'
+import { Container, Grid } from '@material-ui/core'
 
 ReactDOM.render(
   (<Provider store={store}>
     <Container>
-      <Grid columns={2} doubling stackable>
-        <Grid.Column>
+      <Grid container spacing={2}>
+        <Grid item md={6} xs={12}>
           <NoteView />
-        </Grid.Column>
-        <Grid.Column>
+        </Grid>
+        <Grid item md={6} xs={12}>
           <ConfigWindow />
           <InspectorWindow />
-        </Grid.Column>
+        </Grid>
       </Grid>
     </Container>
   </Provider>),

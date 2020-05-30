@@ -1,9 +1,9 @@
 import { ModeSelectHandler } from "./ModeSelectHandler";
 import { modes, Mode, NoteType, noteTypes } from "~NoteView/types";
-import { Button, Segment, Divider } from "semantic-ui-react";
 import React from "react";
 import { dispatch } from "~StateStore/store";
 import { ModeAction } from "~StateStore/_gen/mode_action.ts";
+import { Button, ButtonGroup, ListItem, Container } from "@material-ui/core";
 
 const modeSelectHandler = new ModeSelectHandler();
 
@@ -21,7 +21,7 @@ export const ModeWindow = (props: {
         }
         dispatch(ModeAction.changeMode(mode));
       }}
-      positive={currentMode === mode}
+      variant={currentMode === mode ? 'contained' : 'outlined'}
     > {mode}</Button >;
   });
 
@@ -35,21 +35,26 @@ export const ModeWindow = (props: {
         }
         dispatch(ModeAction.changeNoteTypeMode(noteTypeMode));
       }}
-      positive={currentNoteTypeMode === noteTypeMode}
+      variant={currentNoteTypeMode === noteTypeMode ? 'contained' : 'outlined'}
     > {noteTypeMode}</Button>
 
   });
 
 
   return (
-    <Segment>
-      <Button.Group fluid>
-        {buttons}
-      </Button.Group>
-      <Divider />
-      <Button.Group fluid>
-        {noteTypeButtons}
-      </Button.Group>
-    </Segment>
+    <ListItem>
+      <Container disableGutters>
+        <ListItem disableGutters>
+          <ButtonGroup fullWidth>
+            {buttons}
+          </ButtonGroup>
+        </ListItem>
+        <ListItem disableGutters>
+          <ButtonGroup fullWidth>
+            {noteTypeButtons}
+          </ButtonGroup>
+        </ListItem>
+      </Container>
+    </ListItem>
   );
 }
