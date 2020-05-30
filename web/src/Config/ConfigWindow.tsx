@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, dispatch } from '~StateStore/store';
 import { ModeWindow } from './ModeWindow';
-import { Slider, Typography, Button } from '@material-ui/core';
+import { Slider, Typography, Button, Card, List, ListItem } from '@material-ui/core';
 import { ConfigAction } from '~StateStore/_gen/config_action.ts';
 import { PlayerAction } from '~StateStore/_gen/player_action.ts';
-import { Segment, Header } from 'semantic-ui-react';
+
 const dearUrl = require('../dear.mp3');
 console.log(dearUrl);
 const audioElement = document.createElement('audio');
@@ -32,28 +32,29 @@ export const ConfigWindow = () => {
   }
 
   return (
-    <Segment.Group>
-      <Segment><Header >Config</Header></Segment>
-      <Segment>
-        <Button onClick={() => { dispatch(isPlaying ? PlayerAction.stop() : PlayerAction.play()) }}>
-          {isPlaying ? '⏸ Stop' : '▶️ Play'} {cursor.beats.toFixed(1)}
-        </Button>
-      </Segment>
-      <Segment>
-        <Typography gutterBottom>
-          Guide Beat
-        </Typography>
-        <Slider
-          value={Math.log2(guideBeat)}
-          min={-4}
-          step={1}
-          max={1}
-          valueLabelDisplay="auto"
-          valueLabelFormat={(value) => value < 0 ? `1 / ${2 ** -value}` : value}
-          onChange={(_, value) => dispatch(ConfigAction.setGuideBeat(2 ** (value as number)))}
-        />
-      </Segment>
-      <ModeWindow mode={mode} noteTypeMode={noteTypeMode} />
-    </Segment.Group>
+    <Card>
+      <List>
+        <ListItem><Typography variant="h3">Config</Typography></ListItem>
+        <ListItem>
+          <Button onClick={() => { dispatch(isPlaying ? PlayerAction.stop() : PlayerAction.play()) }}>
+            {isPlaying ? '⏸ Stop' : '▶️ Play'} {cursor.beats.toFixed(1)}
+          </Button>
+        </ListItem>
+        <ListItem>
+          <Typography gutterBottom>Guide Beat</Typography>
+          <Slider
+
+            value={Math.log2(guideBeat)}
+            min={-4}
+            step={1}
+            max={1}
+            valueLabelDisplay="auto"
+            valueLabelFormat={(value) => value < 0 ? `1 / ${2 ** -value}` : value}
+            onChange={(_, value) => dispatch(ConfigAction.setGuideBeat(2 ** (value as number)))}
+          />
+        </ListItem>
+          <ModeWindow mode={mode} noteTypeMode={noteTypeMode} />
+      </List>
+    </Card>
   );
 }
