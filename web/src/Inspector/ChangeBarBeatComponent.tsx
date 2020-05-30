@@ -4,7 +4,11 @@ import { isNumber } from 'util';
 import { dispatch } from '~StateStore/store';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
 import { removeOverFlowedNotes } from '~utils/note';
-import { Button, InputAdornment, TextField} from '@material-ui/core';
+import { Button, InputAdornment, TextField, InputLabel, Select, MenuItem} from '@material-ui/core';
+import { convertBarSecondToBeat, convertBarBeatToSecond } from '~utils/bar';
+
+const durationUnits = ['second', 'beat'] as const;
+type DurationUnit = typeof durationUnits[number];
 
 type ChangeBarBeatInputProps = {
   isPlaying: boolean;
@@ -14,37 +18,70 @@ type ChangeBarBeatInputProps = {
 
 type ChangeBarBeatInputStates = {
   inputText: string;
+  durationUnit: DurationUnit;
 }
 
 export default class ChangeBarBeatComponent extends Component<ChangeBarBeatInputProps, ChangeBarBeatInputStates>  {
   constructor(props: ChangeBarBeatInputProps) {
     super(props);
     this.state = {
-      inputText: props.bar.beat.toString()
+      inputText: this.getDurationByBeat(props.bar.beat, 'beat').toString(),
+      durationUnit: 'beat',
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleDurationUnitSelectChange = this.handleDurationUnitSelectChange.bind(this);
   }
 
   public componentWillReceiveProps(nextProps: Readonly<ChangeBarBeatInputProps>): void {
-    this.setInputText(nextProps.bar.beat.toString());
+    const duration = this.getDurationByBeat(nextProps.bar.beat);
+    this.setState({
+      inputText: duration.toString(),
+    });
   }
 
-  private setInputText(inputText: string): void {
+  private getDurationByBeat(beat: number, manualDurationUnit?: DurationUnit) {
+    const durationUnit = manualDurationUnit || this.state.durationUnit;
+    return durationUnit === 'second'
+      ? convertBarBeatToSecond(beat)
+      : beat;
+  }
+
+  private handleInputChange(event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>): void {
     this.setState({
-      inputText,
+      inputText: event.target.value,
+    });
+  }
+
+  private handleDurationUnitSelectChange(event: React.ChangeEvent<{ value: unknown }>): void {
+    const { beat } = this.props.bar;
+    const durationUnit = event.target.value as DurationUnit;
+    const duration = this.getDurationByBeat(beat, durationUnit);
+
+    this.setState({
+      durationUnit,
+      inputText: duration.toString(),
     });
   }
 
   private changeBarBeat(): void {
-    const { inputText } = this.state;
+    const {
+      inputText,
+      durationUnit,
+    } = this.state;
     const {
       bar,
       barIndex,
     } = this.props;
 
-    const beat = parseFloat(inputText);
-    if (!isNumber(beat)) {
+    const inputNumber = parseFloat(inputText);
+    if (!isNumber(inputNumber)) {
       return;
     }
+
+    const beat = durationUnit === 'second'
+      ? convertBarSecondToBeat(inputNumber)
+      : inputNumber;
 
     if (bar.beat > beat) {
       removeOverFlowedNotes(beat, bar.id, barIndex);
@@ -54,20 +91,37 @@ export default class ChangeBarBeatComponent extends Component<ChangeBarBeatInput
   }
 
   public render() {
-    const { inputText } = this.state;
+    const {
+      inputText,
+      durationUnit,
+    } = this.state;
     const {
       barIndex,
       isPlaying,
     } = this.props;
 
+    const durationUnitItems = durationUnits.map(unit => <MenuItem
+      key={`selected-note-${unit}`}
+      value={unit}
+      disabled={durationUnit === unit}
+      selected={durationUnit === unit}
+    >{unit}</MenuItem>);
+
     return <TextField
       fullWidth
-      label={`${barIndex}번 마디의 박자`}
+      label={`${barIndex}번 마디의 길이`}
       disabled={isPlaying}
       type={'number'}
       value={inputText}
-      onChange={(event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => this.setInputText(event.target.value)}
+      onChange={this.handleInputChange}
       InputProps={{
+        startAdornment: <InputAdornment position="start">
+          <Select
+            label={<InputLabel >Note Type</InputLabel>}
+            value={durationUnit}
+            onChange={this.handleDurationUnitSelectChange}
+          >{durationUnitItems}</Select>
+        </InputAdornment>,
         endAdornment: <InputAdornment position="start">
           <Button onClick={() => { this.changeBarBeat() }}>변경</Button>
         </InputAdornment>,

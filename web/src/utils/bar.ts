@@ -59,3 +59,13 @@ export function getXY(position: Position): { x: number, y: number } {
     y,
   }
 }
+
+export function convertBarBeatToSecond(beat: number): number {
+  const { bpm } = store.getState().configState;
+  return beat / (bpm / 60);
+}
+
+export function convertBarSecondToBeat(second: number): number {
+  const { bpm } = store.getState().configState;
+  return second * (bpm / 60);
+}
