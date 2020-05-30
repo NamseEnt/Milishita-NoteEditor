@@ -9,13 +9,14 @@ import {ButtonGroup, Button, Container, CardContent } from '@material-ui/core';
 
 export const CursorLocatedBarInspectorComponent = () => {
   const isPlaying = useSelector((state: RootState) => state.playerState.isPlaying);
+  const bars = useSelector((state: RootState) => state.barState.bars);
   const beats = store.getState().playerState.cursor.beats
   const barIndex = getBarIndexByBeats(beats);
   if (barIndex < 0) {
     return null;
   }
 
-  const bar = store.getState().barState.bars.get(barIndex);
+  const bar = bars.get(barIndex);
   if (!bar) {
     return null;
   }
