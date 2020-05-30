@@ -1,22 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState, dispatch } from '~StateStore/store';
+import { RootState, dispatch, store } from '~StateStore/store';
 import { noteTypes, NoteType } from '~NoteView/types';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
 import { Divider, MenuItem, Select, FormControl, InputLabel, Container } from '@material-ui/core';
 
 
 export const SelectedNoteInspectorComponent = () => {
-  const { selectedNote } = useSelector((state: RootState) => {
-    const {selectedNoteId} = state.selectNoteState;
-    console.log(state.barState.bars);
-    const bar = state.barState.bars.find(bar => bar.notes.some(note => note.id === selectedNoteId));
-    const selectedNote = bar?.notes.find(note => note.id === selectedNoteId);
-
-    return {
-      selectedNote,
-    };
-  });
+  const selectedNoteId = useSelector((state: RootState) => state.selectNoteState.selectedNoteId);
+  const bars = store.getState().barState.bars;
+  const bar = bars.find(bar => bar.notes.some(note => note.id === selectedNoteId));
+  const selectedNote = bar?.notes.find(note => note.id === selectedNoteId);
 
   if (!selectedNote) {
     return null;
