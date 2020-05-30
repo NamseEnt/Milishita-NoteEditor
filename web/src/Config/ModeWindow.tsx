@@ -3,7 +3,7 @@ import { modes, Mode, NoteType, noteTypes } from "~NoteView/types";
 import React from "react";
 import { dispatch } from "~StateStore/store";
 import { ModeAction } from "~StateStore/_gen/mode_action.ts";
-import { Button, ButtonGroup, ListItem, Container } from "@material-ui/core";
+import { Button, ButtonGroup, Container, CardContent } from "@material-ui/core";
 
 const modeSelectHandler = new ModeSelectHandler();
 
@@ -42,19 +42,17 @@ export const ModeWindow = (props: {
 
 
   return (
-    <ListItem>
-      <Container disableGutters>
-        <ListItem disableGutters>
-          <ButtonGroup fullWidth>
-            {buttons}
-          </ButtonGroup>
-        </ListItem>
-        <ListItem disableGutters>
-          <ButtonGroup fullWidth>
-            {noteTypeButtons}
-          </ButtonGroup>
-        </ListItem>
-      </Container>
-    </ListItem>
+    <Container disableGutters>
+      <CardContent>
+        <ButtonGroup fullWidth>
+          {buttons}
+        </ButtonGroup>
+      </CardContent>
+      <CardContent>
+        <ButtonGroup fullWidth>
+          {noteTypeButtons}
+        </ButtonGroup>
+      </CardContent>
+    </Container>
   );
 }

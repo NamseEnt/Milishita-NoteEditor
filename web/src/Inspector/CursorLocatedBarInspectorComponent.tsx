@@ -5,7 +5,7 @@ import { getBarIndexByBeats } from '~utils/bar';
 import { LongNoteAction } from '~StateStore/_gen/longNote_action.ts';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
 import ChangeBarBeatComponent from './ChangeBarBeatComponent';
-import {ButtonGroup, Button, ListItem, Container } from '@material-ui/core';
+import {ButtonGroup, Button, Container, CardContent } from '@material-ui/core';
 
 export const CursorLocatedBarInspectorComponent = () => {
   const isPlaying = useSelector((state: RootState) => state.playerState.isPlaying);
@@ -43,17 +43,19 @@ export const CursorLocatedBarInspectorComponent = () => {
 
   return (
     <Container disableGutters>
-      <ListItem disableGutters>
+      <CardContent>
         <Buttons />
-      </ListItem>
-      <ListItem disableGutters>
+      </CardContent>
+      <CardContent>
         <ChangeBarBeatComponent
           bar={bar}
           barIndex={barIndex}
           isPlaying={isPlaying}
         />
-      </ListItem>
-      <pre>{JSON.stringify(bar, null, 2)}</pre>
+      </CardContent>
+      <CardContent>
+        <pre>{JSON.stringify(bar, null, 2)}</pre>
+      </CardContent>
     </Container>
   );
 }
