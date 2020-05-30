@@ -18,6 +18,7 @@ export default class NoteViewCanvas {
       || (() => { throw new Error('cannot get canvas 2d context') })();
 
     const mouseEventHandler = (event: MouseEvent) => {
+      event.preventDefault();
       world.onMouseEvent(event);
     };
     canvasElement.onwheel = mouseEventHandler;
