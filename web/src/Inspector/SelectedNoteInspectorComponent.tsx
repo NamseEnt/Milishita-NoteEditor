@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { RootState, dispatch } from '~StateStore/store';
 import { noteTypes, NoteType } from '~NoteView/types';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
-import { Divider, MenuItem, Select, FormControl, InputLabel, Container } from '@material-ui/core';
+import { Divider, MenuItem, Select, FormControl, InputLabel, CardContent } from '@material-ui/core';
 
 
 export const SelectedNoteInspectorComponent = () => {
@@ -36,7 +36,7 @@ export const SelectedNoteInspectorComponent = () => {
   });
 
   return (
-    <Container disableGutters>
+    <CardContent>
       <FormControl fullWidth>
         <InputLabel id="selected-note-type-label">Note Type</InputLabel>
         <Select
@@ -48,7 +48,9 @@ export const SelectedNoteInspectorComponent = () => {
         </Select>
       </FormControl>
       <Divider />
-      <pre>{JSON.stringify(selectedNote, null, 2)}</pre>
-    </Container>
+      <CardContent>
+        <pre>{JSON.stringify(selectedNote, null, 2)}</pre>
+      </CardContent>
+    </CardContent>
   );
 }

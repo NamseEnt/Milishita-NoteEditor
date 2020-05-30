@@ -1,6 +1,6 @@
 import React from 'react';
 import NoteViewCanvas from './NoteViewCanvas';
-import { Card, Typography, List, ListItem } from '@material-ui/core';
+import { Card, Typography, CardContent } from '@material-ui/core';
 
 type NoteViewProps = {
 
@@ -30,14 +30,12 @@ export default class NoteView extends React.Component<NoteViewProps, NoteViewSta
   render() {
     return (
       <Card>
-        <List>
-          <ListItem>
-            <Typography variant="h3">NoteView</Typography>
-          </ListItem>
-          <ListItem>
-            <canvas width={440} height={500} ref={this.setCanvasRef} />
-          </ListItem>
-        </List>
+        <CardContent>
+          <Typography variant="h3">NoteView</Typography>
+        </CardContent>
+        <CardContent>
+          <canvas width={440} height={500} ref={this.setCanvasRef} />
+        </CardContent>
       </Card>
     );
   }
