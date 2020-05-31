@@ -5,6 +5,7 @@ import { PlayerAction } from "~StateStore/_gen/player_action.ts"
 import { ConfigAction } from "~StateStore/_gen/config_action.ts";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { ModeAction } from "~StateStore/_gen/mode_action.ts";
+import editHistory from "~utils/editHistory";
 
 document.onkeydown = (event) => {
   const {
@@ -27,6 +28,17 @@ document.onkeydown = (event) => {
       dispatch(ModeAction.changeMode('longNoteEdit'));
     } break;
 
+    case "KeyR": {
+      if (ctrl) {
+        event.preventDefault();
+      }
+      if (shift) {
+        editHistory.redo();
+        break;
+      }
+      editHistory.undo();
+    } break;
+
     case "KeyA": {
       dispatch(ModeAction.changeNoteTypeMode('left'));
     } break;
@@ -37,6 +49,17 @@ document.onkeydown = (event) => {
 
     case "KeyD": {
       dispatch(ModeAction.changeNoteTypeMode('right'));
+    } break;
+
+    case "KeyZ": {
+      if (ctrl) {
+        if (shift) {
+          editHistory.redo();
+          break;
+        }
+        editHistory.undo();
+        break;
+      }
     } break;
 
     case "Space": {

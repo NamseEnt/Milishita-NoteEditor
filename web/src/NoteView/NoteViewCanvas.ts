@@ -5,6 +5,7 @@ import { ScrollView } from "./ScrollView";
 import { dispatch, store } from "~StateStore/store";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { runTestCode } from "./runTestCode";
+import editHistory from "~utils/editHistory";
 
 export default class NoteViewCanvas {
   private isDestroyed = false;
@@ -69,6 +70,7 @@ export default class NoteViewCanvas {
   }
 
   private addBar() {
+    editHistory.push();
     dispatch(BarAction.pushNewBar(store.getState().configState.defaultBarBeat));
   }
 

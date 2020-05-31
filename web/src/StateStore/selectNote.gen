@@ -1,2 +1,3 @@
 selectNote(noteId: string)
 deselectNote()
+setSelectNoteState(state: SelectNoteState)

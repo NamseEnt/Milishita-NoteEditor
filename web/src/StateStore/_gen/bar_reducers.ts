@@ -1,4 +1,4 @@
-import { IBarReducers, PushNewBarAction, AddBarAction, RemoveBarAction, AddNoteAction, RemoveNoteAction, BarActions, ChangeNoteTypeAction, WaitBarClickAction, ClickBarAction, InsertNewBarAction, RemoveNotesOnBarAction, ChangeBarBeatAction, RemoveOverflowedNotesAction } from "./bar_action.ts";
+import { IBarReducers, PushNewBarAction, AddBarAction, RemoveBarAction, AddNoteAction, RemoveNoteAction, BarActions, ChangeNoteTypeAction, WaitBarClickAction, ClickBarAction, InsertNewBarAction, RemoveNotesOnBarAction, ChangeBarBeatAction, RemoveOverflowedNotesAction, SetBarStateAction } from "./bar_action.ts";
 import { BarState } from "./bar_state";
 import { Bar, Note } from "~NoteView/types";
 import uuid from "~utils/uuid";
@@ -51,6 +51,9 @@ export class BarReducers implements IBarReducers {
   REMOVE_OVERFLOWED_NOTES(state: BarState, action: RemoveOverflowedNotesAction): BarState {
     return state.updateIn(['bars', action.barIndex, 'notes'],
       notes => (notes as Note[]).filter(note =>note.position.beat < action.beat));
+  }
+  SET_BAR_STATE(state: BarState, action: SetBarStateAction): BarState {
+    return action.state;
   }
 }
 

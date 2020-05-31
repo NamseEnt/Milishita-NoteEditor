@@ -1,4 +1,4 @@
-import { IPlayerReducers, PlayerActions, PlayAction, SetCursorAction, StopAction, MouseDownOnCursorAction, MouseUpOnCursorAction, TogglePlayAction, PLAY, STOP } from "./player_action.ts";
+import { IPlayerReducers, PlayerActions, PlayAction, SetCursorAction, StopAction, MouseDownOnCursorAction, MouseUpOnCursorAction, TogglePlayAction, PLAY, STOP, SetPlayerStateAction } from "./player_action.ts";
 import { PlayerState } from "./player_state";
 import { StartInfo } from "~NoteView/types";
 
@@ -29,6 +29,9 @@ export class PlayerReducers implements IPlayerReducers {
     return state
       .update('isPlaying', _ => false)
       .update('startInfo', _ => undefined);
+  }
+  SET_PLAYER_STATE(state: PlayerState, action: SetPlayerStateAction): PlayerState {
+    return action.state;
   }
 };
 

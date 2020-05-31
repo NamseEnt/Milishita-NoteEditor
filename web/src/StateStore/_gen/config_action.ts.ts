@@ -4,6 +4,7 @@ import { ConfigState } from './config_state'
 
 export const SET_GUIDE_BEAT = "SET_GUIDE_BEAT" as const;
 export const SET_DEFAULT_BAR_BEAT = "SET_DEFAULT_BAR_BEAT" as const;
+export const SET_CONFIG_STATE = "SET_CONFIG_STATE" as const;
 
  export namespace ConfigAction {
   export function setGuideBeat(guideBeat: number) {
@@ -18,6 +19,14 @@ export const SET_DEFAULT_BAR_BEAT = "SET_DEFAULT_BAR_BEAT" as const;
     return {
       type: SET_DEFAULT_BAR_BEAT,
       beat,
+    };
+  }
+
+
+  export function setConfigState(state: ConfigState) {
+    return {
+      type: SET_CONFIG_STATE,
+      state,
     };
   }
 
@@ -36,9 +45,16 @@ export type SetDefaultBarBeatAction = {
 };
 
 
-export type ConfigActions = SetGuideBeatAction | SetDefaultBarBeatAction
+export type SetConfigStateAction = {
+  type: typeof SET_CONFIG_STATE;
+  state: ConfigState;
+};
+
+
+export type ConfigActions = SetGuideBeatAction | SetDefaultBarBeatAction | SetConfigStateAction
 
 export interface IConfigReducers {
   SET_GUIDE_BEAT(state: ConfigState, action: SetGuideBeatAction): ConfigState;
   SET_DEFAULT_BAR_BEAT(state: ConfigState, action: SetDefaultBarBeatAction): ConfigState;
+  SET_CONFIG_STATE(state: ConfigState, action: SetConfigStateAction): ConfigState;
 };
