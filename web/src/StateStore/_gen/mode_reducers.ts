@@ -1,4 +1,4 @@
-import { IModeReducers, ModeActions, ChangeModeAction, ChangeNoteTypeModeAction } from "./mode_action.ts";
+import { IModeReducers, ModeActions, ChangeModeAction, ChangeNoteTypeModeAction, SetModeStateAction } from "./mode_action.ts";
 import { ModeState } from "./mode_state";
 import { CancellationToken } from "~runAddLongNoteProcess";
 
@@ -10,6 +10,9 @@ export class ModeReducers implements IModeReducers {
   }
   CHANGE_NOTE_TYPE_MODE(state: ModeState, action: ChangeNoteTypeModeAction): ModeState {
     return state.update('noteTypeMode', (_) => action.mode)
+  }
+  SET_MODE_STATE(state: ModeState, action: SetModeStateAction): ModeState {
+    return action.state;
   }
 };
 

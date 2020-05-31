@@ -6,6 +6,7 @@ import { SelectNoteAction } from "~StateStore/_gen/selectNote_action.ts";
 import uuid from "~utils/uuid";
 import { ModeSelectHandler } from "~Config/ModeSelectHandler";
 import { removeNote } from "~utils/note";
+import editHistory from "~utils/editHistory";
 
 interface BarRendererProps {
   bar: Bar;
@@ -99,6 +100,7 @@ export class BarRenderer extends Drawable<BarRendererProps> {
   }
 
   removeNote(note: Note) {
+    editHistory.push();
     removeNote(note, this.props.barIndex);
   }
 
@@ -126,6 +128,7 @@ export class BarRenderer extends Drawable<BarRendererProps> {
       type: store.getState().modeState.noteTypeMode,
     });
 
+    editHistory.push();
     dispatch(BarAction.addNote(this.props.barIndex, newNote));
     dispatch(SelectNoteAction.selectNote(newNote.id));
   }

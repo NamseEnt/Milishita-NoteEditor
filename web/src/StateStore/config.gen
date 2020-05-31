@@ -1,2 +1,3 @@
 setGuideBeat(guideBeat: number)
 setDefaultBarBeat(beat: number)
+setConfigState(state: ConfigState)

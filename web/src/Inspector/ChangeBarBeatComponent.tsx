@@ -6,6 +6,7 @@ import { BarAction } from '~StateStore/_gen/bar_action.ts';
 import { removeOverFlowedNotes } from '~utils/note';
 import { Button, InputAdornment, TextField, InputLabel, Select, MenuItem} from '@material-ui/core';
 import { convertBarSecondToBeat, convertBarBeatToSecond } from '~utils/bar';
+import editHistory from '~utils/editHistory';
 
 const durationUnits = ['second', 'beat'] as const;
 type DurationUnit = typeof durationUnits[number];
@@ -83,6 +84,7 @@ export default class ChangeBarBeatComponent extends Component<ChangeBarBeatInput
       ? convertBarSecondToBeat(inputNumber)
       : inputNumber;
 
+    editHistory.push();
     if (bar.beat > beat) {
       removeOverFlowedNotes(beat, bar.id, barIndex);
     }

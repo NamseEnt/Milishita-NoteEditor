@@ -1,4 +1,4 @@
-import { IConfigReducers, ConfigActions, SetGuideBeatAction, SetDefaultBarBeatAction } from "./config_action.ts";
+import { IConfigReducers, ConfigActions, SetGuideBeatAction, SetDefaultBarBeatAction, SetConfigStateAction } from "./config_action.ts";
 import { ConfigState } from "./config_state";
 
 export class ConfigReducers implements IConfigReducers {
@@ -7,6 +7,9 @@ export class ConfigReducers implements IConfigReducers {
   }
   SET_DEFAULT_BAR_BEAT(state: ConfigState, action: SetDefaultBarBeatAction): ConfigState {
     return state.update('defaultBarBeat', _ => action.beat);
+  }
+  SET_CONFIG_STATE(state: ConfigState, action: SetConfigStateAction): ConfigState {
+    return action.state;
   }
 };
 

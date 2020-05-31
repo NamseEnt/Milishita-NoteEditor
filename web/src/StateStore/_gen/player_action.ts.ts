@@ -9,6 +9,7 @@ export const STOP = "STOP" as const;
 export const MOUSE_DOWN_ON_CURSOR = "MOUSE_DOWN_ON_CURSOR" as const;
 export const MOUSE_UP_ON_CURSOR = "MOUSE_UP_ON_CURSOR" as const;
 export const TOGGLE_PLAY = "TOGGLE_PLAY" as const;
+export const SET_PLAYER_STATE = "SET_PLAYER_STATE" as const;
 
  export namespace PlayerAction {
   export function play() {
@@ -53,6 +54,14 @@ export const TOGGLE_PLAY = "TOGGLE_PLAY" as const;
     };
   }
 
+
+  export function setPlayerState(state: PlayerState) {
+    return {
+      type: SET_PLAYER_STATE,
+      state,
+    };
+  }
+
 }
 
 
@@ -87,7 +96,13 @@ export type TogglePlayAction = {
 };
 
 
-export type PlayerActions = PlayAction | SetCursorAction | StopAction | MouseDownOnCursorAction | MouseUpOnCursorAction | TogglePlayAction
+export type SetPlayerStateAction = {
+  type: typeof SET_PLAYER_STATE;
+  state: PlayerState;
+};
+
+
+export type PlayerActions = PlayAction | SetCursorAction | StopAction | MouseDownOnCursorAction | MouseUpOnCursorAction | TogglePlayAction | SetPlayerStateAction
 
 export interface IPlayerReducers {
   PLAY(state: PlayerState, action: PlayAction): PlayerState;
@@ -96,4 +111,5 @@ export interface IPlayerReducers {
   MOUSE_DOWN_ON_CURSOR(state: PlayerState, action: MouseDownOnCursorAction): PlayerState;
   MOUSE_UP_ON_CURSOR(state: PlayerState, action: MouseUpOnCursorAction): PlayerState;
   TOGGLE_PLAY(state: PlayerState, action: TogglePlayAction): PlayerState;
+  SET_PLAYER_STATE(state: PlayerState, action: SetPlayerStateAction): PlayerState;
 };

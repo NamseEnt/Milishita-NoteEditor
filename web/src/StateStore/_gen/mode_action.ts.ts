@@ -5,6 +5,7 @@ import { Mode, NoteType } from '~NoteView/types';
 
 export const CHANGE_MODE = "CHANGE_MODE" as const;
 export const CHANGE_NOTE_TYPE_MODE = "CHANGE_NOTE_TYPE_MODE" as const;
+export const SET_MODE_STATE = "SET_MODE_STATE" as const;
 
  export namespace ModeAction {
   export function changeMode(mode: Mode) {
@@ -19,6 +20,14 @@ export const CHANGE_NOTE_TYPE_MODE = "CHANGE_NOTE_TYPE_MODE" as const;
     return {
       type: CHANGE_NOTE_TYPE_MODE,
       mode,
+    };
+  }
+
+
+  export function setModeState(state: ModeState) {
+    return {
+      type: SET_MODE_STATE,
+      state,
     };
   }
 
@@ -37,9 +46,16 @@ export type ChangeNoteTypeModeAction = {
 };
 
 
-export type ModeActions = ChangeModeAction | ChangeNoteTypeModeAction
+export type SetModeStateAction = {
+  type: typeof SET_MODE_STATE;
+  state: ModeState;
+};
+
+
+export type ModeActions = ChangeModeAction | ChangeNoteTypeModeAction | SetModeStateAction
 
 export interface IModeReducers {
   CHANGE_MODE(state: ModeState, action: ChangeModeAction): ModeState;
   CHANGE_NOTE_TYPE_MODE(state: ModeState, action: ChangeNoteTypeModeAction): ModeState;
+  SET_MODE_STATE(state: ModeState, action: SetModeStateAction): ModeState;
 };

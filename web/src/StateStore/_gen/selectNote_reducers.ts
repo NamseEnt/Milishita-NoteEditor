@@ -1,4 +1,4 @@
-import { ISelectNoteReducers, SelectNoteAction, DeselectNoteAction, SelectNoteActions } from "./selectNote_action.ts";
+import { ISelectNoteReducers, SelectNoteAction, DeselectNoteAction, SelectNoteActions, SetSelectNoteStateAction } from "./selectNote_action.ts";
 import { SelectNoteState } from "./selectNote_state";
 
 export class SelectNoteReducers implements ISelectNoteReducers {
@@ -13,6 +13,9 @@ export class SelectNoteReducers implements ISelectNoteReducers {
       ...state,
       selectedNoteId: undefined,
     };
+  }
+  SET_SELECT_NOTE_STATE(state: SelectNoteState, action: SetSelectNoteStateAction): SelectNoteState {
+    return action.state;
   }
 };
 

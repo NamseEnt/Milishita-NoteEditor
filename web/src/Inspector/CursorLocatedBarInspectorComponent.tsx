@@ -6,6 +6,7 @@ import { LongNoteAction } from '~StateStore/_gen/longNote_action.ts';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
 import ChangeBarBeatComponent from './ChangeBarBeatComponent';
 import {ButtonGroup, Button, Container, CardContent } from '@material-ui/core';
+import editHistory from '~utils/editHistory';
 
 export const CursorLocatedBarInspectorComponent = () => {
   const isPlaying = useSelector((state: RootState) => state.playerState.isPlaying);
@@ -22,12 +23,16 @@ export const CursorLocatedBarInspectorComponent = () => {
   }
 
   const removeBar = () => {
+    editHistory.push();
     dispatch(LongNoteAction.removeLongNotesOnBar(bar.id));
     dispatch(BarAction.removeNotesOnBar(barIndex));
     dispatch(BarAction.removeBar(barIndex));
   }
 
-  const insertBar = () => dispatch(BarAction.insertNewBar(barIndex, store.getState().configState.defaultBarBeat));
+  const insertBar = () => {
+    editHistory.push();
+    dispatch(BarAction.insertNewBar(barIndex, store.getState().configState.defaultBarBeat));
+  }
 
   const Buttons = () => <ButtonGroup
     fullWidth

@@ -10,6 +10,7 @@ export const FINISH_EDITING_LONG_NOTE = "FINISH_EDITING_LONG_NOTE" as const;
 export const REMOVE_LONG_NOTE = "REMOVE_LONG_NOTE" as const;
 export const REMOVE_LONG_NOTES_ON_BAR = "REMOVE_LONG_NOTES_ON_BAR" as const;
 export const REMOVE_OVERFLOWED_LONG_NOTES = "REMOVE_OVERFLOWED_LONG_NOTES" as const;
+export const SET_LONG_NOTE_STATE = "SET_LONG_NOTE_STATE" as const;
 
  export namespace LongNoteAction {
   export function addLongNote(longNote: LongNote) {
@@ -67,6 +68,14 @@ export const REMOVE_OVERFLOWED_LONG_NOTES = "REMOVE_OVERFLOWED_LONG_NOTES" as co
     };
   }
 
+
+  export function setLongNoteState(state: LongNoteState) {
+    return {
+      type: SET_LONG_NOTE_STATE,
+      state,
+    };
+  }
+
 }
 
 
@@ -112,7 +121,13 @@ export type RemoveOverflowedLongNotesAction = {
 };
 
 
-export type LongNoteActions = AddLongNoteAction | UpdateLongNoteAction | UpdateEditingLongNoteAction | FinishEditingLongNoteAction | RemoveLongNoteAction | RemoveLongNotesOnBarAction | RemoveOverflowedLongNotesAction
+export type SetLongNoteStateAction = {
+  type: typeof SET_LONG_NOTE_STATE;
+  state: LongNoteState;
+};
+
+
+export type LongNoteActions = AddLongNoteAction | UpdateLongNoteAction | UpdateEditingLongNoteAction | FinishEditingLongNoteAction | RemoveLongNoteAction | RemoveLongNotesOnBarAction | RemoveOverflowedLongNotesAction | SetLongNoteStateAction
 
 export interface ILongNoteReducers {
   ADD_LONG_NOTE(state: LongNoteState, action: AddLongNoteAction): LongNoteState;
@@ -122,4 +137,5 @@ export interface ILongNoteReducers {
   REMOVE_LONG_NOTE(state: LongNoteState, action: RemoveLongNoteAction): LongNoteState;
   REMOVE_LONG_NOTES_ON_BAR(state: LongNoteState, action: RemoveLongNotesOnBarAction): LongNoteState;
   REMOVE_OVERFLOWED_LONG_NOTES(state: LongNoteState, action: RemoveOverflowedLongNotesAction): LongNoteState;
+  SET_LONG_NOTE_STATE(state: LongNoteState, action: SetLongNoteStateAction): LongNoteState;
 };
