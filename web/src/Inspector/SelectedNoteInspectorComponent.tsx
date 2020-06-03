@@ -4,8 +4,6 @@ import { RootState, dispatch, store } from '~StateStore/store';
 import { noteTypes, NoteType } from '~NoteView/types';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
 import { Divider, MenuItem, Select, FormControl, InputLabel, CardContent } from '@material-ui/core';
-import editHistory from '~utils/editHistory';
-
 
 export const SelectedNoteInspectorComponent = () => {
   const selectedNoteId = useSelector((state: RootState) => state.selectNoteState.selectedNoteId);
@@ -18,7 +16,6 @@ export const SelectedNoteInspectorComponent = () => {
   }
 
   const changeNoteType = (noteType: NoteType) => {
-    editHistory.push();
     dispatch(BarAction.changeNoteType(selectedNote.id, noteType));
   };
 
