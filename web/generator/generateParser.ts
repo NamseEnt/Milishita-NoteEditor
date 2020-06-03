@@ -1,6 +1,6 @@
 import peg from "pegjs";
 
-export type ParseResult = { functionName: string, parameterList: { name: string, type: string }[] }[];
+export type ParseResult = { functionName: string, parameterList: { name: string, type: string }[], categoryList: string[] }[];
 
 const grammar = `
 start
@@ -16,11 +16,13 @@ Functions
   }
 
 Function
-  = functionName:Name _ "(" _ parameterList:ParameterList? _ ")" {
+  = functionName:Name _ "(" _ parameterList:ParameterList? _ ")" categoryList:CategoryList? {
     var parameterList = parameterList || [];
+    var categoryList = categoryList || [];
     return {
       functionName,
       parameterList,
+      categoryList,
     }
   }
 
@@ -46,6 +48,20 @@ Parameter
       type,
     };
   }
+
+CategoryList
+  = _ category:Category _ categories:CategoryList _ {
+    return [category, ...categories];
+  }
+  / _ category:Category _ {
+    return [category];
+  }
+
+Category
+  = "-" categoryName:[a-zA-Z0-9]+ {
+    return categoryName.join("");
+  }
+
 _ "whitespace"
   = [ \\t\\n\\r]*
 `;

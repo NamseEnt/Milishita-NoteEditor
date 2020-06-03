@@ -1,4 +1,4 @@
-import { genDir, baseDir, beginMark, toActionFileName } from "./utils";
+import { genDir, baseDir, toUpperSnake } from "./utils";
 import * as path from "path";
 import * as fs from 'fs-extra';
 import { ParseResult, parser } from "./generateParser";
@@ -6,6 +6,7 @@ import { writeStateFile } from "./writeStateFile";
 import { writeActionsFile } from './writeActionsFile';
 import { writeReducerFile } from "./writeReducerFile";
 import { writeRootReducerFile } from "./writeRootReducerFile";
+import { writeActionTypeCategoriesFile, Categories } from "./writeActionTypeCategoriesFile";
 
 if (!fs.existsSync(genDir)) {
   fs.mkdirSync(genDir);
@@ -15,6 +16,9 @@ fs.readdir(baseDir, async (err, files) => {
   if (err) {
     throw err;
   }
+
+  const categories: Categories = new Map<string, Set<string>>();
+
   const reducerNames = files
     .filter(file => file.endsWith('.gen'))
     .map((file) => {
@@ -22,7 +26,7 @@ fs.readdir(baseDir, async (err, files) => {
       return reducerName;
     });
 
-  files.map(async file => {
+  await Promise.all(files.map(async file => {
     if (!file.endsWith('.gen')) {
       return;
     }
@@ -34,8 +38,20 @@ fs.readdir(baseDir, async (err, files) => {
     await writeStateFile(reducerName);
     await writeReducerFile(reducerName);
 
+    result.forEach(func => {
+      func.categoryList.forEach(categoryName => {
+        if (!categories.has(categoryName)) {
+          categories.set(categoryName, new Set());
+        }
+
+        categories.get(categoryName)?.add(toUpperSnake(func.functionName));
+      })
+    })
+
     console.log(`${file} done`);
-  });
+  }));
+
+  await writeActionTypeCategoriesFile(categories);
 
   await writeRootReducerFile(reducerNames);
 });
