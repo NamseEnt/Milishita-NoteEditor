@@ -5,6 +5,7 @@ import { getNoteOnPosition } from "~utils/note";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { dispatch, store } from "~StateStore/store";
 import { getBarIndex } from "~utils/bar";
+import { batchActions } from "redux-batched-actions";
 
 async function waitClick(token: CancellationToken): Promise<Position> {
   return new Promise((resolve, reject) => {
@@ -107,7 +108,8 @@ export async function runAddLongNoteProcess(token: CancellationToken) {
     middlePoints,
   });
 
-  dispatch(LongNoteAction.finishEditingLongNote());
-
-  dispatch(LongNoteAction.addLongNote(longNote));
+  dispatch(batchActions([
+    LongNoteAction.finishEditingLongNote(),
+    LongNoteAction.addLongNote(longNote)
+  ]));
 }

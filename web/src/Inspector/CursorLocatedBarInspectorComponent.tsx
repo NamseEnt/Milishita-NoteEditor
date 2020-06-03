@@ -6,6 +6,7 @@ import { LongNoteAction } from '~StateStore/_gen/longNote_action.ts';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
 import ChangeBarBeatComponent from './ChangeBarBeatComponent';
 import {ButtonGroup, Button, Container, CardContent } from '@material-ui/core';
+import { batchActions } from 'redux-batched-actions';
 
 export const CursorLocatedBarInspectorComponent = () => {
   const isPlaying = useSelector((state: RootState) => state.playerState.isPlaying);
@@ -22,9 +23,11 @@ export const CursorLocatedBarInspectorComponent = () => {
   }
 
   const removeBar = () => {
-    dispatch(LongNoteAction.removeLongNotesOnBar(bar.id));
-    dispatch(BarAction.removeNotesOnBar(barIndex));
-    dispatch(BarAction.removeBar(barIndex));
+    dispatch(batchActions([
+      LongNoteAction.removeLongNotesOnBar(bar.id),
+      BarAction.removeNotesOnBar(barIndex),
+      BarAction.removeBar(barIndex),
+    ]));
   }
 
   const insertBar = () => {
