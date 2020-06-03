@@ -45,12 +45,12 @@ export class LongNote extends Record<{
   id: string;
   startNote: Note;
   endNote: Note;
-  middlePoints: Position[],
+  middlePoints: List<Position>,
 }>({
   id: uuid(),
   endNote: undefined as unknown as Note,
   startNote: undefined as unknown as Note,
-  middlePoints: [],
+  middlePoints: List(),
 }) { };
 
 export type WorldCoord = { worldX: number; worldY: number; };
