@@ -5,7 +5,6 @@ import { getNoteOnPosition } from "~utils/note";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { dispatch, store } from "~StateStore/store";
 import { getBarIndex } from "~utils/bar";
-import editHistory from "~utils/editHistory";
 
 async function waitClick(token: CancellationToken): Promise<Position> {
   return new Promise((resolve, reject) => {
@@ -37,7 +36,6 @@ export class CancellationToken {
 
 async function getStartNote(token: CancellationToken): Promise<Note> {
   const position = await waitClick(token);
-  editHistory.push();
   const noteOnPosition = getNoteOnPosition(position);
 
   if (noteOnPosition) {
