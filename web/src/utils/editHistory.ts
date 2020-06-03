@@ -5,18 +5,21 @@ import { LongNoteAction } from "~StateStore/_gen/longNote_action.ts";
 import { ModeAction } from "~StateStore/_gen/mode_action.ts";
 import { PlayerAction } from "~StateStore/_gen/player_action.ts";
 import { SelectNoteAction } from "~StateStore/_gen/selectNote_action.ts";
+import { batchActions } from "redux-batched-actions";
 
 type EditHistoryOption = {
   limit?: number,
 }
 
 function dispatchAllStates(state: RootState): void {
-  dispatch(BarAction.setBarState(state.barState));
-  dispatch(ConfigAction.setConfigState(state.configState));
-  dispatch(LongNoteAction.setLongNoteState(state.longNoteState));
-  dispatch(ModeAction.setModeState(state.modeState));
-  dispatch(PlayerAction.setPlayerState(state.playerState));
-  dispatch(SelectNoteAction.setSelectNoteState(state.selectNoteState));
+  dispatch(batchActions([
+    BarAction.setBarState(state.barState),
+    ConfigAction.setConfigState(state.configState),
+    LongNoteAction.setLongNoteState(state.longNoteState),
+    ModeAction.setModeState(state.modeState),
+    PlayerAction.setPlayerState(state.playerState),
+    SelectNoteAction.setSelectNoteState(state.selectNoteState),
+  ]));
 }
 
 class EditHistory {

@@ -31,8 +31,3 @@ export function removeNote(note: Note, barIndex?: number) {
   }
   removeSingleNote(note, barIndex);
 }
-
-export function removeOverFlowedNotes(beat: number, barId: string, barIndex: number) {
-  dispatch(LongNoteAction.removeOverflowedLongNotes(barId, beat));
-  dispatch(BarAction.removeOverflowedNotes(barIndex, beat));
-}
