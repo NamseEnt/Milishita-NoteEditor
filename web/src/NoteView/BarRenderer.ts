@@ -4,9 +4,9 @@ import { dispatch, store } from "~StateStore/store";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { SelectNoteAction } from "~StateStore/_gen/selectNote_action.ts";
 import uuid from "~utils/uuid";
-import { ModeSelectHandler } from "~Config/ModeSelectHandler";
 import { removeNote } from "~utils/note";
 import { batchActions } from "redux-batched-actions";
+import { handleLeftClick, cancleEditingLongNote } from "./longNoteEditHandler";
 
 interface BarRendererProps {
   bar: Bar;
@@ -69,6 +69,7 @@ export class BarRenderer extends Drawable<BarRendererProps> {
         })));
 
         if (mode === 'longNoteEdit') {
+          handleLeftClick(guideDotOnMouse);
           break;
         }
 
@@ -85,8 +86,8 @@ export class BarRenderer extends Drawable<BarRendererProps> {
       } break;
 
       case 2: { // right click
-        if (mode === 'longNoteEdit') {
-          ModeSelectHandler.cancelAddLongNoteProcess();
+        if (store.getState().longNoteState.editingLongNote) {
+          cancleEditingLongNote();
         }
 
         const noteOnBeatKey = this.getNoteOnBeatKey(beatKey)

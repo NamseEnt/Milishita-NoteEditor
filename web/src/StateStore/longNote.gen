@@ -1,7 +1,7 @@
 addLongNote(longNote: LongNote) -undoable
 updateLongNote(longNote: LongNote)
-updateEditingLongNote(longNote: Partial<LongNote>)
-finishEditingLongNote()
+updateEditingLongNote(longNote: Partial<LongNote>) -undoable
+finishEditingLongNote() -undoable
 removeLongNote(longNote: LongNote) -undoable
 removeLongNotesOnBar(barId: string) -undoable
 removeOverflowedLongNotes(barId: string, beat: number) -undoable
