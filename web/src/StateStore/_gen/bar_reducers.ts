@@ -22,13 +22,16 @@ export class BarReducers implements IBarReducers {
       (note: Note) => note.set('type', action.noteType));
   }
   PUSH_NEW_BAR(state: BarState, action: PushNewBarAction): BarState {
-    return state.update('bars', bars => bars.push(new Bar({ id: uuid(), beat: action.beat })));
+    return state.update('bars', bars => bars.push(new Bar({ id: uuid(), beat: action.beat })))
+      .update('beats', beats => beats + action.beat);
   }
   ADD_BAR(state: BarState, action: AddBarAction): BarState {
-    return state.update('bars', bars => bars.push(action.bar));
+    return state.update('bars', bars => bars.push(action.bar))
+      .update('beats', beats => beats + action.bar.beat);
   }
   REMOVE_BAR(state: BarState, action: RemoveBarAction): BarState {
-    return state.update('bars', bars => bars.remove(action.barIndex));
+    return state.update('bars', bars => bars.remove(action.barIndex))
+      .update('beats', beats => beats - (state.bars.get(action.barIndex)?.beat || 0));
   }
   ADD_NOTE(state: BarState, action: AddNoteAction): BarState {
     return state.updateIn(['bars', action.barIndex, 'notes'],
@@ -40,13 +43,15 @@ export class BarReducers implements IBarReducers {
   }
   INSERT_NEW_BAR(state: BarState, action: InsertNewBarAction): BarState {
     return state.update('bars', bars => bars.splice(action.barIndex, 0, new Bar({ id: uuid(), beat: action.beat })))
+    .update('beats', beats => beats + action.beat);
   }
   REMOVE_NOTES_ON_BAR(state: BarState, action: RemoveNotesOnBarAction): BarState {
     return state.updateIn(['bars', action.barIndex, 'notes'], (_) => []);
   }
   CHANGE_BAR_BEAT(state: BarState, action: ChangeBarBeatAction): BarState {
-    return state.updateIn(['bars', action.barIndex],
-      (bar: Bar) => bar.set('beat', action.beat));
+    return state.updateIn(['bars', action.barIndex], (bar: Bar) => bar.set('beat', action.beat))
+      .update('beats', beats => beats - (state.bars.get(action.barIndex)?.beat || 0))
+      .update('beats', beats => beats + action.beat);
   }
   REMOVE_OVERFLOWED_NOTES(state: BarState, action: RemoveOverflowedNotesAction): BarState {
     return state.updateIn(['bars', action.barIndex, 'notes'],

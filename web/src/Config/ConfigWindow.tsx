@@ -2,43 +2,19 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, dispatch } from '~StateStore/store';
 import { ModeWindow } from './ModeWindow';
-import { Slider, Typography, Button, Card, CardContent } from '@material-ui/core';
+import { Slider, Typography, Card, CardContent } from '@material-ui/core';
 import { ConfigAction } from '~StateStore/_gen/config_action.ts';
-import { PlayerAction } from '~StateStore/_gen/player_action.ts';
-
-const dearUrl = require('../dear.mp3');
-console.log(dearUrl);
-const audioElement = document.createElement('audio');
-audioElement.src = dearUrl;
+import PlayerWindow from './PlayerWindow';
 
 export const ConfigWindow = () => {
-  const { mode, guideBeat, isPlaying, cursor, noteTypeMode } = useSelector((state: RootState) => {
-    const { mode, noteTypeMode } = state.modeState;
-    const { guideBeat } = state.configState;
-    const { isPlaying, cursor } = state.playerState;
-    return {
-      mode,
-      guideBeat,
-      isPlaying,
-      cursor,
-      noteTypeMode,
-    };
-  });
-
-  if (isPlaying && audioElement.paused) {
-    audioElement.play();
-  } else if (!isPlaying && !audioElement.paused) {
-    audioElement.pause();
-  }
+  const mode = useSelector((state: RootState) => state.modeState.mode);
+  const noteTypeMode = useSelector((state: RootState) => state.modeState.noteTypeMode);
+  const guideBeat = useSelector((state: RootState) => state.configState.guideBeat);
 
   return (
     <Card>
       <CardContent><Typography variant="h3">Config</Typography></CardContent>
-      <CardContent>
-        <Button onClick={() => { dispatch(isPlaying ? PlayerAction.stop() : PlayerAction.play()) }}>
-          {isPlaying ? '⏸ Stop' : '▶️ Play'} {cursor.beats.toFixed(1)}
-        </Button>
-      </CardContent>
+      <PlayerWindow />
       <CardContent>
         <Typography gutterBottom>Guide Beat</Typography>
         <Slider

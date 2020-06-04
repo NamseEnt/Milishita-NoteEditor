@@ -1,13 +1,15 @@
-import { dispatch, store } from "~StateStore/store";
+import { dispatch } from "~StateStore/store";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
-import { Note, LongNote, Position, Bar } from "./types";
+import { LongNote, Bar } from "./types";
 import { LongNoteAction } from "~StateStore/_gen/longNote_action.ts";
-import uuid from "~utils/uuid";
-import { runAddLongNoteProcess, CancellationToken } from "~runAddLongNoteProcess";
-
 import bars from './bars.json';
 import longNotes from './longNotes.json';
-import { fromJS, isKeyed, Record, List } from "immutable";
+import { isKeyed, Record, List } from "immutable";
+import player from "~Config/Player";
+
+const dearUrl = require('../dear.mp3');
+console.log(dearUrl);
+player.setAudioSource(dearUrl);
 
 export function JSONreviver(key: any, value: any) {
   if (Array.isArray(value)) {
