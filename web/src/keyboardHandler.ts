@@ -1,11 +1,9 @@
 // event.code reference : https://keycode.info/
 
 import { dispatch } from "~StateStore/store"
-import { PlayerAction } from "~StateStore/_gen/player_action.ts"
-import { ConfigAction } from "~StateStore/_gen/config_action.ts";
-import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { ModeAction } from "~StateStore/_gen/mode_action.ts";
 import editHistory from "~utils/editHistory";
+import player from "~Config/Player";
 
 document.onkeydown = (event) => {
   const {
@@ -64,7 +62,7 @@ document.onkeydown = (event) => {
 
     case "Space": {
       event.preventDefault();
-      dispatch(PlayerAction.togglePlay());
+      player.togglePlay();
     } break;
 
     default: break;

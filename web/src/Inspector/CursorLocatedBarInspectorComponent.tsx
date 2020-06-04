@@ -11,7 +11,7 @@ import { batchActions } from 'redux-batched-actions';
 export const CursorLocatedBarInspectorComponent = () => {
   const isPlaying = useSelector((state: RootState) => state.playerState.isPlaying);
   const bars = useSelector((state: RootState) => state.barState.bars);
-  const beats = store.getState().playerState.cursor.beats
+  const beats = useSelector((state: RootState) => state.playerState.cursor.beats);
   const barIndex = getBarIndexByBeats(beats);
   if (barIndex < 0) {
     return null;

@@ -1,11 +1,5 @@
 export namespace ActionTypeCategory {
   export const undoableActionTypes = [
-    'ADD_LONG_NOTE',
-    'UPDATE_EDITING_LONG_NOTE',
-    'FINISH_EDITING_LONG_NOTE',
-    'REMOVE_LONG_NOTE',
-    'REMOVE_LONG_NOTES_ON_BAR',
-    'REMOVE_OVERFLOWED_LONG_NOTES',
     'PUSH_NEW_BAR',
     'INSERT_NEW_BAR',
     'ADD_BAR',
@@ -16,5 +10,11 @@ export namespace ActionTypeCategory {
     'REMOVE_NOTES_ON_BAR',
     'REMOVE_OVERFLOWED_NOTES',
     'CHANGE_NOTE_TYPE',
+    'ADD_LONG_NOTE',
+    'UPDATE_EDITING_LONG_NOTE',
+    'FINISH_EDITING_LONG_NOTE',
+    'REMOVE_LONG_NOTE',
+    'REMOVE_LONG_NOTES_ON_BAR',
+    'REMOVE_OVERFLOWED_LONG_NOTES',
   ] as const
 }
