@@ -1,4 +1,6 @@
 import Drawable, { DynamicRect } from "./Drawable";
+import { store, dispatch } from "~StateStore/store";
+import { ConfigAction } from "~StateStore/_gen/config_action.ts";
 
 interface ScrollViewProps {
   scrollPercent: number; // TOP 0 ~  BOTTOM 1
@@ -47,6 +49,11 @@ export class ScrollView extends Drawable<ScrollViewProps> {
   onMouseEvent(event: MouseEvent): void {
     if (event.type === 'wheel') {
       const wheelEvent = event as MouseWheelEvent;
+      const { autoScroll } = store.getState().configState;
+
+      if (autoScroll) {
+        dispatch(ConfigAction.setAutoScroll(false));
+      }
 
       let scrollY = this.scrollY;
       scrollY += wheelEvent.deltaY;

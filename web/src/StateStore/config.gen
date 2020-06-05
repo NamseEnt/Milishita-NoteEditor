@@ -1,3 +1,4 @@
 setGuideBeat(guideBeat: number)
 setDefaultBarBeat(beat: number)
+setAutoScroll(auto: boolean)
 setConfigState(state: ConfigState)

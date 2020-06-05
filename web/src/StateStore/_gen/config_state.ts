@@ -8,6 +8,7 @@ export class ConfigState extends Record<{
   guideBeat: number;
   bpm: number;
   defaultBarBeat: number;
+  autoScroll: boolean;
 }>({
   beatHeight: 100,
   barWidth: 350,
@@ -16,4 +17,5 @@ export class ConfigState extends Record<{
   guideBeat: 0.5,
   bpm: 123,
   defaultBarBeat: 4,
+  autoScroll: true,
 }) {};
