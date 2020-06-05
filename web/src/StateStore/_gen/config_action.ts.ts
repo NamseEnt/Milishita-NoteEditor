@@ -4,6 +4,7 @@ import { ConfigState } from './config_state'
 
 export const SET_GUIDE_BEAT = "SET_GUIDE_BEAT" as const;
 export const SET_DEFAULT_BAR_BEAT = "SET_DEFAULT_BAR_BEAT" as const;
+export const SET_AUTO_SCROLL = "SET_AUTO_SCROLL" as const;
 export const SET_CONFIG_STATE = "SET_CONFIG_STATE" as const;
 
  export namespace ConfigAction {
@@ -19,6 +20,14 @@ export const SET_CONFIG_STATE = "SET_CONFIG_STATE" as const;
     return {
       type: SET_DEFAULT_BAR_BEAT,
       beat,
+    };
+  }
+
+
+  export function setAutoScroll(auto: boolean) {
+    return {
+      type: SET_AUTO_SCROLL,
+      auto,
     };
   }
 
@@ -45,16 +54,23 @@ export type SetDefaultBarBeatAction = {
 };
 
 
+export type SetAutoScrollAction = {
+  type: typeof SET_AUTO_SCROLL;
+  auto: boolean;
+};
+
+
 export type SetConfigStateAction = {
   type: typeof SET_CONFIG_STATE;
   state: ConfigState;
 };
 
 
-export type ConfigActions = SetGuideBeatAction | SetDefaultBarBeatAction | SetConfigStateAction
+export type ConfigActions = SetGuideBeatAction | SetDefaultBarBeatAction | SetAutoScrollAction | SetConfigStateAction
 
 export interface IConfigReducers {
   SET_GUIDE_BEAT(state: ConfigState, action: SetGuideBeatAction): ConfigState;
   SET_DEFAULT_BAR_BEAT(state: ConfigState, action: SetDefaultBarBeatAction): ConfigState;
+  SET_AUTO_SCROLL(state: ConfigState, action: SetAutoScrollAction): ConfigState;
   SET_CONFIG_STATE(state: ConfigState, action: SetConfigStateAction): ConfigState;
 };

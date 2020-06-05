@@ -1,4 +1,4 @@
-import { IConfigReducers, ConfigActions, SetGuideBeatAction, SetDefaultBarBeatAction, SetConfigStateAction } from "./config_action.ts";
+import { IConfigReducers, ConfigActions, SetGuideBeatAction, SetDefaultBarBeatAction, SetConfigStateAction, SetAutoScrollAction } from "./config_action.ts";
 import { ConfigState } from "./config_state";
 
 export class ConfigReducers implements IConfigReducers {
@@ -10,6 +10,9 @@ export class ConfigReducers implements IConfigReducers {
   }
   SET_CONFIG_STATE(state: ConfigState, action: SetConfigStateAction): ConfigState {
     return action.state;
+  }
+  SET_AUTO_SCROLL(state: ConfigState, action: SetAutoScrollAction): ConfigState {
+    return state.update('autoScroll', _ => action.auto);
   }
 };
 

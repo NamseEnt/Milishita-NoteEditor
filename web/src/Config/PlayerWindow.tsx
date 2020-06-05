@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { RootState } from '~StateStore/store';
-import { Slider, Button, CardContent, Grid, Select, Switch, FormControlLabel } from '@material-ui/core';
+import { RootState, dispatch } from '~StateStore/store';
+import { Slider, Button, CardContent, Grid, Switch, FormControlLabel } from '@material-ui/core';
 import { isArray } from 'util';
 import Player from './Player';
 import { VolumeUp, Pause, PlayArrow } from '@material-ui/icons';
+import { ConfigAction } from '~StateStore/_gen/config_action.ts';
 
 type PlayerWindowProps = ReturnType<typeof mapStateToPlayerWindowProps>
 
@@ -22,10 +23,15 @@ function mapStateToPlayerWindowProps(state: RootState) {
     beats,
   } = state.barState;
 
+  const {
+    autoScroll,
+  } = state.configState;
+
   return {
     isPlaying,
     cursor,
     beats,
+    autoScroll,
   };
 }
 
@@ -57,6 +63,10 @@ class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowS
     Player.seek(beat);
   }
 
+  private handleAutoScrollChange(event: React.ChangeEvent<HTMLInputElement>, checked: boolean) {
+    dispatch(ConfigAction.setAutoScroll(checked));
+  }
+
   public render() {
     const {
       volume,
@@ -66,6 +76,7 @@ class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowS
       cursor,
       isPlaying,
       beats,
+      autoScroll,
     } = this.props;
 
     return (
@@ -98,6 +109,17 @@ class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowS
               step={0.001}
               value={volume}
               onChange={this.handleVolumeChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={<Switch
+                color="primary"
+                checked={autoScroll}
+                onChange={this.handleAutoScrollChange}
+              />}
+              label="Auto Scroll"
+              labelPlacement="start"
             />
           </Grid>
         </Grid>

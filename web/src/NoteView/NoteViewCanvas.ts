@@ -9,6 +9,8 @@ import { runTestCode } from "./runTestCode";
 export default class NoteViewCanvas {
   private isDestroyed = false;
   private context: CanvasRenderingContext2D;
+  private readonly scrollView: ScrollView;
+  private readonly addBarButton: Button;
   private readonly barListRenderer: BarListRenderer;
 
   constructor(
@@ -41,6 +43,7 @@ export default class NoteViewCanvas {
     }, {
       scrollPercent: 0,
     });
+    this.scrollView = scrollView;
 
     const addBarButton = new Button({
       x: 0,
@@ -51,6 +54,7 @@ export default class NoteViewCanvas {
       text: `+ 한 마디 추가`,
       handler: () => { this.addBar() },
     });
+    this.addBarButton = addBarButton;
     scrollView.addChild(addBarButton);
 
     this.barListRenderer = new BarListRenderer(
@@ -72,13 +76,41 @@ export default class NoteViewCanvas {
     dispatch(BarAction.pushNewBar(store.getState().configState.defaultBarBeat));
   }
 
+  private autoScroll() {
+    const {
+      barState,
+      playerState,
+    } = store.getState();
+
+    const { autoScroll } = store.getState().configState;
+
+    if (autoScroll) {
+      const { beats: totalBeats } = barState;
+      const { beats: cursorBeats } = playerState.cursor;
+
+      const playProgress = (totalBeats - cursorBeats) / totalBeats;
+      const scrollViewHeight = this.scrollView.height;
+      const addBarButtonHeight = this.addBarButton.height;
+      const barListHeight = this.barListRenderer.height;
+      const scrollY = barListHeight * playProgress + addBarButtonHeight - scrollViewHeight * 0.9;
+
+      this.scrollView.scrollTo(scrollY);
+    }
+  }
+
   tick() {
     if (this.isDestroyed) {
       return;
     }
-    this.context.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
 
     world.update();
+
+    const { autoScroll } = store.getState().configState;
+    if (autoScroll) {
+      this.autoScroll();
+    }
+
+    this.context.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
     world.render(this.context);
 
     requestAnimationFrame(() => this.tick());
