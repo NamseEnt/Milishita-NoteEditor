@@ -30,16 +30,20 @@ class Player extends EventEmitter {
     this.emit('volume', volume);
   }
 
-  public play() {
-    this.emit('play');
+  public play(silence?: boolean) {
+    if (!silence) {
+      this.emit('play');
+    }
     if (this.audioElement.readyState > 3) {
       this.audioElement.play();
     }
     dispatch(PlayerAction.play());
   }
 
-  public stop() {
-    this.emit('stop');
+  public stop(silence?: boolean) {
+    if (!silence) {
+      this.emit('stop');
+    }
     this.audioElement.pause();
     dispatch(PlayerAction.stop());
   }
@@ -50,8 +54,10 @@ class Player extends EventEmitter {
       : this.play();
   }
 
-  public seek(beat: number) {
-    this.emit('seek', beat);
+  public seek(beat: number, silence?: boolean) {
+    if (!silence) {
+      this.emit('seek', beat);
+    }
     this.audioElement.currentTime = convertBarBeatToSecond(beat);
 
     if (!store.getState().playerState.isPlaying) {
