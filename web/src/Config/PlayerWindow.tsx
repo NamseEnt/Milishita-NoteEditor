@@ -6,11 +6,13 @@ import { isArray } from 'util';
 import Player from './Player';
 import { VolumeUp, Pause, PlayArrow } from '@material-ui/icons';
 import { ConfigAction } from '~StateStore/_gen/config_action.ts';
+import player from './Player';
 
 type PlayerWindowProps = ReturnType<typeof mapStateToPlayerWindowProps>
 
 type PlayerWindowState = {
   volume: number;
+  fileName: string;
 }
 
 function mapStateToPlayerWindowProps(state: RootState) {
@@ -45,9 +47,11 @@ class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowS
 
     this.state = {
       volume: 0.5,
+      fileName: 'Select file',
     };
 
     this.handleVolumeChange = this.handleVolumeChange.bind(this);
+    this.handleFileButtonClick = this.handleFileButtonClick.bind(this);
   }
 
   private handleVolumeChange(event: React.ChangeEvent<{}>, value: number | number[]) {
@@ -67,9 +71,29 @@ class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowS
     dispatch(ConfigAction.setAutoScroll(checked));
   }
 
+  private handleFileButtonClick() {
+    const inputElement = document.createElement('input');
+    inputElement.style.display = 'none';
+    inputElement.type = 'file';
+    inputElement.click();
+    inputElement.onchange = event => {
+      const target = event.target as HTMLInputElement;
+      if (!target) {
+        return;
+      }
+      const file = target.files ? target.files[0] : null;
+      if (!file) {
+        return;
+      }
+      this.setState({ fileName: file.name });
+      player.setAudioSource(URL.createObjectURL(file));
+    }
+  }
+
   public render() {
     const {
       volume,
+      fileName,
     } = this.state;
 
     const {
@@ -111,7 +135,7 @@ class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowS
               onChange={this.handleVolumeChange}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <FormControlLabel
               control={<Switch
                 color="primary"
@@ -121,6 +145,12 @@ class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowS
               label="Auto Scroll"
               labelPlacement="start"
             />
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              onClick={this.handleFileButtonClick}
+              variant="contained"
+            >{fileName}</Button>
           </Grid>
         </Grid>
       </CardContent>
