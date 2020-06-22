@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RootState, dispatch } from '~StateStore/store';
-import { Slider, Button, CardContent, Grid, Switch, FormControlLabel } from '@material-ui/core';
+import { Slider, Button, CardContent, Grid, Switch, FormControlLabel, IconButton, Typography } from '@material-ui/core';
 import { isArray } from 'util';
 import Player from './Player';
 import { VolumeUp, Pause, PlayArrow } from '@material-ui/icons';
 import { ConfigAction } from '~StateStore/_gen/config_action.ts';
 import player from './Player';
+import { convertBarBeatToSecond } from '~utils/bar';
 
 type PlayerWindowProps = ReturnType<typeof mapStateToPlayerWindowProps>
 
@@ -37,13 +38,16 @@ function mapStateToPlayerWindowProps(state: RootState) {
   };
 }
 
+function getTimeStringFromSeccond(second: number) {
+  const minutes = (second / 60).toFixed(0);
+  const seconds = (second % 60).toFixed(0);
+
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
 class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowState> {
   constructor(props: PlayerWindowProps) {
     super(props);
-
-    const {
-      beats,
-    } = props;
 
     this.state = {
       volume: 0.5,
@@ -103,39 +107,46 @@ class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowS
       autoScroll,
     } = this.props;
 
+    const duration = getTimeStringFromSeccond(convertBarBeatToSecond(beats));
+    const currentTime = getTimeStringFromSeccond(convertBarBeatToSecond(cursor.beats));
+
     return (
       <CardContent>
-        <Grid container>
+        <Grid container alignItems={'center'}>
           <Grid item xs={12}>
-            <Slider
-              min={0}
-              max={beats}
-              step={0.001}
-              value={cursor.beats}
-              valueLabelDisplay={'on'}
-              valueLabelFormat={beats => beats.toFixed(1)}
-              marks={[
-                { value: beats, label: beats.toFixed(1) },
-              ]}
-              onChange={this.handleTimebarChange}
-            />
+            <Button
+              onClick={this.handleFileButtonClick}
+              variant="contained"
+              fullWidth
+            >{fileName}</Button>
           </Grid>
-          <Grid item xs={2}>
-            <Button onClick={Player.togglePlay} style={{paddingTop: '0px', paddingBottom: '0px'}}>
-              {isPlaying ? <Pause /> : <PlayArrow />}
-            </Button>
+          <Grid container spacing={1} alignItems={'center'}>
+            <Grid item>
+              <IconButton onClick={Player.togglePlay}>
+                {isPlaying ? <Pause /> : <PlayArrow />}
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <Typography>
+                {currentTime}
+              </Typography>
+            </Grid>
+            <Grid item xs>
+              <Slider
+                min={0}
+                max={beats}
+                step={0.001}
+                value={cursor.beats}
+                onChange={this.handleTimebarChange}
+              />
+            </Grid>
+            <Grid item>
+              <Typography>
+                {duration}
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item xs={1}><VolumeUp /></Grid>
-          <Grid item xs={9}>
-            <Slider
-              min={0}
-              max={1}
-              step={0.001}
-              value={volume}
-              onChange={this.handleVolumeChange}
-            />
-          </Grid>
-          <Grid item xs={6}>
+          <Grid item xs>
             <FormControlLabel
               control={<Switch
                 color="primary"
@@ -146,11 +157,23 @@ class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowS
               labelPlacement="start"
             />
           </Grid>
-          <Grid item xs={6}>
-            <Button
-              onClick={this.handleFileButtonClick}
-              variant="contained"
-            >{fileName}</Button>
+          <Grid item xs={4}>
+            <Grid container alignItems={'center'}>
+              <Grid item>
+                <IconButton>
+                  <VolumeUp />
+                </IconButton>
+              </Grid>
+              <Grid item xs>
+                <Slider
+                  min={0}
+                  max={1}
+                  step={0.001}
+                  value={volume}
+                  onChange={this.handleVolumeChange}
+                />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </CardContent>
