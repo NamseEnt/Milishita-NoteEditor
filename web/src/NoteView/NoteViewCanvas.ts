@@ -5,6 +5,7 @@ import { ScrollView } from "./ScrollView";
 import { dispatch, store } from "~StateStore/store";
 import { BarAction } from "~StateStore/_gen/bar_action.ts";
 import { runTestCode } from "./runTestCode";
+import cursorDragManager from "./cursorDragManager";
 
 export default class NoteViewCanvas {
   private isDestroyed = false;
@@ -22,6 +23,24 @@ export default class NoteViewCanvas {
     const mouseEventHandler = (event: MouseEvent) => {
       event.preventDefault();
       world.onMouseEvent(event);
+
+      switch(event.type) {
+        case 'wheel': {
+          const wheelEvent = event as MouseWheelEvent;
+          cursorDragManager.handleWheel(wheelEvent);
+        } break;
+
+        case 'mousemove': {
+          cursorDragManager.handleMouseMove(event);
+        } break;
+
+        case 'mouseup':
+        case 'mouseleave': {
+          cursorDragManager.stopDragging();
+        } break;
+
+        default: break;
+      }
     };
     canvasElement.onwheel = mouseEventHandler;
     canvasElement.onclick = mouseEventHandler;
@@ -29,6 +48,7 @@ export default class NoteViewCanvas {
     canvasElement.onmouseenter = mouseEventHandler;
     canvasElement.onmouseleave = mouseEventHandler;
     canvasElement.onmousemove = mouseEventHandler;
+    canvasElement.onmouseup = mouseEventHandler;
     canvasElement.oncontextmenu = (event) => {
       mouseEventHandler(event);
       return false;
