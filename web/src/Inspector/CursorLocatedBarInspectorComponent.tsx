@@ -5,13 +5,15 @@ import { getBarIndexByBeats } from '~utils/bar';
 import { LongNoteAction } from '~StateStore/_gen/longNote_action.ts';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
 import ChangeBarBeatComponent from './ChangeBarBeatComponent';
-import {ButtonGroup, Button, Container, CardContent } from '@material-ui/core';
+import {ButtonGroup, Button, Container, CardContent, Collapse } from '@material-ui/core';
 import { batchActions } from 'redux-batched-actions';
+import { ArrowDropDown, ArrowRight } from '@material-ui/icons';
 
 export const CursorLocatedBarInspectorComponent = () => {
   const isPlaying = useSelector((state: RootState) => state.playerState.isPlaying);
   const bars = useSelector((state: RootState) => state.barState.bars);
   const beats = useSelector((state: RootState) => state.playerState.cursor.beats);
+  const [detailExpanded, setDetailExpanded] = React.useState(false);
   const barIndex = getBarIndexByBeats(beats);
   if (barIndex < 0) {
     return null;
@@ -60,7 +62,14 @@ export const CursorLocatedBarInspectorComponent = () => {
         />
       </CardContent>
       <CardContent>
-        <pre>{JSON.stringify(bar, null, 2)}</pre>
+        <Button
+          onClick={() => {
+            setDetailExpanded(isExpanded => !isExpanded);
+          }}
+        >{detailExpanded ? <ArrowDropDown /> : <ArrowRight />}Details</Button>
+        <Collapse in={detailExpanded}>
+          <pre>{JSON.stringify(bar, null, 2)}</pre>
+        </Collapse>
       </CardContent>
     </Container>
   );

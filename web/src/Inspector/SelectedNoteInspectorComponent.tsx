@@ -3,13 +3,15 @@ import { useSelector } from 'react-redux';
 import { RootState, dispatch, store } from '~StateStore/store';
 import { noteTypes, NoteType } from '~NoteView/types';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
-import { Divider, MenuItem, Select, FormControl, InputLabel, CardContent } from '@material-ui/core';
+import { Divider, MenuItem, Select, FormControl, InputLabel, CardContent, Button, Collapse } from '@material-ui/core';
+import { ArrowDropDown, ArrowRight } from '@material-ui/icons';
 
 export const SelectedNoteInspectorComponent = () => {
   const selectedNoteId = useSelector((state: RootState) => state.selectNoteState.selectedNoteId);
   const bars = store.getState().barState.bars;
   const bar = bars.find(bar => bar.notes.some(note => note.id === selectedNoteId));
   const selectedNote = bar?.notes.find(note => note.id === selectedNoteId);
+  const [detailExpanded, setDetailExpanded] = React.useState(false);
 
   if (!selectedNote) {
     return null;
@@ -41,9 +43,14 @@ export const SelectedNoteInspectorComponent = () => {
         </Select>
       </FormControl>
       <Divider />
-      <CardContent>
+      <Button
+        onClick={() => {
+          setDetailExpanded(isExpanded => !isExpanded);
+        }}
+      >{detailExpanded ? <ArrowDropDown /> : <ArrowRight />}Details</Button>
+      <Collapse in={detailExpanded}>
         <pre>{JSON.stringify(selectedNote, null, 2)}</pre>
-      </CardContent>
+      </Collapse>
     </CardContent>
   );
 }
