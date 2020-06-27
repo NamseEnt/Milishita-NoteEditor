@@ -2,6 +2,7 @@ import Drawable from "./Drawable";
 import { Cursor, Position } from "./types";
 import { toPosition } from "~utils/cursor";
 import { getXY } from "~utils/bar";
+import cursorDragManager from "./cursorDragManager";
 
 type CursorRendererProps = {
   cursor: Cursor,
@@ -58,7 +59,10 @@ export class CursorRenderer extends Drawable<CursorRendererProps> {
   }
 
   onMouseEvent(event: MouseEvent): void {
-    console.log(event);
+    if (event.type === 'mousedown') {
+      cursorDragManager.startDragging();
+    }
+
     event.stopPropagation();
   }
 }
