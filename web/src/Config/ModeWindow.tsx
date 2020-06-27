@@ -22,6 +22,7 @@ export const ModeWindow = (props: {
         dispatch(ModeAction.changeMode(mode));
       }}
       variant={currentMode === mode ? 'contained' : 'outlined'}
+      color={currentMode === mode ? 'primary' : 'default'}
     > {mode}</Button >;
   });
 
@@ -36,6 +37,7 @@ export const ModeWindow = (props: {
         dispatch(ModeAction.changeNoteTypeMode(noteTypeMode));
       }}
       variant={currentNoteTypeMode === noteTypeMode ? 'contained' : 'outlined'}
+      color={currentNoteTypeMode === noteTypeMode ? 'primary' : 'default'}
     > {noteTypeMode}</Button>
 
   });

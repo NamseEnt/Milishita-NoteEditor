@@ -117,6 +117,7 @@ class UnconnectedPlayerWindow extends Component<PlayerWindowProps, PlayerWindowS
             <Button
               onClick={this.handleFileButtonClick}
               variant="contained"
+              color='primary'
               fullWidth
             >{fileName}</Button>
           </Grid>

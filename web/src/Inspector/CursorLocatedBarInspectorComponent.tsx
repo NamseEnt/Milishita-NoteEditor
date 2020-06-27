@@ -42,10 +42,14 @@ export const CursorLocatedBarInspectorComponent = () => {
     <Button
       disabled={isPlaying}
       onClick={() => { insertBar() }}
+      variant='contained'
+      color='primary'
     >{`${barIndex}번 마디 아래에 한 마디 추가`}</Button>
     <Button
       disabled={isPlaying}
       onClick={removeBar}
+      variant='contained'
+      color='secondary'
     >{`${barIndex}번 마디 삭제`}</Button>
   </ButtonGroup>
 
