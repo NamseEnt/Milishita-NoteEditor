@@ -2,31 +2,33 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, dispatch } from '~StateStore/store';
 import { ModeWindow } from './ModeWindow';
-import { Slider, Typography, Card, CardContent } from '@material-ui/core';
-import { ConfigAction } from '~StateStore/_gen/config_action.ts';
+import { Typography, Card, CardContent, Button, Grid } from '@material-ui/core';
 import PlayerWindow from './PlayerWindow';
+import { Settings } from '@material-ui/icons';
+import AdvancedConfigDialog from './AdvancedConfigDialog';
 
 export const ConfigWindow = () => {
   const mode = useSelector((state: RootState) => state.modeState.mode);
   const noteTypeMode = useSelector((state: RootState) => state.modeState.noteTypeMode);
-  const guideBeat = useSelector((state: RootState) => state.configState.guideBeat);
+  const [advancedConfigOpen, setAdvancedConfigOpen] = React.useState(false);
 
   return (
     <Card>
-      <CardContent><Typography variant="h3">Config</Typography></CardContent>
-      <PlayerWindow />
       <CardContent>
-        <Typography gutterBottom>Guide Beat</Typography>
-        <Slider
-          value={Math.log2(guideBeat)}
-          min={-4}
-          step={1}
-          max={1}
-          valueLabelDisplay="auto"
-          valueLabelFormat={(value) => value < 0 ? `1 / ${2 ** -value}` : value}
-          onChange={(_, value) => dispatch(ConfigAction.setGuideBeat(2 ** (value as number)))}
-        />
+        <Grid container alignItems="center">
+          <Grid item xs>
+            <Typography variant="h3">Config</Typography>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="text"
+              onClick={() => setAdvancedConfigOpen(true)}
+            ><Settings fontSize="large" /></Button>
+            <AdvancedConfigDialog open={advancedConfigOpen} close={() => setAdvancedConfigOpen(false)} />
+          </Grid>
+        </Grid>
       </CardContent>
+      <PlayerWindow />
       <ModeWindow mode={mode} noteTypeMode={noteTypeMode} />
     </Card>
   );
