@@ -11,3 +11,4 @@ changeNoteType(noteId: string, noteType: NoteType) -undoable
 waitBarClick(trigger: Action<Position>)
 clickBar(position: Position)
 setBarState(state: BarState)
+removeNotesOutOfKeys(keys: number) -undoable

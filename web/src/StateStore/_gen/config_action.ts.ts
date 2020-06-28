@@ -2,16 +2,43 @@ import { ConfigState } from './config_state'
 
 ///BEGIN
 
+export const SET_BEAT_HEIGHT = "SET_BEAT_HEIGHT" as const;
+export const SET_KEYS = "SET_KEYS" as const;
 export const SET_GUIDE_BEAT = "SET_GUIDE_BEAT" as const;
+export const SET_BPM = "SET_BPM" as const;
 export const SET_DEFAULT_BAR_BEAT = "SET_DEFAULT_BAR_BEAT" as const;
 export const SET_AUTO_SCROLL = "SET_AUTO_SCROLL" as const;
 export const SET_CONFIG_STATE = "SET_CONFIG_STATE" as const;
 
  export namespace ConfigAction {
+  export function setBeatHeight(beatHeight: number) {
+    return {
+      type: SET_BEAT_HEIGHT,
+      beatHeight,
+    };
+  }
+
+
+  export function setKeys(keys: number) {
+    return {
+      type: SET_KEYS,
+      keys,
+    };
+  }
+
+
   export function setGuideBeat(guideBeat: number) {
     return {
       type: SET_GUIDE_BEAT,
       guideBeat,
+    };
+  }
+
+
+  export function setBpm(bpm: number) {
+    return {
+      type: SET_BPM,
+      bpm,
     };
   }
 
@@ -42,9 +69,27 @@ export const SET_CONFIG_STATE = "SET_CONFIG_STATE" as const;
 }
 
 
+export type SetBeatHeightAction = {
+  type: typeof SET_BEAT_HEIGHT;
+  beatHeight: number;
+};
+
+
+export type SetKeysAction = {
+  type: typeof SET_KEYS;
+  keys: number;
+};
+
+
 export type SetGuideBeatAction = {
   type: typeof SET_GUIDE_BEAT;
   guideBeat: number;
+};
+
+
+export type SetBpmAction = {
+  type: typeof SET_BPM;
+  bpm: number;
 };
 
 
@@ -66,10 +111,13 @@ export type SetConfigStateAction = {
 };
 
 
-export type ConfigActions = SetGuideBeatAction | SetDefaultBarBeatAction | SetAutoScrollAction | SetConfigStateAction
+export type ConfigActions = SetBeatHeightAction | SetKeysAction | SetGuideBeatAction | SetBpmAction | SetDefaultBarBeatAction | SetAutoScrollAction | SetConfigStateAction
 
 export interface IConfigReducers {
+  SET_BEAT_HEIGHT(state: ConfigState, action: SetBeatHeightAction): ConfigState;
+  SET_KEYS(state: ConfigState, action: SetKeysAction): ConfigState;
   SET_GUIDE_BEAT(state: ConfigState, action: SetGuideBeatAction): ConfigState;
+  SET_BPM(state: ConfigState, action: SetBpmAction): ConfigState;
   SET_DEFAULT_BAR_BEAT(state: ConfigState, action: SetDefaultBarBeatAction): ConfigState;
   SET_AUTO_SCROLL(state: ConfigState, action: SetAutoScrollAction): ConfigState;
   SET_CONFIG_STATE(state: ConfigState, action: SetConfigStateAction): ConfigState;

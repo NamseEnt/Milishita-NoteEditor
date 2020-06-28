@@ -1,4 +1,7 @@
+setBeatHeight(beatHeight: number)
+setKeys(keys: number) -undoable
 setGuideBeat(guideBeat: number)
+setBpm(bpm: number)
 setDefaultBarBeat(beat: number)
 setAutoScroll(auto: boolean)
 setConfigState(state: ConfigState)

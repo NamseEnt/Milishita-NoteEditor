@@ -1,9 +1,18 @@
-import { IConfigReducers, ConfigActions, SetGuideBeatAction, SetDefaultBarBeatAction, SetConfigStateAction, SetAutoScrollAction } from "./config_action.ts";
+import { IConfigReducers, ConfigActions, SetGuideBeatAction, SetDefaultBarBeatAction, SetConfigStateAction, SetAutoScrollAction, SetBpmAction, SetKeysAction, SetBeatHeightAction } from "./config_action.ts";
 import { ConfigState } from "./config_state";
 
 export class ConfigReducers implements IConfigReducers {
+  SET_BEAT_HEIGHT(state: ConfigState, action: SetBeatHeightAction): ConfigState {
+    return state.update('beatHeight', _ => action.beatHeight);
+  }
+  SET_KEYS(state: ConfigState, action: SetKeysAction): ConfigState {
+    return state.update('keys', _ => action.keys);
+  }
   SET_GUIDE_BEAT(state: ConfigState, action: SetGuideBeatAction): ConfigState {
     return state.update('guideBeat', _ => action.guideBeat);
+  }
+  SET_BPM(state: ConfigState, action: SetBpmAction): ConfigState {
+    return state.update('bpm', _ => action.bpm);
   }
   SET_DEFAULT_BAR_BEAT(state: ConfigState, action: SetDefaultBarBeatAction): ConfigState {
     return state.update('defaultBarBeat', _ => action.beat);

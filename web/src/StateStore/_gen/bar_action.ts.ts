@@ -16,6 +16,7 @@ export const CHANGE_NOTE_TYPE = "CHANGE_NOTE_TYPE" as const;
 export const WAIT_BAR_CLICK = "WAIT_BAR_CLICK" as const;
 export const CLICK_BAR = "CLICK_BAR" as const;
 export const SET_BAR_STATE = "SET_BAR_STATE" as const;
+export const REMOVE_NOTES_OUT_OF_KEYS = "REMOVE_NOTES_OUT_OF_KEYS" as const;
 
  export namespace BarAction {
   export function pushNewBar(beat: number) {
@@ -127,6 +128,14 @@ export const SET_BAR_STATE = "SET_BAR_STATE" as const;
     };
   }
 
+
+  export function removeNotesOutOfKeys(keys: number) {
+    return {
+      type: REMOVE_NOTES_OUT_OF_KEYS,
+      keys,
+    };
+  }
+
 }
 
 
@@ -214,7 +223,13 @@ export type SetBarStateAction = {
 };
 
 
-export type BarActions = PushNewBarAction | InsertNewBarAction | AddBarAction | RemoveBarAction | ChangeBarBeatAction | AddNoteAction | RemoveNoteAction | RemoveNotesOnBarAction | RemoveOverflowedNotesAction | ChangeNoteTypeAction | WaitBarClickAction | ClickBarAction | SetBarStateAction
+export type RemoveNotesOutOfKeysAction = {
+  type: typeof REMOVE_NOTES_OUT_OF_KEYS;
+  keys: number;
+};
+
+
+export type BarActions = PushNewBarAction | InsertNewBarAction | AddBarAction | RemoveBarAction | ChangeBarBeatAction | AddNoteAction | RemoveNoteAction | RemoveNotesOnBarAction | RemoveOverflowedNotesAction | ChangeNoteTypeAction | WaitBarClickAction | ClickBarAction | SetBarStateAction | RemoveNotesOutOfKeysAction
 
 export interface IBarReducers {
   PUSH_NEW_BAR(state: BarState, action: PushNewBarAction): BarState;
@@ -230,4 +245,5 @@ export interface IBarReducers {
   WAIT_BAR_CLICK(state: BarState, action: WaitBarClickAction): BarState;
   CLICK_BAR(state: BarState, action: ClickBarAction): BarState;
   SET_BAR_STATE(state: BarState, action: SetBarStateAction): BarState;
+  REMOVE_NOTES_OUT_OF_KEYS(state: BarState, action: RemoveNotesOutOfKeysAction): BarState;
 };

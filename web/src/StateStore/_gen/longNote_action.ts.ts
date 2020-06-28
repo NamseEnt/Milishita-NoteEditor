@@ -11,6 +11,7 @@ export const REMOVE_LONG_NOTE = "REMOVE_LONG_NOTE" as const;
 export const REMOVE_LONG_NOTES_ON_BAR = "REMOVE_LONG_NOTES_ON_BAR" as const;
 export const REMOVE_OVERFLOWED_LONG_NOTES = "REMOVE_OVERFLOWED_LONG_NOTES" as const;
 export const SET_LONG_NOTE_STATE = "SET_LONG_NOTE_STATE" as const;
+export const REMOVE_LONG_NOTES_OUT_OF_KEYS = "REMOVE_LONG_NOTES_OUT_OF_KEYS" as const;
 
  export namespace LongNoteAction {
   export function addLongNote(longNote: LongNote) {
@@ -76,6 +77,14 @@ export const SET_LONG_NOTE_STATE = "SET_LONG_NOTE_STATE" as const;
     };
   }
 
+
+  export function removeLongNotesOutOfKeys(keys: number) {
+    return {
+      type: REMOVE_LONG_NOTES_OUT_OF_KEYS,
+      keys,
+    };
+  }
+
 }
 
 
@@ -127,7 +136,13 @@ export type SetLongNoteStateAction = {
 };
 
 
-export type LongNoteActions = AddLongNoteAction | UpdateLongNoteAction | UpdateEditingLongNoteAction | FinishEditingLongNoteAction | RemoveLongNoteAction | RemoveLongNotesOnBarAction | RemoveOverflowedLongNotesAction | SetLongNoteStateAction
+export type RemoveLongNotesOutOfKeysAction = {
+  type: typeof REMOVE_LONG_NOTES_OUT_OF_KEYS;
+  keys: number;
+};
+
+
+export type LongNoteActions = AddLongNoteAction | UpdateLongNoteAction | UpdateEditingLongNoteAction | FinishEditingLongNoteAction | RemoveLongNoteAction | RemoveLongNotesOnBarAction | RemoveOverflowedLongNotesAction | SetLongNoteStateAction | RemoveLongNotesOutOfKeysAction
 
 export interface ILongNoteReducers {
   ADD_LONG_NOTE(state: LongNoteState, action: AddLongNoteAction): LongNoteState;
@@ -138,4 +153,5 @@ export interface ILongNoteReducers {
   REMOVE_LONG_NOTES_ON_BAR(state: LongNoteState, action: RemoveLongNotesOnBarAction): LongNoteState;
   REMOVE_OVERFLOWED_LONG_NOTES(state: LongNoteState, action: RemoveOverflowedLongNotesAction): LongNoteState;
   SET_LONG_NOTE_STATE(state: LongNoteState, action: SetLongNoteStateAction): LongNoteState;
+  REMOVE_LONG_NOTES_OUT_OF_KEYS(state: LongNoteState, action: RemoveLongNotesOutOfKeysAction): LongNoteState;
 };
