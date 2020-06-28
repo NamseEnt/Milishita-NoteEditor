@@ -6,3 +6,4 @@ removeLongNote(longNote: LongNote) -undoable
 removeLongNotesOnBar(barId: string) -undoable
 removeOverflowedLongNotes(barId: string, beat: number) -undoable
 setLongNoteState(state: LongNoteState)
+removeLongNotesOutOfKeys(keys: number) -undoable

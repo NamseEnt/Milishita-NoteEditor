@@ -1,4 +1,4 @@
-import { ILongNoteReducers, LongNoteActions, AddLongNoteAction, UpdateLongNoteAction, UpdateEditingLongNoteAction, FinishEditingLongNoteAction, RemoveLongNoteAction, RemoveLongNotesOnBarAction, RemoveOverflowedLongNotesAction, SetLongNoteStateAction } from "./longNote_action.ts";
+import { ILongNoteReducers, LongNoteActions, AddLongNoteAction, UpdateLongNoteAction, UpdateEditingLongNoteAction, FinishEditingLongNoteAction, RemoveLongNoteAction, RemoveLongNotesOnBarAction, RemoveOverflowedLongNotesAction, SetLongNoteStateAction, RemoveLongNotesOutOfKeysAction } from "./longNote_action.ts";
 import { LongNoteState } from "./longNote_state";
 
 export class LongNoteReducers implements ILongNoteReducers {
@@ -33,6 +33,13 @@ export class LongNoteReducers implements ILongNoteReducers {
   }
   SET_LONG_NOTE_STATE(state: LongNoteState, action: SetLongNoteStateAction): LongNoteState {
     return action.state;
+  }
+  REMOVE_LONG_NOTES_OUT_OF_KEYS(state: LongNoteState, action: RemoveLongNotesOutOfKeysAction): LongNoteState {
+    return state.update('longNotes', longNotes => longNotes.filter(longNote =>
+      (longNote.startNote.position.key < action.keys)
+      && (longNote.endNote.position.key < action.keys)
+      && longNote.middlePoints.every(middlePoint => middlePoint.key < action.keys)
+    ));
   }
 };
 

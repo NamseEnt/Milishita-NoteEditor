@@ -1,47 +1,238 @@
-import React from 'react';
-import { Dialog, DialogTitle, DialogContent, Typography, Slider, Grid, Button } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import React, { Component } from 'react';
+import { Dialog, DialogTitle, DialogContent, Typography, Slider, Grid, Button, TextField, InputAdornment } from '@material-ui/core';
+import { connect } from 'react-redux';
 import { RootState, dispatch } from '~StateStore/store';
 import { ConfigAction } from '~StateStore/_gen/config_action.ts';
 import { Close } from '@material-ui/icons';
+import { isNumber } from 'util';
+import { batchActions } from 'redux-batched-actions';
+import { BarAction } from '~StateStore/_gen/bar_action.ts';
+import { LongNoteAction } from '~StateStore/_gen/longNote_action.ts';
+
+function mapStateToPlayerWindowProps(state: RootState, props: AdvancedConfigDialogProps) {
+  const {
+    bpm,
+    keys,
+    guideBeat,
+    beatHeight,
+    defaultBarBeat,
+  } = state.configState;
+
+  const {
+    open,
+    close,
+  } = props;
+
+  return {
+    bpm,
+    keys,
+    guideBeat,
+    beatHeight,
+    defaultBarBeat,
+    open,
+    close,
+  };
+}
 
 export type AdvancedConfigDialogProps = {
   close: () => void;
   open: boolean;
 }
 
-export default function AdvancedConfigDialog(props: AdvancedConfigDialogProps) {
-  const {
-    close,
-    open,
-  } = props;
+export type AdvancedConfigDialogState = {
+  bpmInput: string;
+  keysInput: string;
+  beatHeightInput: string;
+  defaultBarBeatInput: string;
+};
 
-  const guideBeat = useSelector((state: RootState) => state.configState.guideBeat);
+class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerWindowProps>, AdvancedConfigDialogState>{
+  constructor(props: ReturnType<typeof mapStateToPlayerWindowProps>) {
+    super(props);
 
-  return (
-    <Dialog onClose={close} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle>
-        <Grid container alignItems="center">
-          <Grid item xs>
-            <Typography variant="h4">Advanced Config</Typography>
+    const {
+      bpm,
+      keys,
+      beatHeight,
+      defaultBarBeat,
+    } = props;
+
+    this.state = {
+      bpmInput: bpm.toString(),
+      keysInput: keys.toString(),
+      beatHeightInput: beatHeight.toString(),
+      defaultBarBeatInput: defaultBarBeat.toString(),
+    };
+
+    this.setBpmInput = this.setBpmInput.bind(this);
+    this.setKeysInput = this.setKeysInput.bind(this);
+    this.setBeatHeightInput = this.setBeatHeightInput.bind(this);
+    this.setDefaultBarBeatInput = this.setDefaultBarBeatInput.bind(this);
+  }
+
+  public componentWillReceiveProps(nextProps: Readonly<ReturnType<typeof mapStateToPlayerWindowProps>>) {
+    const {
+      bpm,
+      keys,
+      beatHeight,
+      defaultBarBeat,
+    } = nextProps;
+
+    this.setState({
+      bpmInput: bpm.toString(),
+      keysInput: keys.toString(),
+      beatHeightInput: beatHeight.toString(),
+      defaultBarBeatInput: defaultBarBeat.toString(),
+    });
+  }
+
+  private setBpmInput(value: string) {
+    this.setState({
+      bpmInput: value,
+    });
+  }
+
+  private setKeysInput(value: string) {
+    this.setState({
+      keysInput: value,
+    });
+  }
+
+  private setBeatHeightInput(value: string) {
+    this.setState({
+      beatHeightInput: value,
+    });
+  }
+
+  private setDefaultBarBeatInput(value: string) {
+    this.setState({
+      defaultBarBeatInput: value,
+    });
+  }
+
+  public render() {
+    const {
+      close,
+      open,
+      guideBeat,
+    } = this.props;
+
+    const {
+      bpmInput,
+      keysInput,
+      beatHeightInput,
+      defaultBarBeatInput,
+    } = this.state;
+
+    const configMap: {
+      name: string,
+      value: string,
+      setValue: (value: string) => void,
+      apply: () => void;
+    }[] = [
+        {
+          name: 'bpm',
+          value: bpmInput,
+          setValue: this.setBpmInput,
+          apply: () => {
+            const value = parseFloat(bpmInput);
+            if (!isNumber(value)) {
+              return;
+            }
+            dispatch(ConfigAction.setBpm(value))
+          },
+        },
+        {
+          name: 'keys',
+          value: keysInput,
+          setValue: this.setKeysInput,
+          apply: () => {
+            const value = parseFloat(keysInput);
+            if (!isNumber(value)) {
+              return;
+            }
+
+            const keys = Math.floor(value);
+
+            dispatch(batchActions([
+              ConfigAction.setKeys(keys),
+              BarAction.removeNotesOutOfKeys(keys),
+              LongNoteAction.removeLongNotesOutOfKeys(keys),
+            ]));
+          },
+        },
+        {
+          name: 'beatHeight',
+          value: beatHeightInput,
+          setValue: this.setBeatHeightInput,
+          apply: () => {
+            const value = parseFloat(beatHeightInput);
+            if (!isNumber(value)) {
+              return;
+            }
+            dispatch(ConfigAction.setBeatHeight(value))
+          },
+        },
+        {
+          name: 'defaultBarBeat',
+          value: defaultBarBeatInput,
+          setValue: this.setDefaultBarBeatInput,
+          apply: () => {
+            const value = parseFloat(defaultBarBeatInput);
+            if (!isNumber(value)) {
+              return;
+            }
+            dispatch(ConfigAction.setDefaultBarBeat(value))
+          },
+        },
+    ];
+
+    return (
+      <Dialog
+        onClose={close}
+        open={open}
+      >
+        <DialogTitle>
+          <Grid container alignItems="center">
+            <Grid item xs>
+              <Typography variant="h4">Advanced Config</Typography>
+            </Grid>
+            <Grid item>
+              <Button variant="text" onClick={close}><Close fontSize="large" /></Button>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Button variant="text" onClick={close}><Close fontSize="large" /></Button>
-          </Grid>
-        </Grid>
-      </DialogTitle>
-      <DialogContent>
-        <Typography gutterBottom>Guide Beat</Typography>
-        <Slider
-          value={Math.log2(guideBeat)}
-          min={-4}
-          step={1}
-          max={1}
-          valueLabelDisplay="auto"
-          valueLabelFormat={(value) => value < 0 ? `1 / ${2 ** -value}` : value}
-          onChange={(_, value) => dispatch(ConfigAction.setGuideBeat(2 ** (value as number)))}
-        />
-      </DialogContent>
-    </Dialog>
-  );
+        </DialogTitle>
+        <DialogContent>
+          <Typography gutterBottom>Guide Beat</Typography>
+          <Slider
+            value={Math.log2(guideBeat)}
+            min={-4}
+            step={1}
+            max={1}
+            valueLabelDisplay="auto"
+            valueLabelFormat={(value) => value < 0 ? `1 / ${2 ** -value}` : value}
+            onChange={(_, value) => dispatch(ConfigAction.setGuideBeat(2 ** (value as number)))}
+          />
+        </DialogContent>
+        {configMap.map(config =>
+          <DialogContent key={config.name}>
+            <TextField
+              fullWidth
+              label={config.name}
+              type="number"
+              value={config.value}
+              onChange={event => config.setValue(event.target.value)}
+              InputProps={{
+                endAdornment: <InputAdornment position="start">
+                  <Button onClick={config.apply}>변경</Button>
+                </InputAdornment>,
+              }}
+            />
+          </DialogContent>
+        )}
+      </Dialog>
+    );
+  }
 }
+
+export default connect(mapStateToPlayerWindowProps)(AdvancedConfigDialog);
