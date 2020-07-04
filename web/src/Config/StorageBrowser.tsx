@@ -33,6 +33,19 @@ export default class StorageBrowser extends Component<StorageBrowserProps, Stroa
       directory: [],
       path,
     };
+
+    this.handleStorageServiceChange = this.handleStorageServiceChange.bind(this);
+
+    storageManager.on('storageServiceChanged', this.handleStorageServiceChange);
+  }
+
+  private handleStorageServiceChange() {
+    const path = storageManager.parsePath(storageManager.defaultPath);
+    this.setPath(path);
+  }
+
+  public componentWillUnmount() {
+    storageManager.off('storageServiceChanged', this.handleStorageServiceChange);
   }
 
   public componentDidUpdate(previousProps: StorageBrowserProps) {
@@ -71,6 +84,7 @@ export default class StorageBrowser extends Component<StorageBrowserProps, Stroa
 
   private setPath(path: string[]) {
     this.setState({ path });
+    this.getDirectory(path);
   }
 
   public render() {
