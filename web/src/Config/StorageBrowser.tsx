@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Dialog, Breadcrumbs, Typography, Grid, DialogTitle, Button, DialogContent, List, ListItem, ListItemText, ListItemAvatar, Avatar, TextField, InputAdornment } from '@material-ui/core';
+import { Dialog, Breadcrumbs, Typography, Grid, DialogTitle, Button, DialogContent, List, ListItem, ListItemText, ListItemAvatar, Avatar, TextField, InputAdornment, Chip } from '@material-ui/core';
 import storageManager from '~storageManager/storageManager';
-import { Close, Folder, InsertDriveFile, NoteAdd, ArrowUpward } from '@material-ui/icons';
+import { Close, Folder, InsertDriveFile, NoteAdd, ArrowUpward, NavigateNext } from '@material-ui/icons';
 import { StorageDirectory } from '~storageManager/types';
 
 type StorageBrowserProps = {
@@ -162,8 +162,20 @@ export default class StorageBrowser extends Component<StorageBrowserProps, Stroa
           <Grid container alignItems="center">
             <GoUpButton />
             <Grid item xs>
-              <Breadcrumbs>
-                {path.map(directoryName => <Typography key={directoryName}>{directoryName}</Typography>)}
+              <Breadcrumbs
+                separator={<NavigateNext fontSize="small" />}>
+                {path.map((directoryName, index) => {
+                  const targetPath = path.slice(0, index + 1);
+                  return (
+                    <Chip
+                      size="small"
+                      key={directoryName}
+                      label={directoryName}
+                      style={{textDecoration: 'none'}}
+                      onClick={() => this.setPath(targetPath)}
+                    />
+                  )
+                })}
               </Breadcrumbs>
             </Grid>
             <Grid item>
