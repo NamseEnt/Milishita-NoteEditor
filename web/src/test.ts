@@ -2,6 +2,8 @@ import { ElectronMigration } from "~ElectronMigration/ElectronMigration";
 import { WebsocketManager } from "~websocketManager/websocketManager";
 import player from "~Config/Player";
 import { convertBarSecondToBeat, convertBarBeatToSecond } from "~utils/bar";
+import storageManager from "~storageManager/storageManager";
+import ElectronStorageService from "~storageManager/electronStorageService";
 
 if (!ElectronMigration.isElectronMigrated) {
   console.log('not electron migrated');
@@ -9,6 +11,8 @@ if (!ElectronMigration.isElectronMigrated) {
   console.log('electron migrated');
   console.log('fs: ',  ElectronMigration.fsExtra);
   console.log('websocket server: ', ElectronMigration.websocketServer);
+  console.log('cwd: ', ElectronMigration.cwd);
+  console.log('path: ', ElectronMigration.path);
 
   const websocketManager = new WebsocketManager();
 
@@ -26,4 +30,5 @@ if (!ElectronMigration.isElectronMigrated) {
     player.seek(beat, true);
   })
 
+  storageManager.addStorageservice('Electron File System', new ElectronStorageService());
 }

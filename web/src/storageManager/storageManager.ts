@@ -3,9 +3,19 @@ import BrowserStorageService from "./browserStorageService";
 import { StorageItem, StorageItemInfo, StorageDirectory } from "./types";
 import { store } from "~StateStore/store";
 import { dispatchAllStates } from "~utils/editHistory";
+import { EventEmitter } from "events";
 
-class StorageManager {
+interface StorageManager {
+  on(event: 'storageServiceChanged', listener: (previousStorageServiceName: string, nextStorageServiceName: string) => void): this;
+
+  emit(event: 'storageServiceChanged', previousStorageServiceName: string, nextStorageServiceName: string): boolean;
+
+  off(event: 'storageServiceChanged', listener: (previousStorageServiceName: string, nextStorageServiceName: string) => void): this;
+}
+
+class StorageManager extends EventEmitter{
   constructor() {
+    super();
     const browserStorageService = new BrowserStorageService();
     this.addStorageservice('Browser Local Storage', browserStorageService);
     this.storageServiceName = 'Browser Local Storage';
@@ -37,6 +47,10 @@ class StorageManager {
       return false;
     }
     this.storageService = storageService;
+    const previousStorageServiceName = this.storageServiceName;
+    this.storageServiceName = storageServiceName;
+
+    this.emit('storageServiceChanged', previousStorageServiceName, storageServiceName);
     return true;
   }
 
