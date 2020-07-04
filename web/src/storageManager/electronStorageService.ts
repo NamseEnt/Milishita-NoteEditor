@@ -36,7 +36,7 @@ export default class ElectronStorageService extends StorageServiceBase {
     return directory.map(directoryEntry => ({
       isDirectory: directoryEntry.isDirectory(),
       name: directoryEntry.name,
-    }));
+    })).sort((a, b) => (b.isDirectory ? 1 : 0) - (a.isDirectory ? 1 : 0));
   }
 
   public async load(path: string) {
