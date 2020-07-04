@@ -145,7 +145,11 @@ export default class StorageBrowser extends Component<StorageBrowserProps, Stroa
     );
 
     return (
-      <Dialog open={open} onClose={() => close()}>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={() => close()}
+      >
         <DialogTitle>
           <Grid container alignItems="center">
             <Grid item xs>
@@ -155,9 +159,7 @@ export default class StorageBrowser extends Component<StorageBrowserProps, Stroa
               <Button variant="text" onClick={close}><Close fontSize="large" /></Button>
             </Grid>
           </Grid>
-        </DialogTitle>
-        <DialogContent>
-          <Grid container>
+          <Grid container alignItems="center">
             <GoUpButton />
             <Grid item xs>
               <Breadcrumbs>
@@ -200,7 +202,7 @@ export default class StorageBrowser extends Component<StorageBrowserProps, Stroa
               </Dialog>
             </Grid>
           </Grid>
-        </DialogContent>
+        </DialogTitle>
         <FileList />
       </Dialog>
     );
