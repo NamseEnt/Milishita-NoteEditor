@@ -6,6 +6,7 @@ import { Typography, Card, CardContent, Button, Grid } from '@material-ui/core';
 import PlayerWindow from './PlayerWindow';
 import { Settings } from '@material-ui/icons';
 import AdvancedConfigDialog from './AdvancedConfigDialog';
+import StorageManagerWindow from './StorageManagerWindow';
 
 export const ConfigWindow = () => {
   const mode = useSelector((state: RootState) => state.modeState.mode);
@@ -28,6 +29,7 @@ export const ConfigWindow = () => {
           </Grid>
         </Grid>
       </CardContent>
+      <StorageManagerWindow />
       <PlayerWindow />
       <ModeWindow mode={mode} noteTypeMode={noteTypeMode} />
     </Card>
