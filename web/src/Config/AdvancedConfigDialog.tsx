@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dialog, DialogTitle, DialogContent, Typography, Slider, Grid, Button, TextField, InputAdornment } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, Typography, Slider, Grid, Button, TextField, InputAdornment, Select, MenuItem, InputLabel } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { RootState, dispatch } from '~StateStore/store';
 import { ConfigAction } from '~StateStore/_gen/config_action.ts';
@@ -8,6 +8,7 @@ import { isNumber } from 'util';
 import { batchActions } from 'redux-batched-actions';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
 import { LongNoteAction } from '~StateStore/_gen/longNote_action.ts';
+import storageManager from '~storageManager/storageManager';
 
 function mapStateToPlayerWindowProps(state: RootState, props: AdvancedConfigDialogProps) {
   const {
@@ -44,6 +45,8 @@ export type AdvancedConfigDialogState = {
   keysInput: string;
   beatHeightInput: string;
   defaultBarBeatInput: string;
+  storageServiceName: string;
+  storageServiceList: string[];
 };
 
 class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerWindowProps>, AdvancedConfigDialogState>{
@@ -62,6 +65,8 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
       keysInput: keys.toString(),
       beatHeightInput: beatHeight.toString(),
       defaultBarBeatInput: defaultBarBeat.toString(),
+      storageServiceName: storageManager.getStorageServiceName(),
+      storageServiceList: storageManager.getStorageServiceList(),
     };
 
     this.setBpmInput = this.setBpmInput.bind(this);
@@ -122,6 +127,8 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
       keysInput,
       beatHeightInput,
       defaultBarBeatInput,
+      storageServiceName,
+      storageServiceList,
     } = this.state;
 
     const configMap: {
@@ -230,6 +237,26 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
             />
           </DialogContent>
         )}
+        <DialogContent>
+          <InputLabel shrink id="select-storage-service">Storage Service</InputLabel>
+          <Select
+            onClick={() => { this.setState({ storageServiceList: storageManager.getStorageServiceList() }) }}
+            fullWidth
+            labelId="select-storage-service"
+            value={storageServiceName}
+            onChange={event => {
+              const newStorageServiceName = event.target.value as string;
+              const changed = storageManager.setStorageService(newStorageServiceName);
+              if (changed) {
+                this.setState({
+                  storageServiceName: newStorageServiceName,
+                })
+              }
+            }}
+          >
+            {storageServiceList.map(name => <MenuItem key={name} value={name}>{name}</MenuItem>)}
+          </Select>
+        </DialogContent>
       </Dialog>
     );
   }
