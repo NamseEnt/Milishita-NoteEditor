@@ -5,7 +5,7 @@ import { ModeAction } from "~StateStore/_gen/mode_action.ts";
 import editHistory from "~utils/editHistory";
 import player from "~Config/Player";
 
-document.onkeydown = (event) => {
+export default function handleKeyDown(event: KeyboardEvent) {
   const {
     altKey: alt,
     ctrlKey: ctrl,

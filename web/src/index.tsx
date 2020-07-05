@@ -8,6 +8,7 @@ import { ConfigWindow } from '~Config/ConfigWindow'
 import '~/test.ts';
 import '~/keyboardHandler';
 import { Container, Grid } from '@material-ui/core'
+import handleKeyDown from '~/keyboardHandler'
 
 ReactDOM.render(
   (<Provider store={store}>
@@ -24,4 +25,5 @@ ReactDOM.render(
     </Container>
   </Provider>),
   document.getElementById('root'),
+  () => document.onkeydown = handleKeyDown,
 )
