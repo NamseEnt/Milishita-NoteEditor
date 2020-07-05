@@ -4,6 +4,7 @@ import { dispatch } from "~StateStore/store"
 import { ModeAction } from "~StateStore/_gen/mode_action.ts";
 import editHistory from "~utils/editHistory";
 import player from "~Config/Player";
+import storageManager from "~storageManager/storageManager";
 
 export default function handleKeyDown(event: KeyboardEvent) {
   const {
@@ -42,6 +43,13 @@ export default function handleKeyDown(event: KeyboardEvent) {
     } break;
 
     case "KeyS": {
+      if (ctrl) {
+        event.preventDefault();
+        if (storageManager.getItemInfo()) {
+          storageManager.save();
+        }
+        break;
+      }
       dispatch(ModeAction.changeNoteTypeMode('tap'));
     } break;
 
