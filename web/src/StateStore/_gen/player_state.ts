@@ -4,7 +4,7 @@ import { Cursor, StartInfo } from '~NoteView/types';
 export class PlayerState extends Record<{
   cursor: Cursor,
   isPlaying: boolean,
-  startInfo?: StartInfo,
+  startInfo: StartInfo | null,
   isCursorClicked: boolean,
 }>({
   cursor: new Cursor({
@@ -12,6 +12,6 @@ export class PlayerState extends Record<{
     //beats: -14,
   }),
   isPlaying: false,
-  startInfo: undefined,
+  startInfo: null,
   isCursorClicked: false,
 }) {};

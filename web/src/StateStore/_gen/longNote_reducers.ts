@@ -3,7 +3,7 @@ import { LongNoteState } from "./longNote_state";
 
 export class LongNoteReducers implements ILongNoteReducers {
   FINISH_EDITING_LONG_NOTE(state: LongNoteState, action: FinishEditingLongNoteAction): LongNoteState {
-    return state.update('editingLongNote', _ => undefined);
+    return state.update('editingLongNote', _ => null);
   }
   UPDATE_EDITING_LONG_NOTE(state: LongNoteState, action: UpdateEditingLongNoteAction): LongNoteState {
     return state.update('editingLongNote', _ => action.longNote);

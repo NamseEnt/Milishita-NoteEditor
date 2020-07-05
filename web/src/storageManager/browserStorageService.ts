@@ -1,6 +1,6 @@
 import StorageServiceBase from "./storageServiceBase";
 import { StorageItem, StorageServiceSaveOption, StorageDirectoryEntry, StorageDirectory } from "./types";
-import { JSONreviver } from "~NoteView/runTestCode";
+import { JSONreviver } from "./util";
 
 export default class BrowserStorageService extends StorageServiceBase {
   constructor() {
