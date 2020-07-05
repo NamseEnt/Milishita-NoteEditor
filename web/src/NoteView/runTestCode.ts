@@ -4,22 +4,13 @@ import { LongNote, Bar } from "./types";
 import { LongNoteAction } from "~StateStore/_gen/longNote_action.ts";
 import bars from './bars.json';
 import longNotes from './longNotes.json';
-import { isKeyed, Record, List } from "immutable";
+import { isKeyed, Record } from "immutable";
 import player from "~Config/Player";
+import { JSONreviver } from "~storageManager/util";
 
 const dearUrl = require('../dear.mp3');
 console.log(dearUrl);
 player.setAudioSource(dearUrl);
-
-export function JSONreviver(key: any, value: any) {
-  if (Array.isArray(value)) {
-    return List(value);
-  }
-  if (value !== undefined && value !== null && value.constructor === Object) {
-    return new (Record(value));
-  }
-  return value;
-}
 
 function reviver(key: any, value: any) {
   console.log(isKeyed(value));

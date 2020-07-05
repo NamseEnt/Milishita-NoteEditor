@@ -28,7 +28,7 @@ export class PlayerReducers implements IPlayerReducers {
   STOP(state: PlayerState, action: StopAction): PlayerState {
     return state
       .update('isPlaying', _ => false)
-      .update('startInfo', _ => undefined);
+      .update('startInfo', _ => null);
   }
   SET_PLAYER_STATE(state: PlayerState, action: SetPlayerStateAction): PlayerState {
     return action.state;

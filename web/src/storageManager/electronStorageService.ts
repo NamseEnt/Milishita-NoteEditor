@@ -1,7 +1,7 @@
 import StorageServiceBase from "./storageServiceBase";
 import { StorageItem, StorageServiceSaveOption, StorageDirectoryEntry, StorageDirectory } from "./types";
-import { JSONreviver } from "~NoteView/runTestCode";
 import { ElectronMigration } from "~ElectronMigration/ElectronMigration";
+import { JSONreviver } from "./util";
 
 const fsExtra = ElectronMigration.fsExtra;
 const path = ElectronMigration.path;
