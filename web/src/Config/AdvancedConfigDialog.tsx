@@ -17,6 +17,7 @@ function mapStateToPlayerWindowProps(state: RootState, props: AdvancedConfigDial
     guideBeat,
     beatHeight,
     defaultBarBeat,
+    autoSaveDelay,
   } = state.configState;
 
   const {
@@ -30,6 +31,7 @@ function mapStateToPlayerWindowProps(state: RootState, props: AdvancedConfigDial
     guideBeat,
     beatHeight,
     defaultBarBeat,
+    autoSaveDelay,
     open,
     close,
   };
@@ -45,6 +47,7 @@ export type AdvancedConfigDialogState = {
   keysInput: string;
   beatHeightInput: string;
   defaultBarBeatInput: string;
+  autoSaveDelayInput: string;
   storageServiceName: string;
   storageServiceList: string[];
 };
@@ -58,6 +61,7 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
       keys,
       beatHeight,
       defaultBarBeat,
+      autoSaveDelay,
     } = props;
 
     this.state = {
@@ -65,6 +69,7 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
       keysInput: keys.toString(),
       beatHeightInput: beatHeight.toString(),
       defaultBarBeatInput: defaultBarBeat.toString(),
+      autoSaveDelayInput: autoSaveDelay.toString(),
       storageServiceName: storageManager.getStorageServiceName(),
       storageServiceList: storageManager.getStorageServiceList(),
     };
@@ -73,6 +78,7 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
     this.setKeysInput = this.setKeysInput.bind(this);
     this.setBeatHeightInput = this.setBeatHeightInput.bind(this);
     this.setDefaultBarBeatInput = this.setDefaultBarBeatInput.bind(this);
+    this.setAutoSaveDelayInput = this.setAutoSaveDelayInput.bind(this);
   }
 
   public componentWillReceiveProps(nextProps: Readonly<ReturnType<typeof mapStateToPlayerWindowProps>>) {
@@ -115,6 +121,12 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
     });
   }
 
+  private setAutoSaveDelayInput(value: string) {
+    this.setState({
+      autoSaveDelayInput: value,
+    });
+  }
+
   public render() {
     const {
       close,
@@ -127,6 +139,7 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
       keysInput,
       beatHeightInput,
       defaultBarBeatInput,
+      autoSaveDelayInput,
       storageServiceName,
       storageServiceList,
     } = this.state;
@@ -190,6 +203,18 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
               return;
             }
             dispatch(ConfigAction.setDefaultBarBeat(value))
+          },
+        },
+        {
+          name: 'autoSaveDelay',
+          value: autoSaveDelayInput,
+          setValue: this.setAutoSaveDelayInput,
+          apply: () => {
+            const value = parseFloat(bpmInput);
+            if (!isNumber(value)) {
+              return;
+            }
+            dispatch(ConfigAction.setAutoSaveDelay(value))
           },
         },
     ];

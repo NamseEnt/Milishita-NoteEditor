@@ -1,10 +1,15 @@
 import React from 'react';
-import { CardContent, Grid, ButtonGroup, Button, Dialog, Typography, DialogActions, DialogContent } from '@material-ui/core';
+import { CardContent, Grid, ButtonGroup, Button, Dialog, Typography, DialogActions, DialogContent, FormControlLabel, Switch } from '@material-ui/core';
 import { Save, OpenInBrowser, Delete, SaveAlt } from '@material-ui/icons';
 import StorageBrowser from './StorageBrowser';
 import storageManager from '~storageManager/storageManager';
+import { useSelector } from 'react-redux';
+import { RootState, dispatch } from '~StateStore/store';
+import { ConfigAction } from '~StateStore/_gen/config_action.ts';
 
 export default function StorageManagerWindow() {
+  const autoSave = useSelector((state: RootState) => state.configState.autoSave);
+
   const [saveAltBrowserOpen, setSaveAltBrowserOpen] = React.useState(false);
   const [importBrowserOpen, setImportBrowserOpen] = React.useState(false);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = React.useState(false);
@@ -45,7 +50,7 @@ export default function StorageManagerWindow() {
         <Grid item xs={12}>
           <Typography>{fileName}</Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs>
           <ButtonGroup variant="contained" color="primary" fullWidth >
             <Button
               onClick={handleSave}
@@ -98,6 +103,17 @@ export default function StorageManagerWindow() {
               >Cancel</Button>
             </DialogActions>
           </Dialog>
+        </Grid>
+        <Grid item>
+          <FormControlLabel
+            control={<Switch
+              color="primary"
+              checked={autoSave}
+              onChange={(event, checked) => dispatch(ConfigAction.setAutoSave(checked))}
+            />}
+            label="Auto Save"
+            labelPlacement="start"
+          />
         </Grid>
       </Grid>
     </CardContent>

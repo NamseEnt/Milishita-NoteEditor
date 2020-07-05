@@ -9,6 +9,8 @@ export class ConfigState extends Record<{
   bpm: number;
   defaultBarBeat: number;
   autoScroll: boolean;
+  autoSave: boolean;
+  autoSaveDelay: number;
 }>({
   beatHeight: 100,
   barWidth: 350,
@@ -18,4 +20,6 @@ export class ConfigState extends Record<{
   bpm: 123,
   defaultBarBeat: 4,
   autoScroll: true,
+  autoSave: false,
+  autoSaveDelay: 3,
 }) {};

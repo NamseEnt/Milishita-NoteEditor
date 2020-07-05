@@ -1,14 +1,14 @@
-pushNewBar(beat: number) -undoable
-insertNewBar(barIndex: number, beat: number) -undoable
-addBar(bar: Bar) -undoable
-removeBar(barIndex: number) -undoable
-changeBarBeat(barIndex: number, beat: number) -undoable
-addNote(barIndex: number, note: Note) -undoable
-removeNote(barIndex: number, note: Note) -undoable
-removeNotesOnBar(barIndex: number) -undoable
-removeOverflowedNotes(barIndex: number, beat: number) -undoable
-changeNoteType(noteId: string, noteType: NoteType) -undoable
+pushNewBar(beat: number) -undoable -autoSave
+insertNewBar(barIndex: number, beat: number) -undoable -autoSave
+addBar(bar: Bar) -undoable -autoSave
+removeBar(barIndex: number) -undoable -autoSave
+changeBarBeat(barIndex: number, beat: number) -undoable -autoSave
+addNote(barIndex: number, note: Note) -undoable -autoSave
+removeNote(barIndex: number, note: Note) -undoable -autoSave
+removeNotesOnBar(barIndex: number) -undoable -autoSave
+removeOverflowedNotes(barIndex: number, beat: number) -undoable -autoSave
+changeNoteType(noteId: string, noteType: NoteType) -undoable -autoSave
 waitBarClick(trigger: Action<Position>)
 clickBar(position: Position)
-setBarState(state: BarState)
-removeNotesOutOfKeys(keys: number) -undoable
+setBarState(state: BarState) -autoSave
+removeNotesOutOfKeys(keys: number) -undoable -autoSave

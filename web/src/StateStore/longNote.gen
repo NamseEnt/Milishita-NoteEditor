@@ -1,9 +1,9 @@
-addLongNote(longNote: LongNote) -undoable
+addLongNote(longNote: LongNote) -undoable -autoSave
 updateLongNote(longNote: LongNote)
-updateEditingLongNote(longNote: Partial<LongNote>) -undoable
-finishEditingLongNote() -undoable
-removeLongNote(longNote: LongNote) -undoable
-removeLongNotesOnBar(barId: string) -undoable
-removeOverflowedLongNotes(barId: string, beat: number) -undoable
-setLongNoteState(state: LongNoteState)
-removeLongNotesOutOfKeys(keys: number) -undoable
+updateEditingLongNote(longNote: Partial<LongNote>) -undoable -autoSave
+finishEditingLongNote() -undoable -autoSave
+removeLongNote(longNote: LongNote) -undoable -autoSave
+removeLongNotesOnBar(barId: string) -undoable -autoSave
+removeOverflowedLongNotes(barId: string, beat: number) -undoable -autoSave
+setLongNoteState(state: LongNoteState) -autoSave
+removeLongNotesOutOfKeys(keys: number) -undoable -autoSave

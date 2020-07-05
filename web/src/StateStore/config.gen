@@ -4,4 +4,6 @@ setGuideBeat(guideBeat: number)
 setBpm(bpm: number)
 setDefaultBarBeat(beat: number)
 setAutoScroll(auto: boolean)
-setConfigState(state: ConfigState)
+setAutoSave(auto: boolean)
+setAutoSaveDelay(second: number)
+setConfigState(state: ConfigState) -autoSave

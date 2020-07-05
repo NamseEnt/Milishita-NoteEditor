@@ -4,4 +4,4 @@ stop()
 mouseDownOnCursor()
 mouseUpOnCursor()
 togglePlay()
-setPlayerState(state: PlayerState)
+setPlayerState(state: PlayerState) -autoSave
