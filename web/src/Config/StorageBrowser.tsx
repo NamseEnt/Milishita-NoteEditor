@@ -146,6 +146,7 @@ export default class StorageBrowser extends Component<StorageBrowserProps, Stroa
 
     return (
       <Dialog
+        onKeyDown={event => event.nativeEvent.stopImmediatePropagation()}
         fullScreen
         open={open}
         onClose={() => close()}
