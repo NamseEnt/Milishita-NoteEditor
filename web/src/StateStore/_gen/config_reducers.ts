@@ -1,4 +1,4 @@
-import { IConfigReducers, ConfigActions, SetGuideBeatAction, SetDefaultBarBeatAction, SetConfigStateAction, SetAutoScrollAction, SetBpmAction, SetKeysAction, SetBeatHeightAction } from "./config_action.ts";
+import { IConfigReducers, ConfigActions, SetGuideBeatAction, SetDefaultBarBeatAction, SetConfigStateAction, SetAutoScrollAction, SetBpmAction, SetKeysAction, SetBeatHeightAction, SetAutoSaveAction, SetAutoSaveDelayAction } from "./config_action.ts";
 import { ConfigState } from "./config_state";
 
 export class ConfigReducers implements IConfigReducers {
@@ -22,6 +22,12 @@ export class ConfigReducers implements IConfigReducers {
   }
   SET_AUTO_SCROLL(state: ConfigState, action: SetAutoScrollAction): ConfigState {
     return state.update('autoScroll', _ => action.auto);
+  }
+  SET_AUTO_SAVE(state: ConfigState, action: SetAutoSaveAction): ConfigState {
+    return state.update('autoSave', _ => action.auto);
+  }
+  SET_AUTO_SAVE_DELAY(state: ConfigState, action: SetAutoSaveDelayAction): ConfigState {
+    return state.update('autoSaveDelay', _ => action.second);
   }
 };
 

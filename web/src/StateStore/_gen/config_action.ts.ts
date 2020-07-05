@@ -8,6 +8,8 @@ export const SET_GUIDE_BEAT = "SET_GUIDE_BEAT" as const;
 export const SET_BPM = "SET_BPM" as const;
 export const SET_DEFAULT_BAR_BEAT = "SET_DEFAULT_BAR_BEAT" as const;
 export const SET_AUTO_SCROLL = "SET_AUTO_SCROLL" as const;
+export const SET_AUTO_SAVE = "SET_AUTO_SAVE" as const;
+export const SET_AUTO_SAVE_DELAY = "SET_AUTO_SAVE_DELAY" as const;
 export const SET_CONFIG_STATE = "SET_CONFIG_STATE" as const;
 
  export namespace ConfigAction {
@@ -59,6 +61,22 @@ export const SET_CONFIG_STATE = "SET_CONFIG_STATE" as const;
   }
 
 
+  export function setAutoSave(auto: boolean) {
+    return {
+      type: SET_AUTO_SAVE,
+      auto,
+    };
+  }
+
+
+  export function setAutoSaveDelay(second: number) {
+    return {
+      type: SET_AUTO_SAVE_DELAY,
+      second,
+    };
+  }
+
+
   export function setConfigState(state: ConfigState) {
     return {
       type: SET_CONFIG_STATE,
@@ -105,13 +123,25 @@ export type SetAutoScrollAction = {
 };
 
 
+export type SetAutoSaveAction = {
+  type: typeof SET_AUTO_SAVE;
+  auto: boolean;
+};
+
+
+export type SetAutoSaveDelayAction = {
+  type: typeof SET_AUTO_SAVE_DELAY;
+  second: number;
+};
+
+
 export type SetConfigStateAction = {
   type: typeof SET_CONFIG_STATE;
   state: ConfigState;
 };
 
 
-export type ConfigActions = SetBeatHeightAction | SetKeysAction | SetGuideBeatAction | SetBpmAction | SetDefaultBarBeatAction | SetAutoScrollAction | SetConfigStateAction
+export type ConfigActions = SetBeatHeightAction | SetKeysAction | SetGuideBeatAction | SetBpmAction | SetDefaultBarBeatAction | SetAutoScrollAction | SetAutoSaveAction | SetAutoSaveDelayAction | SetConfigStateAction
 
 export interface IConfigReducers {
   SET_BEAT_HEIGHT(state: ConfigState, action: SetBeatHeightAction): ConfigState;
@@ -120,5 +150,7 @@ export interface IConfigReducers {
   SET_BPM(state: ConfigState, action: SetBpmAction): ConfigState;
   SET_DEFAULT_BAR_BEAT(state: ConfigState, action: SetDefaultBarBeatAction): ConfigState;
   SET_AUTO_SCROLL(state: ConfigState, action: SetAutoScrollAction): ConfigState;
+  SET_AUTO_SAVE(state: ConfigState, action: SetAutoSaveAction): ConfigState;
+  SET_AUTO_SAVE_DELAY(state: ConfigState, action: SetAutoSaveDelayAction): ConfigState;
   SET_CONFIG_STATE(state: ConfigState, action: SetConfigStateAction): ConfigState;
 };
