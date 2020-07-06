@@ -7,3 +7,4 @@ setAutoScroll(auto: boolean)
 setAutoSave(auto: boolean)
 setAutoSaveDelay(second: number)
 setConfigState(state: ConfigState) -autoSave
+applyStorageItemToConfigState(keys: number, bpm: number) -autoSave

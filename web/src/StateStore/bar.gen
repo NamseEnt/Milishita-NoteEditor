@@ -12,3 +12,4 @@ waitBarClick(trigger: Action<Position>)
 clickBar(position: Position)
 setBarState(state: BarState) -autoSave
 removeNotesOutOfKeys(keys: number) -undoable -autoSave
+applyStorageItemToBarState(beats: number, bars: List<Bar>) -autoSave

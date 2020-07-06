@@ -1,5 +1,6 @@
 import { LongNoteState } from './longNote_state'
 import { LongNote } from '~NoteView/types';
+import { List } from 'immutable';
 
 ///BEGIN
 
@@ -12,6 +13,7 @@ export const REMOVE_LONG_NOTES_ON_BAR = "REMOVE_LONG_NOTES_ON_BAR" as const;
 export const REMOVE_OVERFLOWED_LONG_NOTES = "REMOVE_OVERFLOWED_LONG_NOTES" as const;
 export const SET_LONG_NOTE_STATE = "SET_LONG_NOTE_STATE" as const;
 export const REMOVE_LONG_NOTES_OUT_OF_KEYS = "REMOVE_LONG_NOTES_OUT_OF_KEYS" as const;
+export const APPLY_STORAGE_ITEM_TO_LONG_NOTE_STATE = "APPLY_STORAGE_ITEM_TO_LONG_NOTE_STATE" as const;
 
  export namespace LongNoteAction {
   export function addLongNote(longNote: LongNote) {
@@ -85,6 +87,14 @@ export const REMOVE_LONG_NOTES_OUT_OF_KEYS = "REMOVE_LONG_NOTES_OUT_OF_KEYS" as 
     };
   }
 
+
+  export function applyStorageItemToLongNoteState(longNotes: List<LongNote>) {
+    return {
+      type: APPLY_STORAGE_ITEM_TO_LONG_NOTE_STATE,
+      longNotes,
+    };
+  }
+
 }
 
 
@@ -142,7 +152,13 @@ export type RemoveLongNotesOutOfKeysAction = {
 };
 
 
-export type LongNoteActions = AddLongNoteAction | UpdateLongNoteAction | UpdateEditingLongNoteAction | FinishEditingLongNoteAction | RemoveLongNoteAction | RemoveLongNotesOnBarAction | RemoveOverflowedLongNotesAction | SetLongNoteStateAction | RemoveLongNotesOutOfKeysAction
+export type ApplyStorageItemToLongNoteStateAction = {
+  type: typeof APPLY_STORAGE_ITEM_TO_LONG_NOTE_STATE;
+  longNotes: List<LongNote>;
+};
+
+
+export type LongNoteActions = AddLongNoteAction | UpdateLongNoteAction | UpdateEditingLongNoteAction | FinishEditingLongNoteAction | RemoveLongNoteAction | RemoveLongNotesOnBarAction | RemoveOverflowedLongNotesAction | SetLongNoteStateAction | RemoveLongNotesOutOfKeysAction | ApplyStorageItemToLongNoteStateAction
 
 export interface ILongNoteReducers {
   ADD_LONG_NOTE(state: LongNoteState, action: AddLongNoteAction): LongNoteState;
@@ -154,4 +170,5 @@ export interface ILongNoteReducers {
   REMOVE_OVERFLOWED_LONG_NOTES(state: LongNoteState, action: RemoveOverflowedLongNotesAction): LongNoteState;
   SET_LONG_NOTE_STATE(state: LongNoteState, action: SetLongNoteStateAction): LongNoteState;
   REMOVE_LONG_NOTES_OUT_OF_KEYS(state: LongNoteState, action: RemoveLongNotesOutOfKeysAction): LongNoteState;
+  APPLY_STORAGE_ITEM_TO_LONG_NOTE_STATE(state: LongNoteState, action: ApplyStorageItemToLongNoteStateAction): LongNoteState;
 };
