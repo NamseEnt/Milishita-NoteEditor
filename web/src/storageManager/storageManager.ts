@@ -2,8 +2,8 @@ import StorageServiceBase from "./storageServiceBase";
 import BrowserStorageService from "./browserStorageService";
 import { StorageItem, StorageItemInfo, StorageDirectory } from "./types";
 import { store } from "~StateStore/store";
-import { dispatchAllStates } from "~utils/editHistory";
 import { EventEmitter } from "events";
+import { applyStorageItemToCurrentState, getStorageItemFromCurrentState } from "./util";
 
 interface StorageManager {
   on(event: 'storageServiceChanged', listener: (previousStorageServiceName: string, nextStorageServiceName: string) => void): this;
@@ -76,7 +76,7 @@ class StorageManager extends EventEmitter{
 
     return this.storageService.save({
       path,
-      rootState: store.getState(),
+      storageItem: getStorageItemFromCurrentState(),
     }).then(success => {
       if (success) {
         this.itemInfo = {
@@ -100,7 +100,7 @@ class StorageManager extends EventEmitter{
       path,
     };
 
-    dispatchAllStates(storageItem);
+    applyStorageItemToCurrentState(storageItem);
 
     return storageItem;
   }

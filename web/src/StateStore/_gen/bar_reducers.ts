@@ -1,4 +1,4 @@
-import { IBarReducers, PushNewBarAction, AddBarAction, RemoveBarAction, AddNoteAction, RemoveNoteAction, BarActions, ChangeNoteTypeAction, WaitBarClickAction, ClickBarAction, InsertNewBarAction, RemoveNotesOnBarAction, ChangeBarBeatAction, RemoveOverflowedNotesAction, SetBarStateAction, RemoveNotesOutOfKeysAction } from "./bar_action.ts";
+import { IBarReducers, PushNewBarAction, AddBarAction, RemoveBarAction, AddNoteAction, RemoveNoteAction, BarActions, ChangeNoteTypeAction, WaitBarClickAction, ClickBarAction, InsertNewBarAction, RemoveNotesOnBarAction, ChangeBarBeatAction, RemoveOverflowedNotesAction, SetBarStateAction, RemoveNotesOutOfKeysAction, ApplyStorageItemToBarStateAction } from "./bar_action.ts";
 import { BarState } from "./bar_state";
 import { Bar, Note } from "~NoteView/types";
 import uuid from "~utils/uuid";
@@ -62,6 +62,10 @@ export class BarReducers implements IBarReducers {
   }
   REMOVE_NOTES_OUT_OF_KEYS(state: BarState, action: RemoveNotesOutOfKeysAction): BarState {
     return state.update('bars', bars => bars.map(bar => bar.update('notes', notes => notes.filter(note => note.position.key < action.keys))))
+  }
+  APPLY_STORAGE_ITEM_TO_BAR_STATE(state: BarState, action: ApplyStorageItemToBarStateAction): BarState {
+    return state.update('bars', _ => action.bars)
+      .update('beats', _ => action.beats);
   }
 }
 

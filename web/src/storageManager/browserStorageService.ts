@@ -51,7 +51,7 @@ export default class BrowserStorageService extends StorageServiceBase {
     this.storageIndex.push(storageDirectoryEntry);
 
     localStorage.setItem('storageIndex', JSON.stringify(this.storageIndex));
-    localStorage.setItem(`storageItem-${path}`, JSON.stringify(option.rootState));
+    localStorage.setItem(`storageItem-${path}`, JSON.stringify(option.storageItem));
 
     return true;
   }

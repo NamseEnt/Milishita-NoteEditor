@@ -3,8 +3,8 @@ import { LongNote } from '~NoteView/types';
 
 export class LongNoteState extends Record<{
   longNotes: List<LongNote>;
-  editingLongNote: Partial<LongNote> | null
+  editingLongNote?: Partial<LongNote>;
 }>({
   longNotes: List(),
-  editingLongNote: null,
+  editingLongNote: undefined,
 }) {};

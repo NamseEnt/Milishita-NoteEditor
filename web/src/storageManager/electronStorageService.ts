@@ -54,10 +54,10 @@ export default class ElectronStorageService extends StorageServiceBase {
   public async save(option: StorageServiceSaveOption) {
     const {
       path,
-      rootState,
+      storageItem,
     } = option;
 
-    return await fsExtra.outputJSON(path, rootState)
+    return await fsExtra.outputJSON(path, storageItem)
       .then(() => true)
       .catch(error => {
         console.error(error);

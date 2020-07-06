@@ -11,7 +11,7 @@ type EditHistoryOption = {
   limit?: number,
 }
 
-export function dispatchAllStates(state: RootState): void {
+function dispatchAllStates(state: RootState): void {
   dispatch(batchActions([
     BarAction.setBarState(state.barState),
     ConfigAction.setConfigState(state.configState),

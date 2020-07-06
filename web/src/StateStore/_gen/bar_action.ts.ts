@@ -1,5 +1,6 @@
 import { Bar, Note, NoteType, Position, Action } from '~NoteView/types';
 import { BarState } from './bar_state'
+import { List } from 'immutable';
 
 ///BEGIN
 
@@ -17,6 +18,7 @@ export const WAIT_BAR_CLICK = "WAIT_BAR_CLICK" as const;
 export const CLICK_BAR = "CLICK_BAR" as const;
 export const SET_BAR_STATE = "SET_BAR_STATE" as const;
 export const REMOVE_NOTES_OUT_OF_KEYS = "REMOVE_NOTES_OUT_OF_KEYS" as const;
+export const APPLY_STORAGE_ITEM_TO_BAR_STATE = "APPLY_STORAGE_ITEM_TO_BAR_STATE" as const;
 
  export namespace BarAction {
   export function pushNewBar(beat: number) {
@@ -136,6 +138,15 @@ export const REMOVE_NOTES_OUT_OF_KEYS = "REMOVE_NOTES_OUT_OF_KEYS" as const;
     };
   }
 
+
+  export function applyStorageItemToBarState(beats: number, bars: List<Bar>) {
+    return {
+      type: APPLY_STORAGE_ITEM_TO_BAR_STATE,
+      beats,
+      bars,
+    };
+  }
+
 }
 
 
@@ -229,7 +240,14 @@ export type RemoveNotesOutOfKeysAction = {
 };
 
 
-export type BarActions = PushNewBarAction | InsertNewBarAction | AddBarAction | RemoveBarAction | ChangeBarBeatAction | AddNoteAction | RemoveNoteAction | RemoveNotesOnBarAction | RemoveOverflowedNotesAction | ChangeNoteTypeAction | WaitBarClickAction | ClickBarAction | SetBarStateAction | RemoveNotesOutOfKeysAction
+export type ApplyStorageItemToBarStateAction = {
+  type: typeof APPLY_STORAGE_ITEM_TO_BAR_STATE;
+  beats: number;
+  bars: List<Bar>;
+};
+
+
+export type BarActions = PushNewBarAction | InsertNewBarAction | AddBarAction | RemoveBarAction | ChangeBarBeatAction | AddNoteAction | RemoveNoteAction | RemoveNotesOnBarAction | RemoveOverflowedNotesAction | ChangeNoteTypeAction | WaitBarClickAction | ClickBarAction | SetBarStateAction | RemoveNotesOutOfKeysAction | ApplyStorageItemToBarStateAction
 
 export interface IBarReducers {
   PUSH_NEW_BAR(state: BarState, action: PushNewBarAction): BarState;
@@ -246,4 +264,5 @@ export interface IBarReducers {
   CLICK_BAR(state: BarState, action: ClickBarAction): BarState;
   SET_BAR_STATE(state: BarState, action: SetBarStateAction): BarState;
   REMOVE_NOTES_OUT_OF_KEYS(state: BarState, action: RemoveNotesOutOfKeysAction): BarState;
+  APPLY_STORAGE_ITEM_TO_BAR_STATE(state: BarState, action: ApplyStorageItemToBarStateAction): BarState;
 };

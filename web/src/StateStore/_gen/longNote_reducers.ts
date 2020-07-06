@@ -1,9 +1,9 @@
-import { ILongNoteReducers, LongNoteActions, AddLongNoteAction, UpdateLongNoteAction, UpdateEditingLongNoteAction, FinishEditingLongNoteAction, RemoveLongNoteAction, RemoveLongNotesOnBarAction, RemoveOverflowedLongNotesAction, SetLongNoteStateAction, RemoveLongNotesOutOfKeysAction } from "./longNote_action.ts";
+import { ILongNoteReducers, LongNoteActions, AddLongNoteAction, UpdateLongNoteAction, UpdateEditingLongNoteAction, FinishEditingLongNoteAction, RemoveLongNoteAction, RemoveLongNotesOnBarAction, RemoveOverflowedLongNotesAction, SetLongNoteStateAction, RemoveLongNotesOutOfKeysAction, ApplyStorageItemToLongNoteStateAction } from "./longNote_action.ts";
 import { LongNoteState } from "./longNote_state";
 
 export class LongNoteReducers implements ILongNoteReducers {
   FINISH_EDITING_LONG_NOTE(state: LongNoteState, action: FinishEditingLongNoteAction): LongNoteState {
-    return state.update('editingLongNote', _ => null);
+    return state.update('editingLongNote', _ => undefined);
   }
   UPDATE_EDITING_LONG_NOTE(state: LongNoteState, action: UpdateEditingLongNoteAction): LongNoteState {
     return state.update('editingLongNote', _ => action.longNote);
@@ -40,6 +40,9 @@ export class LongNoteReducers implements ILongNoteReducers {
       && (longNote.endNote.position.key < action.keys)
       && longNote.middlePoints.every(middlePoint => middlePoint.key < action.keys)
     ));
+  }
+  APPLY_STORAGE_ITEM_TO_LONG_NOTE_STATE(state: LongNoteState, action: ApplyStorageItemToLongNoteStateAction): LongNoteState {
+    return state.update('longNotes', _ => action.longNotes);
   }
 };
 

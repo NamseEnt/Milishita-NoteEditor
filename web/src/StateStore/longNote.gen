@@ -7,3 +7,4 @@ removeLongNotesOnBar(barId: string) -undoable -autoSave
 removeOverflowedLongNotes(barId: string, beat: number) -undoable -autoSave
 setLongNoteState(state: LongNoteState) -autoSave
 removeLongNotesOutOfKeys(keys: number) -undoable -autoSave
+applyStorageItemToLongNoteState(longNotes: List<LongNote>) -autoSave
