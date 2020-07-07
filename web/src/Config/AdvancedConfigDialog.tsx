@@ -18,6 +18,7 @@ function mapStateToPlayerWindowProps(state: RootState, props: AdvancedConfigDial
     beatHeight,
     defaultBarBeat,
     autoSaveDelay,
+    defaultAppearBefore,
   } = state.configState;
 
   const {
@@ -32,6 +33,7 @@ function mapStateToPlayerWindowProps(state: RootState, props: AdvancedConfigDial
     beatHeight,
     defaultBarBeat,
     autoSaveDelay,
+    defaultAppearBefore,
     open,
     close,
   };
@@ -48,6 +50,7 @@ export type AdvancedConfigDialogState = {
   beatHeightInput: string;
   defaultBarBeatInput: string;
   autoSaveDelayInput: string;
+  defaultAppearBeforeInput: string;
   storageServiceName: string;
   storageServiceList: string[];
 };
@@ -62,6 +65,7 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
       beatHeight,
       defaultBarBeat,
       autoSaveDelay,
+      defaultAppearBefore,
     } = props;
 
     this.state = {
@@ -70,6 +74,7 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
       beatHeightInput: beatHeight.toString(),
       defaultBarBeatInput: defaultBarBeat.toString(),
       autoSaveDelayInput: autoSaveDelay.toString(),
+      defaultAppearBeforeInput: defaultAppearBefore.toString(),
       storageServiceName: storageManager.getStorageServiceName(),
       storageServiceList: storageManager.getStorageServiceList(),
     };
@@ -79,6 +84,7 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
     this.setBeatHeightInput = this.setBeatHeightInput.bind(this);
     this.setDefaultBarBeatInput = this.setDefaultBarBeatInput.bind(this);
     this.setAutoSaveDelayInput = this.setAutoSaveDelayInput.bind(this);
+    this.setDefaultAppearBeforeInput = this.setDefaultAppearBeforeInput.bind(this);
   }
 
   public componentWillReceiveProps(nextProps: Readonly<ReturnType<typeof mapStateToPlayerWindowProps>>) {
@@ -87,6 +93,7 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
       keys,
       beatHeight,
       defaultBarBeat,
+      defaultAppearBefore,
     } = nextProps;
 
     this.setState({
@@ -94,6 +101,7 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
       keysInput: keys.toString(),
       beatHeightInput: beatHeight.toString(),
       defaultBarBeatInput: defaultBarBeat.toString(),
+      defaultAppearBeforeInput: defaultAppearBefore.toString(),
     });
   }
 
@@ -127,6 +135,12 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
     });
   }
 
+  private setDefaultAppearBeforeInput(value: string) {
+    this.setState({
+      defaultAppearBeforeInput: value,
+    });
+  }
+
   public render() {
     const {
       close,
@@ -140,6 +154,7 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
       beatHeightInput,
       defaultBarBeatInput,
       autoSaveDelayInput,
+      defaultAppearBeforeInput,
       storageServiceName,
       storageServiceList,
     } = this.state;
@@ -215,6 +230,18 @@ class AdvancedConfigDialog extends Component<ReturnType<typeof mapStateToPlayerW
               return;
             }
             dispatch(ConfigAction.setAutoSaveDelay(value))
+          },
+        },
+        {
+          name: 'defaultAppearBefore (beat)',
+          value: defaultAppearBeforeInput,
+          setValue: this.setDefaultAppearBeforeInput,
+          apply: () => {
+            const value = parseFloat(defaultAppearBeforeInput);
+            if (!isNumber(value)) {
+              return;
+            }
+            dispatch(ConfigAction.setDefaultAppearBefore(value))
           },
         },
     ];

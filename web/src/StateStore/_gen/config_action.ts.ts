@@ -12,6 +12,7 @@ export const SET_AUTO_SAVE = "SET_AUTO_SAVE" as const;
 export const SET_AUTO_SAVE_DELAY = "SET_AUTO_SAVE_DELAY" as const;
 export const SET_CONFIG_STATE = "SET_CONFIG_STATE" as const;
 export const APPLY_STORAGE_ITEM_TO_CONFIG_STATE = "APPLY_STORAGE_ITEM_TO_CONFIG_STATE" as const;
+export const SET_DEFAULT_APPEAR_BEFORE = "SET_DEFAULT_APPEAR_BEFORE" as const;
 
  export namespace ConfigAction {
   export function setBeatHeight(beatHeight: number) {
@@ -94,6 +95,14 @@ export const APPLY_STORAGE_ITEM_TO_CONFIG_STATE = "APPLY_STORAGE_ITEM_TO_CONFIG_
     };
   }
 
+
+  export function setDefaultAppearBefore(beat: number) {
+    return {
+      type: SET_DEFAULT_APPEAR_BEFORE,
+      beat,
+    };
+  }
+
 }
 
 
@@ -158,7 +167,13 @@ export type ApplyStorageItemToConfigStateAction = {
 };
 
 
-export type ConfigActions = SetBeatHeightAction | SetKeysAction | SetGuideBeatAction | SetBpmAction | SetDefaultBarBeatAction | SetAutoScrollAction | SetAutoSaveAction | SetAutoSaveDelayAction | SetConfigStateAction | ApplyStorageItemToConfigStateAction
+export type SetDefaultAppearBeforeAction = {
+  type: typeof SET_DEFAULT_APPEAR_BEFORE;
+  beat: number;
+};
+
+
+export type ConfigActions = SetBeatHeightAction | SetKeysAction | SetGuideBeatAction | SetBpmAction | SetDefaultBarBeatAction | SetAutoScrollAction | SetAutoSaveAction | SetAutoSaveDelayAction | SetConfigStateAction | ApplyStorageItemToConfigStateAction | SetDefaultAppearBeforeAction
 
 export interface IConfigReducers {
   SET_BEAT_HEIGHT(state: ConfigState, action: SetBeatHeightAction): ConfigState;
@@ -171,4 +186,5 @@ export interface IConfigReducers {
   SET_AUTO_SAVE_DELAY(state: ConfigState, action: SetAutoSaveDelayAction): ConfigState;
   SET_CONFIG_STATE(state: ConfigState, action: SetConfigStateAction): ConfigState;
   APPLY_STORAGE_ITEM_TO_CONFIG_STATE(state: ConfigState, action: ApplyStorageItemToConfigStateAction): ConfigState;
+  SET_DEFAULT_APPEAR_BEFORE(state: ConfigState, action: SetDefaultAppearBeforeAction): ConfigState;
 };

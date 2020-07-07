@@ -1,4 +1,4 @@
-import { IBarReducers, PushNewBarAction, AddBarAction, RemoveBarAction, AddNoteAction, RemoveNoteAction, BarActions, ChangeNoteTypeAction, WaitBarClickAction, ClickBarAction, InsertNewBarAction, RemoveNotesOnBarAction, ChangeBarBeatAction, RemoveOverflowedNotesAction, SetBarStateAction, RemoveNotesOutOfKeysAction, ApplyStorageItemToBarStateAction } from "./bar_action.ts";
+import { IBarReducers, PushNewBarAction, AddBarAction, RemoveBarAction, AddNoteAction, RemoveNoteAction, BarActions, ChangeNoteTypeAction, WaitBarClickAction, ClickBarAction, InsertNewBarAction, RemoveNotesOnBarAction, ChangeBarBeatAction, RemoveOverflowedNotesAction, SetBarStateAction, RemoveNotesOutOfKeysAction, ApplyStorageItemToBarStateAction, ChangeNoteAppearBeforeAction } from "./bar_action.ts";
 import { BarState } from "./bar_state";
 import { Bar, Note } from "~NoteView/types";
 import uuid from "~utils/uuid";
@@ -66,6 +66,12 @@ export class BarReducers implements IBarReducers {
   APPLY_STORAGE_ITEM_TO_BAR_STATE(state: BarState, action: ApplyStorageItemToBarStateAction): BarState {
     return state.update('bars', _ => action.bars)
       .update('beats', _ => action.beats);
+  }
+  CHANGE_NOTE_APPEAR_BEFORE(state: BarState, action: ChangeNoteAppearBeforeAction): BarState {
+    const barIndex = state.bars.findIndex(bar => bar.notes.some(note => note.id === action.noteId));
+    const noteIndex = state.bars.get(barIndex)?.notes.findIndex(x => x.id === action.noteId);
+    return state.updateIn(['bars', barIndex, 'notes', noteIndex],
+      (note: Note) => note.set('appearBefore', action.beat));
   }
 }
 

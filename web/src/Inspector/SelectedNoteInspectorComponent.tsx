@@ -3,15 +3,21 @@ import { useSelector } from 'react-redux';
 import { RootState, dispatch, store } from '~StateStore/store';
 import { noteTypes, NoteType } from '~NoteView/types';
 import { BarAction } from '~StateStore/_gen/bar_action.ts';
-import { Divider, MenuItem, Select, FormControl, InputLabel, CardContent, Button, Collapse } from '@material-ui/core';
+import { Divider, MenuItem, Select, FormControl, InputLabel, CardContent, Button, Collapse, TextField, InputAdornment } from '@material-ui/core';
 import { ArrowDropDown, ArrowRight } from '@material-ui/icons';
+import { isNumber } from 'util';
 
 export const SelectedNoteInspectorComponent = () => {
   const selectedNoteId = useSelector((state: RootState) => state.selectNoteState.selectedNoteId);
-  const bars = store.getState().barState.bars;
+  const bars = useSelector((state: RootState) => state.barState.bars);
   const bar = bars.find(bar => bar.notes.some(note => note.id === selectedNoteId));
   const selectedNote = bar?.notes.find(note => note.id === selectedNoteId);
   const [detailExpanded, setDetailExpanded] = React.useState(false);
+  const [noteAppearBeforeInput, setNoteAppearBeforeInput] = React.useState(selectedNote?.appearBefore.toString() || '');
+
+  React.useEffect(() => {
+    setNoteAppearBeforeInput(selectedNote?.appearBefore.toString() || noteAppearBeforeInput);
+  }, [selectedNote?.appearBefore])
 
   if (!selectedNote) {
     return null;
@@ -20,6 +26,10 @@ export const SelectedNoteInspectorComponent = () => {
   const changeNoteType = (noteType: NoteType) => {
     dispatch(BarAction.changeNoteType(selectedNote.id, noteType));
   };
+
+  const changeNoteAppearBefore = (noteAppearBefore: number) => {
+    dispatch(BarAction.changeNoteAppearBefore(selectedNote.id, noteAppearBefore))
+  }
 
   const dropdownItems = noteTypes.map(noteType => {
     return <MenuItem
@@ -37,10 +47,28 @@ export const SelectedNoteInspectorComponent = () => {
         <Select
           labelId='selected-note-type-label'
           value={selectedNote.type}
-          onChange={(event: React.ChangeEvent<{value: unknown}>) => changeNoteType(event.target.value as NoteType)}
+          onChange={(event: React.ChangeEvent<{ value: unknown }>) => changeNoteType(event.target.value as NoteType)}
         >
           {dropdownItems}
         </Select>
+        <TextField
+          fullWidth
+          label="Note Appear Before (beat)"
+          type="number"
+          value={noteAppearBeforeInput}
+          onChange={event => setNoteAppearBeforeInput(event.target.value)}
+          InputProps={{
+            endAdornment: <InputAdornment position="start">
+              <Button onClick={() => {
+                const value = parseFloat(noteAppearBeforeInput);
+                if (!isNumber(value)) {
+                  return;
+                }
+                changeNoteAppearBefore(value);
+              }}>변경</Button>
+            </InputAdornment>,
+          }}
+        />
       </FormControl>
       <Divider />
       <Button

@@ -4,6 +4,7 @@
     "endNote": {
       "id": "5f66ee66-db90-4867-9e7e-31a8d6a673c9",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
         "beat": 0.75,
@@ -13,6 +14,7 @@
     "startNote": {
       "id": "5e683352-7acd-42af-9747-752b0967f47d",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
         "beat": 0,
@@ -26,6 +28,7 @@
     "endNote": {
       "id": "d9b74fcd-b803-42b3-a07b-0c88a4c9b84c",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
         "beat": 0.75,
@@ -35,6 +38,7 @@
     "startNote": {
       "id": "b8a54783-0eff-429d-833a-94c9af5565df",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
         "beat": 0,
@@ -48,6 +52,7 @@
     "endNote": {
       "id": "e38e83eb-d193-41bd-88f1-50bca12fa908",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
         "beat": 2.5,
@@ -57,6 +62,7 @@
     "startNote": {
       "id": "0bb7b057-4242-4487-bd8e-17695a29c0bd",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "b7c72041-b111-410b-82d0-4806f88328b8",
         "beat": 1.5,
@@ -70,6 +76,7 @@
     "endNote": {
       "id": "6f1940c1-1d09-455e-acc4-736bb9b83fe8",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
         "beat": 0.75,
@@ -79,6 +86,7 @@
     "startNote": {
       "id": "8e221e10-79e7-46b6-912d-b56044cb70a5",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
         "beat": 0,
@@ -98,6 +106,7 @@
     "endNote": {
       "id": "ceb8406c-ad32-43f6-b01c-1b0feb752ab3",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
         "beat": 0.75,
@@ -107,6 +116,7 @@
     "startNote": {
       "id": "823dfa42-77cc-4048-b4b5-2682c5a0b53a",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
         "beat": 0,
@@ -120,6 +130,7 @@
     "endNote": {
       "id": "849f6187-2b5a-4d31-857b-78ada69191fa",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
         "beat": 2.5,
@@ -129,6 +140,7 @@
     "startNote": {
       "id": "1b1bd1b9-85f6-45b2-b816-a6cd9334ee46",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "655b3d42-753d-4234-a2dc-34189844a2f5",
         "beat": 1.5,
@@ -142,6 +154,7 @@
     "endNote": {
       "id": "ce2a2e65-9f4e-40f2-a4c8-96124cc2061a",
       "type": "up",
+      "appearBeafore": 2,
       "position": {
         "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
         "beat": 0,
@@ -151,6 +164,7 @@
     "startNote": {
       "id": "da9a051a-b1bc-45d7-921c-184ffd8ec2a2",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "3f873798-4530-4daa-890c-fbca97abd4fb",
         "beat": 1.5,
@@ -164,6 +178,7 @@
     "endNote": {
       "id": "d5fbaccc-7762-4519-bcc5-07fa39766220",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
         "beat": 3,
@@ -173,6 +188,7 @@
     "startNote": {
       "id": "2193a154-b617-462f-a4c7-082632c449e1",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
         "beat": 2.5,
@@ -186,6 +202,7 @@
     "endNote": {
       "id": "2be95993-b0fc-4c91-b45a-f8852d11b8a8",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
         "beat": 3.5,
@@ -195,6 +212,7 @@
     "startNote": {
       "id": "2e2afe64-179c-4e40-a094-4502f0176883",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "2fc09374-89dc-4756-a08c-ae17f8e9509c",
         "beat": 3,
@@ -208,6 +226,7 @@
     "endNote": {
       "id": "811e0481-3fdb-4254-9170-f8f6c05bcd42",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
         "beat": 1,
@@ -217,6 +236,7 @@
     "startNote": {
       "id": "400195bc-f214-418b-b75c-ce59eb1e6e79",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
         "beat": 0,
@@ -230,6 +250,7 @@
     "endNote": {
       "id": "625b3791-47ee-45d0-a17c-6209bc8ad662",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
         "beat": 3,
@@ -239,6 +260,7 @@
     "startNote": {
       "id": "d0d5888f-2cb2-4da4-9033-7a571f0cc0b6",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
         "beat": 1.5,
@@ -252,6 +274,7 @@
     "endNote": {
       "id": "35058266-c6f4-491e-9fb0-3a5fce7b492c",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
         "beat": 2.5,
@@ -261,6 +284,7 @@
     "startNote": {
       "id": "72441d35-a1d9-4ce6-a572-3753f2a4db4f",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "5f3590a6-9b47-4d5e-9e06-dd9e73c141ba",
         "beat": 2,
@@ -274,6 +298,7 @@
     "endNote": {
       "id": "8c96f42c-a8d9-4c58-9f26-7c2ce5b86ff2",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
         "beat": 1,
@@ -283,6 +308,7 @@
     "startNote": {
       "id": "872160e8-96df-477f-a6b7-dd19871fcf75",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
         "beat": 0,
@@ -296,6 +322,7 @@
     "endNote": {
       "id": "e93f56ac-49c1-4648-b98c-e55c9a053280",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
         "beat": 2.5,
@@ -305,6 +332,7 @@
     "startNote": {
       "id": "f686db0b-9add-458b-9f33-2e8a5f6a98c5",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
         "beat": 1.5,
@@ -318,6 +346,7 @@
     "endNote": {
       "id": "e51bc8e6-7442-4ce8-8965-ac54c91c3e67",
       "type": "left",
+      "appearBeafore": 2,
       "position": {
         "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
         "beat": 3,
@@ -327,6 +356,7 @@
     "startNote": {
       "id": "be9ac471-c06d-49c0-ad28-785ee1477675",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
         "beat": 2.5,
@@ -340,6 +370,7 @@
     "endNote": {
       "id": "d74635d8-2338-4dd5-98d4-f4e62fda8686",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
         "beat": 3.5,
@@ -349,6 +380,7 @@
     "startNote": {
       "id": "a5c00d3d-79dd-4cfc-9d98-0646fe716341",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "3003b459-9c32-449a-9be2-67703f5b3b2e",
         "beat": 3,
@@ -362,6 +394,7 @@
     "endNote": {
       "id": "fd20b276-a296-4106-abd1-19f0957a4d71",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
         "beat": 1,
@@ -371,6 +404,7 @@
     "startNote": {
       "id": "fa21d432-682d-4cd2-8672-d09891b864ca",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
         "beat": 0,
@@ -384,6 +418,7 @@
     "endNote": {
       "id": "b252a98f-5b71-4677-9c67-5a25c1bcfe36",
       "type": "left",
+      "appearBeafore": 2,
       "position": {
         "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
         "beat": 3,
@@ -393,6 +428,7 @@
     "startNote": {
       "id": "8cd7e999-ee91-4e37-9f30-9a596881fb5b",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
         "beat": 1.5,
@@ -406,6 +442,7 @@
     "endNote": {
       "id": "aff1fea7-e4f6-4d1c-9068-c07fb610f88f",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
         "beat": 2.5,
@@ -415,6 +452,7 @@
     "startNote": {
       "id": "aa294f04-f43a-4c95-b988-91b36e97b416",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "1a03edfc-f5fc-4b11-8e21-78451c92c562",
         "beat": 2,
@@ -428,6 +466,7 @@
     "endNote": {
       "id": "f1595760-702c-4988-98f4-40116b83f39a",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
         "beat": 0.5,
@@ -437,6 +476,7 @@
     "startNote": {
       "id": "a2e4c40c-ad34-4844-beee-1a78bb4df8e2",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
         "beat": 0,
@@ -450,6 +490,7 @@
     "endNote": {
       "id": "ed4970ae-de0c-4198-9c2b-9c9e0b14b201",
       "type": "left",
+      "appearBeafore": 2,
       "position": {
         "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
         "beat": 1,
@@ -459,6 +500,7 @@
     "startNote": {
       "id": "605d68de-2b05-445c-b3b3-21e1449b3d7c",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
         "beat": 0.5,
@@ -472,6 +514,7 @@
     "endNote": {
       "id": "cee54730-fa54-4a20-969d-20ea232d033e",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
         "beat": 1.5,
@@ -481,6 +524,7 @@
     "startNote": {
       "id": "dc45fba2-3afb-484d-bd0b-3e21b31348ac",
       "type": "tap",
+      "appearBeafore": 2,
       "position": {
         "barId": "50fb51ac-d8b0-4543-9af1-c0ef9ce1eebb",
         "beat": 1,
