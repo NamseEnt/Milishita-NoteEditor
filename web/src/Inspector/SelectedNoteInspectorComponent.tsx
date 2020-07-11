@@ -13,11 +13,11 @@ export const SelectedNoteInspectorComponent = () => {
   const bar = bars.find(bar => bar.notes.some(note => note.id === selectedNoteId));
   const selectedNote = bar?.notes.find(note => note.id === selectedNoteId);
   const [detailExpanded, setDetailExpanded] = React.useState(false);
-  const [noteAppearBeforeInput, setNoteAppearBeforeInput] = React.useState(selectedNote?.appearBefore.toString() || '');
+  const [noteAppearBeforeBeatsInput, setNoteAppearBeforeBeatsInput] = React.useState(selectedNote?.appearBeforeBeats.toString() || '');
 
   React.useEffect(() => {
-    setNoteAppearBeforeInput(selectedNote?.appearBefore.toString() || noteAppearBeforeInput);
-  }, [selectedNote?.appearBefore])
+    setNoteAppearBeforeBeatsInput(selectedNote?.appearBeforeBeats.toString() || noteAppearBeforeBeatsInput);
+  }, [selectedNote?.appearBeforeBeats])
 
   if (!selectedNote) {
     return null;
@@ -27,8 +27,8 @@ export const SelectedNoteInspectorComponent = () => {
     dispatch(BarAction.changeNoteType(selectedNote.id, noteType));
   };
 
-  const changeNoteAppearBefore = (noteAppearBefore: number) => {
-    dispatch(BarAction.changeNoteAppearBefore(selectedNote.id, noteAppearBefore))
+  const changeNoteAppearBeforeBeats = (noteAppearBeforeBeats: number) => {
+    dispatch(BarAction.changeNoteAppearBeforeBeats(selectedNote.id, noteAppearBeforeBeats))
   }
 
   const dropdownItems = noteTypes.map(noteType => {
@@ -55,16 +55,16 @@ export const SelectedNoteInspectorComponent = () => {
           fullWidth
           label="Note Appear Before (beat)"
           type="number"
-          value={noteAppearBeforeInput}
-          onChange={event => setNoteAppearBeforeInput(event.target.value)}
+          value={noteAppearBeforeBeatsInput}
+          onChange={event => setNoteAppearBeforeBeatsInput(event.target.value)}
           InputProps={{
             endAdornment: <InputAdornment position="start">
               <Button onClick={() => {
-                const value = parseFloat(noteAppearBeforeInput);
+                const value = parseFloat(noteAppearBeforeBeatsInput);
                 if (!isNumber(value)) {
                   return;
                 }
-                changeNoteAppearBefore(value);
+                changeNoteAppearBeforeBeats(value);
               }}>변경</Button>
             </InputAdornment>,
           }}

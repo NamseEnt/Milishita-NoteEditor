@@ -12,7 +12,7 @@ export const SET_AUTO_SAVE = "SET_AUTO_SAVE" as const;
 export const SET_AUTO_SAVE_DELAY = "SET_AUTO_SAVE_DELAY" as const;
 export const SET_CONFIG_STATE = "SET_CONFIG_STATE" as const;
 export const APPLY_STORAGE_ITEM_TO_CONFIG_STATE = "APPLY_STORAGE_ITEM_TO_CONFIG_STATE" as const;
-export const SET_DEFAULT_APPEAR_BEFORE = "SET_DEFAULT_APPEAR_BEFORE" as const;
+export const SET_DEFAULT_APPEAR_BEFORE_BEATS = "SET_DEFAULT_APPEAR_BEFORE_BEATS" as const;
 
  export namespace ConfigAction {
   export function setBeatHeight(beatHeight: number) {
@@ -96,9 +96,9 @@ export const SET_DEFAULT_APPEAR_BEFORE = "SET_DEFAULT_APPEAR_BEFORE" as const;
   }
 
 
-  export function setDefaultAppearBefore(beat: number) {
+  export function setDefaultAppearBeforeBeats(beat: number) {
     return {
-      type: SET_DEFAULT_APPEAR_BEFORE,
+      type: SET_DEFAULT_APPEAR_BEFORE_BEATS,
       beat,
     };
   }
@@ -167,13 +167,13 @@ export type ApplyStorageItemToConfigStateAction = {
 };
 
 
-export type SetDefaultAppearBeforeAction = {
-  type: typeof SET_DEFAULT_APPEAR_BEFORE;
+export type SetDefaultAppearBeforeBeatsAction = {
+  type: typeof SET_DEFAULT_APPEAR_BEFORE_BEATS;
   beat: number;
 };
 
 
-export type ConfigActions = SetBeatHeightAction | SetKeysAction | SetGuideBeatAction | SetBpmAction | SetDefaultBarBeatAction | SetAutoScrollAction | SetAutoSaveAction | SetAutoSaveDelayAction | SetConfigStateAction | ApplyStorageItemToConfigStateAction | SetDefaultAppearBeforeAction
+export type ConfigActions = SetBeatHeightAction | SetKeysAction | SetGuideBeatAction | SetBpmAction | SetDefaultBarBeatAction | SetAutoScrollAction | SetAutoSaveAction | SetAutoSaveDelayAction | SetConfigStateAction | ApplyStorageItemToConfigStateAction | SetDefaultAppearBeforeBeatsAction
 
 export interface IConfigReducers {
   SET_BEAT_HEIGHT(state: ConfigState, action: SetBeatHeightAction): ConfigState;
@@ -186,5 +186,5 @@ export interface IConfigReducers {
   SET_AUTO_SAVE_DELAY(state: ConfigState, action: SetAutoSaveDelayAction): ConfigState;
   SET_CONFIG_STATE(state: ConfigState, action: SetConfigStateAction): ConfigState;
   APPLY_STORAGE_ITEM_TO_CONFIG_STATE(state: ConfigState, action: ApplyStorageItemToConfigStateAction): ConfigState;
-  SET_DEFAULT_APPEAR_BEFORE(state: ConfigState, action: SetDefaultAppearBeforeAction): ConfigState;
+  SET_DEFAULT_APPEAR_BEFORE_BEATS(state: ConfigState, action: SetDefaultAppearBeforeBeatsAction): ConfigState;
 };

@@ -19,7 +19,7 @@ export const CLICK_BAR = "CLICK_BAR" as const;
 export const SET_BAR_STATE = "SET_BAR_STATE" as const;
 export const REMOVE_NOTES_OUT_OF_KEYS = "REMOVE_NOTES_OUT_OF_KEYS" as const;
 export const APPLY_STORAGE_ITEM_TO_BAR_STATE = "APPLY_STORAGE_ITEM_TO_BAR_STATE" as const;
-export const CHANGE_NOTE_APPEAR_BEFORE = "CHANGE_NOTE_APPEAR_BEFORE" as const;
+export const CHANGE_NOTE_APPEAR_BEFORE_BEATS = "CHANGE_NOTE_APPEAR_BEFORE_BEATS" as const;
 
  export namespace BarAction {
   export function pushNewBar(beat: number) {
@@ -149,9 +149,9 @@ export const CHANGE_NOTE_APPEAR_BEFORE = "CHANGE_NOTE_APPEAR_BEFORE" as const;
   }
 
 
-  export function changeNoteAppearBefore(noteId: string, beat: number) {
+  export function changeNoteAppearBeforeBeats(noteId: string, beat: number) {
     return {
-      type: CHANGE_NOTE_APPEAR_BEFORE,
+      type: CHANGE_NOTE_APPEAR_BEFORE_BEATS,
       noteId,
       beat,
     };
@@ -257,14 +257,14 @@ export type ApplyStorageItemToBarStateAction = {
 };
 
 
-export type ChangeNoteAppearBeforeAction = {
-  type: typeof CHANGE_NOTE_APPEAR_BEFORE;
+export type ChangeNoteAppearBeforeBeatsAction = {
+  type: typeof CHANGE_NOTE_APPEAR_BEFORE_BEATS;
   noteId: string;
   beat: number;
 };
 
 
-export type BarActions = PushNewBarAction | InsertNewBarAction | AddBarAction | RemoveBarAction | ChangeBarBeatAction | AddNoteAction | RemoveNoteAction | RemoveNotesOnBarAction | RemoveOverflowedNotesAction | ChangeNoteTypeAction | WaitBarClickAction | ClickBarAction | SetBarStateAction | RemoveNotesOutOfKeysAction | ApplyStorageItemToBarStateAction | ChangeNoteAppearBeforeAction
+export type BarActions = PushNewBarAction | InsertNewBarAction | AddBarAction | RemoveBarAction | ChangeBarBeatAction | AddNoteAction | RemoveNoteAction | RemoveNotesOnBarAction | RemoveOverflowedNotesAction | ChangeNoteTypeAction | WaitBarClickAction | ClickBarAction | SetBarStateAction | RemoveNotesOutOfKeysAction | ApplyStorageItemToBarStateAction | ChangeNoteAppearBeforeBeatsAction
 
 export interface IBarReducers {
   PUSH_NEW_BAR(state: BarState, action: PushNewBarAction): BarState;
@@ -282,5 +282,5 @@ export interface IBarReducers {
   SET_BAR_STATE(state: BarState, action: SetBarStateAction): BarState;
   REMOVE_NOTES_OUT_OF_KEYS(state: BarState, action: RemoveNotesOutOfKeysAction): BarState;
   APPLY_STORAGE_ITEM_TO_BAR_STATE(state: BarState, action: ApplyStorageItemToBarStateAction): BarState;
-  CHANGE_NOTE_APPEAR_BEFORE(state: BarState, action: ChangeNoteAppearBeforeAction): BarState;
+  CHANGE_NOTE_APPEAR_BEFORE_BEATS(state: BarState, action: ChangeNoteAppearBeforeBeatsAction): BarState;
 };
