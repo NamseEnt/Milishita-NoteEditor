@@ -13,4 +13,4 @@ clickBar(position: Position)
 setBarState(state: BarState) -autoSave
 removeNotesOutOfKeys(keys: number) -undoable -autoSave
 applyStorageItemToBarState(beats: number, bars: List<Bar>) -autoSave
-changeNoteAppearBefore(noteId: string, beat: number) -undoable -autoSave
+changeNoteAppearBeforeBeats(noteId: string, beat: number) -undoable -autoSave

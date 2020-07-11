@@ -35,12 +35,12 @@ export class Note extends Record<{
   id: string;
   type: NoteType;
   position: Position;
-  appearBefore: number;
+  appearBeforeBeats: number;
 }>({
   id: undefined as unknown as string,
   type: "tap",
   position: new Position(),
-  appearBefore: 2,
+  appearBeforeBeats: 2,
 }) { };
 
 export class LongNote extends Record<{

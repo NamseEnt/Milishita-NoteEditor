@@ -11,7 +11,7 @@ export class ConfigState extends Record<{
   autoScroll: boolean;
   autoSave: boolean;
   autoSaveDelay: number;
-  defaultAppearBefore: number;
+  defaultAppearBeforeBeats: number;
 }>({
   beatHeight: 100,
   barWidth: 350,
@@ -23,5 +23,5 @@ export class ConfigState extends Record<{
   autoScroll: true,
   autoSave: false,
   autoSaveDelay: 3,
-  defaultAppearBefore: 2,
+  defaultAppearBeforeBeats: 2,
 }) {};

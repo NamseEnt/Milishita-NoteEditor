@@ -126,7 +126,7 @@ export class BarRenderer extends Drawable<BarRendererProps> {
         barId: this.props.bar.id,
       }),
       type: store.getState().modeState.noteTypeMode,
-      appearBefore: store.getState().configState.defaultAppearBefore,
+      appearBeforeBeats: store.getState().configState.defaultAppearBeforeBeats,
     });
 
     dispatch(batchActions([
